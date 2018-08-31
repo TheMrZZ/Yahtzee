@@ -30,9 +30,13 @@ public class Yahtzee
         return upperSection;
     }
 
-    public static void scorePoints(int[] upperSection)
+    public static void scorePoints(int[] upperSection, int[] dices)
     {
-
+        System.out.println("Score points in which section?");
+        for (int i = 0; i < upperSection.length; i++)
+        {
+            System.out.println(i+1 + ") " + UPPER_SECTION_ROWS[i]);
+        }
     }
 
 }
