@@ -3,6 +3,8 @@ package com.ernstye.main;
 import java.util.Arrays;
 
 import static com.ernstye.main.Constants.*;
+import static com.ernstye.main.UserInput.askNumber;
+import static com.ernstye.main.Dices.*;
 
 public class Yahtzee
 {
@@ -30,6 +32,15 @@ public class Yahtzee
             dices.display();
         }
 
+
+    }
+
+    public static void displayDices(int dices[])
+    {
+        for (int i=0; i<6;i++)
+        {
+            System.out.println(i+") "+ dices[i]);
+        }
     }
 
     // Create the empty upper section: 6 rows for each possible scores
@@ -40,6 +51,7 @@ public class Yahtzee
         return upperSection;
     }
 
+
     public static void scorePoints(int[] upperSection, int[] dices)
     {
         System.out.println("Score points in which section?");
@@ -47,6 +59,7 @@ public class Yahtzee
         {
             System.out.println(i+1 + ") " + UPPER_SECTION_ROWS[i]);
         }
+
     }
 
 }
