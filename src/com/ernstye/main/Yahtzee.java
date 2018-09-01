@@ -5,6 +5,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 import static com.ernstye.main.Constants.*;
+import static com.ernstye.main.UserInput.askNumber;
 
 public class Yahtzee
 {
@@ -22,7 +23,6 @@ public class Yahtzee
         System.out.println("== YAHTZEE ==");
 
         int[] upperSection = createUpperSection();
-
         int dices[]=startDices();
         displayDices(dices);
         dices=nextTurn(dices);
@@ -71,13 +71,17 @@ public class Yahtzee
         }
     }
 
-    // Create the empty upper section: 6 rows for each possible scores
+    /** Create the empty upper section: 6 rows for each possible scores
+     *
+     * @return upper section filled with {@link com.ernstye.main.Constants#NO_SCORE}
+     */
     public static int[] createUpperSection()
     {
         int[] upperSection = new int[NUMBER_OF_DICES];
         Arrays.fill(upperSection, NO_SCORE);
         return upperSection;
     }
+
 
     public static void scorePoints(int[] upperSection, int[] dices)
     {
@@ -86,6 +90,7 @@ public class Yahtzee
         {
             System.out.println(i+1 + ") " + UPPER_SECTION_ROWS[i]);
         }
+
     }
 
 }
