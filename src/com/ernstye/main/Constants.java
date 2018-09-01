@@ -15,7 +15,8 @@ final class Constants
     // The number of dices we play with
     static final int NUMBER_OF_DICES = 5;
 
-    static final String[] DICE_IMAGES = {"⚀", "⚁", "⚂", "⚃", "⚄", "⚅"};
+    // Images of each dice face in unicode
+    static final String[] DICE_IMAGES = {"\u2680", "\u2681", "\u2682", "\u2684", "\u2685", "\u2686"};
 
     static final String[] UPPER_SECTION_ROWS = {
             "Ones", "Twos", "Threes", "Fours", "Fives", "Sixes"
