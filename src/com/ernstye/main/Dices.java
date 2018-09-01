@@ -4,16 +4,16 @@ import java.util.Scanner;
 import java.util.Random;
 import static com.ernstye.main.Constants.*;
 
-public class Dices
+class Dices
 {
-    public Dices()
+    Dices()
     {
 
     }
     private int dices[];
 
 
-    public void roll()
+    void roll()
     {
         dices =new int[NUMBER_OF_DICES];
         Random random= new Random();
@@ -29,7 +29,7 @@ public class Dices
 
     }
 
-    public void nextTurn()
+    void nextTurn()
     {
         Random random=new Random();
         Scanner scanner = new Scanner(System.in);
@@ -50,7 +50,7 @@ public class Dices
     /*
     This method shows the toss of the 5 dices
      */
-    public void display()
+    void display()
     {
         for (int i=0; i<NUMBER_OF_DICES;i++)
         {

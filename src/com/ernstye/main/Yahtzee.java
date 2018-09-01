@@ -1,6 +1,8 @@
 package com.ernstye.main;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Scanner;
 
 import static com.ernstye.main.Constants.*;
 import static com.ernstye.main.UserInput.askNumber;
@@ -21,7 +23,6 @@ public class Yahtzee
     {
         System.out.println("== YAHTZEE ==");
 
-        int[] upperSection = createUpperSection();
         Dices dices=new Dices();
         dices.roll();
         dices.display();
@@ -42,24 +43,4 @@ public class Yahtzee
             System.out.println(i+") "+ dices[i]);
         }
     }
-
-    // Create the empty upper section: 6 rows for each possible scores
-    public static int[] createUpperSection()
-    {
-        int[] upperSection = new int[NUMBER_OF_DICES];
-        Arrays.fill(upperSection, NO_SCORE);
-        return upperSection;
-    }
-
-
-    public static void scorePoints(int[] upperSection, int[] dices)
-    {
-        System.out.println("Score points in which section?");
-        for (int i = 0; i < upperSection.length; i++)
-        {
-            System.out.println(i+1 + ") " + UPPER_SECTION_ROWS[i]);
-        }
-
-    }
-
 }

@@ -75,7 +75,6 @@ class UserInput
 
         while (true)
         {
-
             if (!message.equals(""))
             {
                 System.out.println(message);
@@ -84,11 +83,12 @@ class UserInput
 
             try
             {
-                number = Integer.valueOf(scanner.nextLine());
+                number = scanner.nextInt();
             }
-            catch (NumberFormatException e)
+            catch (InputMismatchException e)
             {
                 System.out.println("This is not a number.");
+                scanner.nextLine(); // Cleans the buffer
                 continue;
             }
 
