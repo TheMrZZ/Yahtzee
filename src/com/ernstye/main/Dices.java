@@ -13,7 +13,7 @@ public class Dices
     private int dices[];
 
 
-    public void startDices()
+    public void roll()
     {
         dices =new int[NUMBER_OF_DICES];
         Random random= new Random();
@@ -50,7 +50,7 @@ public class Dices
     /*
     This method shows the toss of the 5 dices
      */
-    public void displayDices()
+    public void display()
     {
         for (int i=0; i<NUMBER_OF_DICES;i++)
         {

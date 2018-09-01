@@ -1,11 +1,8 @@
 package com.ernstye.main;
 
 import java.util.Arrays;
-import java.util.Random;
-import java.util.Scanner;
 
 import static com.ernstye.main.Constants.*;
-import static com.ernstye.main.Dices.*;
 
 public class Yahtzee
 {
@@ -24,13 +21,13 @@ public class Yahtzee
 
         int[] upperSection = createUpperSection();
         Dices dices=new Dices();
-        dices.startDices();
-        dices.displayDices();
+        dices.roll();
+        dices.display();
         for (int i=0; i<2;i++)
         {
             System.out.println("\nTURN "+(i+2));
             dices.nextTurn();
-            dices.displayDices();
+            dices.display();
         }
 
     }
