@@ -36,7 +36,7 @@ public class Yahtzee
             dices.play(scoreGrid);
 
             System.out.println();
-
+            scoreGrid.display();
             scoreGrid.score(dices);
 
             turnNumber++;

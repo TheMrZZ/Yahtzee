@@ -33,7 +33,7 @@ class Dices
         while (continue_ == 1 && i < 2)
         {
 
-            System.out.println("Would you like to play again?  0) No 1) Yes");
+            System.out.println("Would you like to play again? 0: No, 1: Yes");
             continue_ = askNumber(2);
 
             if (continue_ == 1)
@@ -106,6 +106,7 @@ class Dices
      */
     void display()
     {
+        System.out.println("This is the result of your roll :");
         for (int i = 0; i < NUMBER_OF_DICES; i++)
         {
             System.out.println(i + ")" + dices[i]);
