@@ -58,14 +58,23 @@ class ScoreGrid
      */
     private int getPotentialScore(int row, Dices dices)
     {
-        // Get the number of dices with the correct face (1 for the "Ones" row, 2 for the "Twos"...
-        int correctDices = Collections.frequency(Arrays.asList(dices.get()), row + 1);
+        /*
+            If the row is 0, then we're looking for Ones: the number on the dice's face must be 1
+            If the row is 1 then we're looking for 2 etc...
+         */
+        int diceNumber = row + 1;
+
+        /*
+         Get the number of dices with the correct face (1 for the "Ones" row, 2 for the "Twos"...
+         ex: if the player rolled 4-3-3-2-6, and diceNumber is 3, then correctDices = 2
+        */
+        int correctDices = Collections.frequency(Arrays.asList(dices.get()), diceNumber);
 
         /*
         Points are the number of dices with the correct face x the digit
         ex: for the Sixes row, if 3 dices shows 6, the player gets 18 points.
         */
-        int score = correctDices * (row + 1);
+        int score = correctDices * diceNumber;
         return score;
     }
 
