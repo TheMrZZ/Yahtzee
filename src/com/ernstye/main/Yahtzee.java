@@ -26,6 +26,7 @@ public class Yahtzee
         dices.display();
 
         ScoreGrid scoreGrid = new ScoreGrid();
+        scoreGrid.display(dices);
         scoreGrid.score(dices);
     }
 }

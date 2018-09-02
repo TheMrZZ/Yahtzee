@@ -48,6 +48,10 @@ class UserInput
         int number;
         boolean validInput;
 
+        /*
+        Make sure the input is between the bounds.
+        Input validation is inside the askNumberRaw function.
+        */
         do
         {
             number = askNumberRaw(message);
@@ -81,6 +85,7 @@ class UserInput
             }
             System.out.print("> ");
 
+            // Check for invalid input (e.g. 'abc' instead of a number)
             try
             {
                 number = scanner.nextInt();
