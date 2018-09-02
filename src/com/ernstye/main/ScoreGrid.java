@@ -75,7 +75,7 @@ class ScoreGrid
      * @param row the row to get the score from
      * @return the score of the row
      */
-    int getRowScore(int row)
+    private int getRowScore(int row)
     {
         return upperSection[row];
     }
