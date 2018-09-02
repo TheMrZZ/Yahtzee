@@ -1,13 +1,17 @@
 package com.ernstye.main;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Random;
-import static com.ernstye.main.Constants.*;
 
-public class Dices
+import static com.ernstye.main.Constants.*;
+import static com.ernstye.main.UserInput.askNumber;
+
+class Dices
 {
-    private int dices[];
-    public Dices()
+    private Integer dices[];
+
+    Dices()
     {
         dices = new Integer[NUMBER_OF_DICES];
         roll();
@@ -31,7 +35,7 @@ public class Dices
 
     }
 
-    ArrayList<Integer> verifyDupplicate(int dicesToRoll)
+    private ArrayList<Integer> verifyDuplicate(int dicesToRoll)
     {
         ArrayList<Integer> dicesEnteredByUser = new ArrayList<Integer>();
 
@@ -51,7 +55,7 @@ public class Dices
         return dicesEnteredByUser;
     }
 
-    public void nextTurn()
+    private void nextTurn()
     {
         Random random = new Random();
         Scanner scanner = new Scanner(System.in);
@@ -62,7 +66,7 @@ public class Dices
         System.out.println("Which dices would you like to toss again?");
         for (int i = 0; i < dicesToRoll; i++)
         {
-            dicesEnteredByUser =verifyDupplicate(dicesToRoll);
+            dicesEnteredByUser = verifyDuplicate(dicesToRoll);
             //The dice chosen is being toss again
             dices[dicesEnteredByUser.get(i)] = random.nextInt(DICE_FACES) + 1;
         }
@@ -73,11 +77,11 @@ public class Dices
     /*
     This method shows the toss of the 5 dices
      */
-    public void display()
+    void display()
     {
-        for (int i=0; i<NUMBER_OF_DICES;i++)
+        for (int i = 0; i < NUMBER_OF_DICES; i++)
         {
-            System.out.println(i+") "+ dices[i]);
+            System.out.println(i + ") " + dices[i]);
         }
     }
 }
