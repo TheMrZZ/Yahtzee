@@ -20,22 +20,20 @@ public class Yahtzee
      */
     public static void main(String[] args)
     {
-        System.out.println("== YAHTZEE ==");
-        Dices dices = new Dices();
-        dices.play();
         startGame();
     }
 
     private static void startGame()
     {
+        int turnNumber = 1;
         System.out.println("== YAHTZEE ==");
         Dices dices = new Dices();
         ScoreGrid scoreGrid = new ScoreGrid();
 
         while (!scoreGrid.isFull())
         {
-            dices.play();
-            dices.display();
+            System.out.println("\n=== TURN " + (turnNumber++) + "===");
+            dices.play(scoreGrid);
 
             System.out.println();
 

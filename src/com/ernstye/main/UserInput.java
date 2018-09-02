@@ -76,6 +76,7 @@ class UserInput
 
     private static int askNumberRaw(String message)
     {
+        String userInput;
         int number;
 
         while (true)
@@ -89,9 +90,10 @@ class UserInput
             // Check for invalid input (e.g. 'abc' instead of a number)
             try
             {
-                number = scanner.nextInt();
+                userInput = scanner.nextLine();
+                number = Integer.parseInt(userInput);
             }
-            catch (InputMismatchException e)
+            catch (NumberFormatException e)
             {
                 System.out.println("This is not a number.");
                 scanner.nextLine(); // Cleans the buffer

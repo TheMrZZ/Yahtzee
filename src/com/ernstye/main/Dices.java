@@ -23,7 +23,7 @@ class Dices
         return dices;
     }
 
-    void play()
+    void play(ScoreGrid scoreGrid)
     {
         int continue_ = 1;
         int i = 0;
@@ -31,6 +31,7 @@ class Dices
         display();
         while (continue_ == 1 && i < 2)
         {
+            scoreGrid.display(this);
             System.out.println("Would you like to play again? \n0) No\n1)Yes\n");
             continue_ = askNumber(2);
 
@@ -83,16 +84,15 @@ class Dices
     private void nextTurn()
     {
         Random random = new Random();
-        Scanner scanner = new Scanner(System.in);
         ArrayList<Integer> dicesEnteredByUser = new ArrayList<Integer>();
         int dicesToRoll;
         System.out.println("How many dices do you want to toss again?");
         dicesToRoll = askNumber(1, 6);
         System.out.println("Which dices would you like to toss again?");
+        dicesEnteredByUser = verifyDuplicate(dicesToRoll);
         for (int i = 0; i < dicesToRoll; i++)
         {
-            dicesEnteredByUser = verifyDuplicate(dicesToRoll);
-            //The dice chosen is being toss again
+            //The dices chosen are being toss again
             dices[dicesEnteredByUser.get(i)] = random.nextInt(DICE_FACES) + 1;
         }
 
