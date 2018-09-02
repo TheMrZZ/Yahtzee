@@ -26,6 +26,11 @@ class ScoreGrid
         Arrays.fill(upperSection, NO_SCORE);
     }
 
+    Integer[] getUpperSection()
+    {
+        return upperSection.clone();
+    }
+
     /**
      * Allows the player to choose a row to score.
      *
@@ -55,7 +60,7 @@ class ScoreGrid
      * @param dices the dices the player rolled
      * @return the potential points he would get
      */
-    private int getPotentialScore(int row, Dices dices)
+    int getPotentialScore(int row, Dices dices)
     {
         /*
          If the row is 0, then we're looking for Ones: the number on the dice's face must be 1
@@ -83,7 +88,7 @@ class ScoreGrid
      * @param row the row to get the score from
      * @return the score of the row
      */
-    private int getRowScore(int row)
+    int getRowScore(int row)
     {
         return upperSection[row];
     }
@@ -111,11 +116,30 @@ class ScoreGrid
         return !Arrays.asList(upperSection).contains(NO_SCORE);
     }
 
+    /**
+     * Get the total points of the grid
+     *
+     * @return the upper section grid plus the bonus if the player has one
+     */
     int getTotalScore()
+    {
+        int total = 0;
+        total += getUpperSectionScore();
+        total += getUpperBonus();
+        return total;
+    }
+
+    /**
+     * Get the sum of the points of each row in the upper section
+     *
+     * @return the upper section score
+     */
+    int getUpperSectionScore()
     {
         int total = 0;
         for (int i = 0; i < upperSection.length; i++)
         {
+            // If the player didn't score, we don't add the current row to the total points
             if (upperSection[i] != NO_SCORE)
             {
                 total += upperSection[i];
@@ -123,6 +147,24 @@ class ScoreGrid
         }
 
         return total;
+    }
+
+    /**
+     * If the player has 63 points or more in the upper section, he gets a bonus of 35 points.
+     *
+     * @return 0 if the player has less than 63 points in the upper section, 35 else.
+     */
+    int getUpperBonus()
+    {
+        final int UPPER_BONUS_POINTS = 35;
+        final int UPPER_SECTION_MINIMUM = 63;
+
+        if (getUpperSectionScore() >= UPPER_SECTION_MINIMUM)
+        {
+            return UPPER_BONUS_POINTS;
+        }
+
+        return 0;
     }
 
     /**
@@ -139,47 +181,7 @@ class ScoreGrid
      */
     void display(Dices dices)
     {
-        // The width of the left column, containing the names of the rows
-        final int LEFT_COLUMN_WIDTH = getLongestStringLength(UPPER_SECTION_ROWS);
-        // We then right-pad the names with spaces
-        final String LEFT_COLUMN_FORMAT = "%-" + LEFT_COLUMN_WIDTH + "s|";
-
-        // The length of the middle column, containing the points the player already scored
-        final int MIDDLE_COLUMN_WIDTH = 3;
-        final String MIDDLE_COLUMN_FORMAT = "%" + MIDDLE_COLUMN_WIDTH + "s|";
-
-        // The right column contains the -optional- potential points
-        final String RIGHT_COLUMN_FORMAT = " %3d %s";
-
-        // The total width, equivalent of is (RowName + "|" + Points + "|").length
-        final int TOTAL_WIDTH = LEFT_COLUMN_WIDTH + 1 + MIDDLE_COLUMN_WIDTH + 1;
-        String ROW_SEPARATOR = stringFilledWith('-', TOTAL_WIDTH);
-
-        System.out.println(ROW_SEPARATOR);
-        for (int row = 0; row < upperSection.length; row++)
-        {
-            int score = getRowScore(row);
-            String scoreString = Integer.toString(score);
-            if (score == NO_SCORE)
-            {
-                scoreString = "";
-            }
-
-            System.out.printf(LEFT_COLUMN_FORMAT, UPPER_SECTION_ROWS[row]);
-            System.out.print("|");
-
-            System.out.printf(MIDDLE_COLUMN_FORMAT, scoreString);
-            System.out.print("|");
-
-            // If the player already scored, we don't show the potential points
-            if (dices != null && score == NO_SCORE)
-            {
-                System.out.printf(RIGHT_COLUMN_FORMAT, getPotentialScore(row, dices), "potential points");
-            }
-
-            System.out.println();
-            System.out.println(ROW_SEPARATOR);
-        }
-
+        Table table = new Table(this, dices);
+        table.display();
     }
 }
