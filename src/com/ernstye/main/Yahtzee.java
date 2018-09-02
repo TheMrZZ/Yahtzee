@@ -20,16 +20,28 @@ public class Yahtzee
      */
     public static void main(String[] args)
     {
+        startGame();
+    }
+
+    private static void startGame()
+    {
         System.out.println("== YAHTZEE ==");
         Dices dices = new Dices();
-        dices.roll();
-        dices.display();
-
         ScoreGrid scoreGrid = new ScoreGrid();
-        scoreGrid.display(dices);
-        scoreGrid.score(dices);
-        dices.roll();
-        dices.display();
-        scoreGrid.display(dices);
+
+        while (!scoreGrid.isFull())
+        {
+            dices.roll();
+            dices.display();
+
+            System.out.println();
+
+            scoreGrid.display(dices);
+            scoreGrid.score(dices);
+        }
+
+        System.out.println("\n\n=== FINAL RESULTS ===\n\n");
+        scoreGrid.display(null);
+        System.out.println("You scored a total of " + scoreGrid.getTotalScore() + " points!");
     }
 }

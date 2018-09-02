@@ -6,7 +6,7 @@ import java.util.Arrays;
  * String Utilities class
  * Methods used for string - or arrays of strings - manipulation
  */
-public class StringUtilities
+class StringUtilities
 {
     /**
      * Return the length of the longest string
@@ -14,7 +14,7 @@ public class StringUtilities
      * @param strings the array to search for the longest string
      * @return the longest string's length
      */
-    static int getLongestStringLenght(String[] strings)
+    static int getLongestStringLength(String[] strings)
     {
         int maxLength = 0;
         for (String string : strings)

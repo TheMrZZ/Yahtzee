@@ -5,7 +5,7 @@ import java.util.Collections;
 
 import static com.ernstye.main.Constants.*;
 import static com.ernstye.main.UserInput.askNumber;
-import static com.ernstye.main.StringUtilities.getLongestStringLenght;
+import static com.ernstye.main.StringUtilities.getLongestStringLength;
 import static com.ernstye.main.StringUtilities.stringFilledWith;
 
 /**
@@ -40,8 +40,7 @@ class ScoreGrid
         {
             if (upperSection[i] == NO_SCORE)
             {
-                System.out.print((i + 1) + ") " + UPPER_SECTION_ROWS[i] + "\t");
-                System.out.println(getPotentialScore(i, dices) + " potential points");
+                System.out.println((i + 1) + ") " + UPPER_SECTION_ROWS[i]);
             }
         }
 
@@ -59,9 +58,9 @@ class ScoreGrid
     private int getPotentialScore(int row, Dices dices)
     {
         /*
-            If the row is 0, then we're looking for Ones: the number on the dice's face must be 1
-            If the row is 1 then we're looking for 2 etc...
-         */
+         If the row is 0, then we're looking for Ones: the number on the dice's face must be 1
+         If the row is 1 then we're looking for 2 etc...
+        */
         int diceNumber = row + 1;
 
         /*
@@ -71,8 +70,8 @@ class ScoreGrid
         int correctDices = Collections.frequency(Arrays.asList(dices.get()), diceNumber);
 
         /*
-        Points are the number of dices with the correct face x the digit
-        ex: for the Sixes row, if 3 dices shows 6, the player gets 18 points.
+         Points are the number of dices with the correct face x the digit
+         ex: for the Sixes row, if 3 dices shows 6, the player gets 18 points.
         */
         int score = correctDices * diceNumber;
         return score;
@@ -112,6 +111,20 @@ class ScoreGrid
         return !Arrays.asList(upperSection).contains(NO_SCORE);
     }
 
+    int getTotalScore()
+    {
+        int total = 0;
+        for (int i = 0; i < upperSection.length; i++)
+        {
+            if (upperSection[i] != NO_SCORE)
+            {
+                total += upperSection[i];
+            }
+        }
+
+        return total;
+    }
+
     /**
      * Displays the score grid and the potential points, in a table shape
      * Table has this format:
@@ -127,13 +140,13 @@ class ScoreGrid
     void display(Dices dices)
     {
         // The width of the left column, containing the names of the rows
-        final int LEFT_COLUMN_WIDTH = getLongestStringLenght(UPPER_SECTION_ROWS);
+        final int LEFT_COLUMN_WIDTH = getLongestStringLength(UPPER_SECTION_ROWS);
         // We then right-pad the names with spaces
-        final String LEFT_COLUMN_FORMAT = "%-" + LEFT_COLUMN_WIDTH + "s";
+        final String LEFT_COLUMN_FORMAT = "%-" + LEFT_COLUMN_WIDTH + "s|";
 
         // The length of the middle column, containing the points the player already scored
         final int MIDDLE_COLUMN_WIDTH = 3;
-        final String MIDDLE_COLUMN_FORMAT = "%" + MIDDLE_COLUMN_WIDTH + "s";
+        final String MIDDLE_COLUMN_FORMAT = "%" + MIDDLE_COLUMN_WIDTH + "s|";
 
         // The right column contains the -optional- potential points
         final String RIGHT_COLUMN_FORMAT = " %3d %s";
