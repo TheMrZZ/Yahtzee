@@ -73,6 +73,7 @@ class UserInput
      * @param message shown before asking the number
      * @return number entered by the user.
      */
+
     private static int askNumberRaw(String message)
     {
         int number;

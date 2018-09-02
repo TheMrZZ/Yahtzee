@@ -1,20 +1,17 @@
 package com.ernstye.main;
 
-import java.util.Arrays;
 import java.util.Scanner;
 import java.util.Random;
-
 import static com.ernstye.main.Constants.*;
 
-class Dices
+public class Dices
 {
-    Dices()
+    private int dices[];
+    public Dices()
     {
         dices = new Integer[NUMBER_OF_DICES];
         roll();
     }
-
-    private Integer[] dices;
 
     Integer[] get()
     {
@@ -28,39 +25,59 @@ class Dices
         for (int i = 0; i < NUMBER_OF_DICES; i++)
         {
             dices[i] = random.nextInt(DICE_FACES) + 1;
+
         }
 
 
     }
 
-    void nextTurn()
+    ArrayList<Integer> verifyDupplicate(int dicesToRoll)
+    {
+        ArrayList<Integer> dicesEnteredByUser = new ArrayList<Integer>();
+
+        int i = 0;
+        while (i < dicesToRoll)
+        {
+            int dice = askNumber(6);
+            if (dicesEnteredByUser.contains(dice))
+            {
+                System.out.println("Sale con");
+            } else
+            {
+                dicesEnteredByUser.add(dice);
+                i++;
+            }
+        }
+        return dicesEnteredByUser;
+    }
+
+    public void nextTurn()
     {
         Random random = new Random();
         Scanner scanner = new Scanner(System.in);
+        ArrayList<Integer> dicesEnteredByUser = new ArrayList<Integer>();
         int dicesToRoll;
         System.out.println("How many dices do you want to toss again?");
         dicesToRoll = scanner.nextInt();
         System.out.println("Which dices would you like to toss again?");
         for (int i = 0; i < dicesToRoll; i++)
         {
-            int throwAgainDice = scanner.nextInt();
+            dicesEnteredByUser =verifyDupplicate(dicesToRoll);
             //The dice chosen is being toss again
-            dices[throwAgainDice] = random.nextInt(DICE_FACES) + 1;
+            dices[dicesEnteredByUser.get(i)] = random.nextInt(DICE_FACES) + 1;
         }
 
 
     }
 
-    /**
-     * This method shows the toss of the {@link com.ernstye.main.Constants#NUMBER_OF_DICES} dices
+    /*
+    This method shows the toss of the 5 dices
      */
-    void display()
+    public void display()
     {
-        for (int i = 0; i < NUMBER_OF_DICES; i++)
+        for (int i=0; i<NUMBER_OF_DICES;i++)
         {
-            System.out.println(i + ") " + dices[i]);
+            System.out.println(i+") "+ dices[i]);
         }
     }
-
-
 }
