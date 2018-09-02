@@ -24,7 +24,7 @@ public class Yahtzee
         int i = 0;
         System.out.println("== YAHTZEE ==");
         Dices dices = new Dices();
-        dices.start();
+        dices.play();
 
         /*ScoreGrid scoreGrid = new ScoreGrid();
         scoreGrid.display(dices);

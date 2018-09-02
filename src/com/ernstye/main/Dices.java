@@ -23,7 +23,7 @@ class Dices
         return dices;
     }
 
-    void start()
+    void play()
     {
         int continue_ = 1;
         int i = 0;
@@ -32,7 +32,6 @@ class Dices
         while (continue_ == 1 && i < 2)
         {
             System.out.println("Would you like to play again? \n0) No\n1)Yes\n");
-            Scanner scanner = new Scanner(System.in);
             continue_ = askNumber(2);
 
             if (continue_ == 1)
