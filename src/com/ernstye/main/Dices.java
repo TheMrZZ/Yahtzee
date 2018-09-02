@@ -106,6 +106,7 @@ class Dices
      */
     void display()
     {
+        System.out.println("This is the result of your roll :");
         for (int i = 0; i < NUMBER_OF_DICES; i++)
         {
             System.out.println(i + ") " + dices[i]);
