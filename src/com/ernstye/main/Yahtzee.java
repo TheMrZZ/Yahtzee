@@ -20,8 +20,6 @@ public class Yahtzee
      */
     public static void main(String[] args)
     {
-        int continue_ = 1;
-        int i = 0;
         System.out.println("== YAHTZEE ==");
         Dices dices = new Dices();
         dices.play();
@@ -36,7 +34,7 @@ public class Yahtzee
 
         while (!scoreGrid.isFull())
         {
-            dices.roll();
+            dices.play();
             dices.display();
 
             System.out.println();
