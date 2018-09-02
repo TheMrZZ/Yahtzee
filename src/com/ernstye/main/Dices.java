@@ -28,16 +28,18 @@ class Dices
         int continue_ = 1;
         int i = 0;
         roll();
+        scoreGrid.display(this);
         display();
         while (continue_ == 1 && i < 2)
         {
-            scoreGrid.display(this);
-            System.out.println("Would you like to play again? \n0) No\n1)Yes\n");
+
+            System.out.println("Would you like to play again?  0) No 1) Yes");
             continue_ = askNumber(2);
 
             if (continue_ == 1)
             {
                 nextTurn();
+                scoreGrid.display(this);
                 display();
                 i++;
             } else
@@ -71,7 +73,7 @@ class Dices
             int dice = askNumber(6);
             if (dicesEnteredByUser.contains(dice))
             {
-                System.out.println("You have already chosen this dice! Please enter another one :\n");
+                System.out.println("You have already chosen this dice! Please enter another one :");
             } else
             {
                 dicesEnteredByUser.add(dice);
