@@ -37,7 +37,6 @@ public class Yahtzee
 
             System.out.println();
 
-            scoreGrid.display(dices);
             scoreGrid.score(dices);
         }
 
