@@ -14,6 +14,7 @@ class Dices
     Dices()
     {
         dices = new Integer[NUMBER_OF_DICES];
+
         roll();
     }
 
@@ -22,7 +23,32 @@ class Dices
         return dices;
     }
 
-    void roll()
+    void start()
+    {
+        int continue_ = 1;
+        int i = 0;
+        roll();
+        display();
+        while (continue_ == 1 && i < 2)
+        {
+            System.out.println("Would you like to play again? \n0) No\n1)Yes\n");
+            Scanner scanner = new Scanner(System.in);
+            continue_ = askNumber(2);
+
+            if (continue_ == 1)
+            {
+                nextTurn();
+                display();
+                i++;
+            } else
+            {
+                continue_ = 0;
+            }
+
+        }
+    }
+
+    private void roll()
     {
         Random random = new Random();
 
@@ -45,7 +71,7 @@ class Dices
             int dice = askNumber(6);
             if (dicesEnteredByUser.contains(dice))
             {
-                System.out.println("Sale con");
+                System.out.println("You have already chosen this dice! Please enter another one :\n");
             } else
             {
                 dicesEnteredByUser.add(dice);
@@ -62,7 +88,7 @@ class Dices
         ArrayList<Integer> dicesEnteredByUser = new ArrayList<Integer>();
         int dicesToRoll;
         System.out.println("How many dices do you want to toss again?");
-        dicesToRoll = scanner.nextInt();
+        dicesToRoll = askNumber(1, 6);
         System.out.println("Which dices would you like to toss again?");
         for (int i = 0; i < dicesToRoll; i++)
         {

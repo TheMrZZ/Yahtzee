@@ -20,16 +20,17 @@ public class Yahtzee
      */
     public static void main(String[] args)
     {
+        int continue_ = 1;
+        int i = 0;
         System.out.println("== YAHTZEE ==");
         Dices dices = new Dices();
-        dices.roll();
-        dices.display();
+        dices.start();
 
-        ScoreGrid scoreGrid = new ScoreGrid();
+        /*ScoreGrid scoreGrid = new ScoreGrid();
         scoreGrid.display(dices);
         scoreGrid.score(dices);
         dices.roll();
         dices.display();
-        scoreGrid.display(dices);
+        scoreGrid.display(dices);*/
     }
 }
