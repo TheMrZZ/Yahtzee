@@ -107,9 +107,9 @@ class ScoreGrid
      * Displays the score grid and the potential points, in a table shape
      * Table has this format:
      * <p>
-     * ---------|----------|
+     * ---------------------
      * RowName  | X Points | X Potential points
-     * ---------|----------|
+     * ---------------------
      * </p>
      *
      * @param dices if NULL, doesn't display potential points - else, display the potential points the
@@ -127,11 +127,11 @@ class ScoreGrid
         final String MIDDLE_COLUMN_FORMAT = "%" + MIDDLE_COLUMN_WIDTH + "s";
 
         // The right column contains the -optional- potential points
-        final String RIGHT_COLUMN_FORMAT = "%3d %s";
+        final String RIGHT_COLUMN_FORMAT = " %3d %s";
 
         // The total width, equivalent of is (RowName + "|" + Points + "|").length
         final int TOTAL_WIDTH = LEFT_COLUMN_WIDTH + 1 + MIDDLE_COLUMN_WIDTH + 1;
-        final String ROW_SEPARATOR = stringFilledWith('-', TOTAL_WIDTH);
+        String ROW_SEPARATOR = stringFilledWith('-', TOTAL_WIDTH);
 
         System.out.println(ROW_SEPARATOR);
         for (int row = 0; row < upperSection.length; row++)
@@ -149,7 +149,8 @@ class ScoreGrid
             System.out.printf(MIDDLE_COLUMN_FORMAT, scoreString);
             System.out.print("|");
 
-            if (dices != null)
+            // If the player already scored, we don't show the potential points
+            if (dices != null && score == NO_SCORE)
             {
                 System.out.printf(RIGHT_COLUMN_FORMAT, getPotentialScore(row, dices), "potential points");
             }

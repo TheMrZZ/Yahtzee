@@ -28,5 +28,8 @@ public class Yahtzee
         ScoreGrid scoreGrid = new ScoreGrid();
         scoreGrid.display(dices);
         scoreGrid.score(dices);
+        dices.roll();
+        dices.display();
+        scoreGrid.display(dices);
     }
 }
