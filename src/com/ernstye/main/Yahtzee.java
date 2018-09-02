@@ -32,12 +32,14 @@ public class Yahtzee
 
         while (!scoreGrid.isFull())
         {
-            System.out.println("\n=== TURN " + (turnNumber++) + "===");
+            System.out.println("\n=== TURN " + turnNumber + " ===");
             dices.play(scoreGrid);
 
             System.out.println();
 
             scoreGrid.score(dices);
+
+            turnNumber++;
         }
 
         System.out.println("\n\n=== FINAL RESULTS ===\n\n");

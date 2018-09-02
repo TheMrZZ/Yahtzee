@@ -58,9 +58,10 @@ class UserInput
             validInput = (min <= number && number < max);
             if (!validInput)
             {
-                System.out.println(number + " is not between " + min + " and " + max + ".");
+                System.out.println(number + " is not between " + min + " and " + (max - 1) + ".");
             }
         } while (!validInput);
+
 
         return number;
     }

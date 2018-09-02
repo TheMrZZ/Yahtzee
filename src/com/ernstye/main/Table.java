@@ -34,11 +34,11 @@ public class Table
         // The width of the left column, containing the names of the rows
         final int LEFT_COLUMN_WIDTH = getLongestStringLength(UPPER_SECTION_ROWS);
         // We then right-pad the names with spaces
-        leftColumnFormat = "%-" + LEFT_COLUMN_WIDTH + "s|";
+        leftColumnFormat = "%-" + LEFT_COLUMN_WIDTH + "s";
 
         // The length of the middle column, containing the points the player already scored
         final int MIDDLE_COLUMN_WIDTH = 3;
-        middleColumnFormat = "%" + MIDDLE_COLUMN_WIDTH + "s|";
+        middleColumnFormat = "%" + MIDDLE_COLUMN_WIDTH + "s";
 
         // The right column contains the -optional- potential points
         rightColumnFormat = " %3d %s";
@@ -90,7 +90,9 @@ public class Table
         int score = scoreGrid.getRowScore(row);
 
         int potentialScore = NO_SCORE;
-        if (dices != null && score != NO_SCORE)
+
+        // If the player didn't score in this row, get the score he could have
+        if (dices != null && score == NO_SCORE)
         {
             potentialScore = scoreGrid.getPotentialScore(row, dices);
         }

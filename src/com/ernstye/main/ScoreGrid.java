@@ -49,7 +49,15 @@ class ScoreGrid
             }
         }
 
-        int row = askNumber(1, upperSection.length + 1, "Choose a section") - 1;
+        int row;
+        do
+        {
+            row = askNumber(1, upperSection.length + 1) - 1;
+            if (getRowScore(row) != NO_SCORE)
+            {
+                System.out.println("This row is already taken.");
+            }
+        } while (getRowScore(row) != NO_SCORE);
         addScore(row, dices);
     }
 

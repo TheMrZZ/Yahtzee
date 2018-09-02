@@ -108,7 +108,7 @@ class Dices
     {
         for (int i = 0; i < NUMBER_OF_DICES; i++)
         {
-            System.out.println(i + ") " + dices[i]);
+            System.out.println(i + ")" + dices[i]);
         }
     }
 }
