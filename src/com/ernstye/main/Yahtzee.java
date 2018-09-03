@@ -1,28 +1,26 @@
 package com.ernstye.main;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Scanner;
-
-import static com.ernstye.main.Constants.*;
-import static com.ernstye.main.UserInput.askNumber;
-import static com.ernstye.main.Dices.*;
-
+/**
+ * A working single-player implementation of Yahtzee's upper section.
+ *
+ * @author Florian ERNST, Céline YE
+ */
 public class Yahtzee
 {
+
     /**
-     * A working Yahtzee implementation.
-     * <p>
-     * TODO:
-     * - Implement a single-player working version of the dices
-     * - Implement the upper section of the points
-     * </p>
+     * Entry point for the program. Launches the Yahtzee.
+     *
+     * @param args not currently used
      */
     public static void main(String[] args)
     {
         startGame();
     }
 
+    /**
+     * Starts the game, and play until the grid is full.
+     */
     private static void startGame()
     {
         int turnNumber = 1;

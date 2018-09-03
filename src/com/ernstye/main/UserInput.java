@@ -1,6 +1,5 @@
 package com.ernstye.main;
 
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
@@ -91,7 +90,8 @@ class UserInput
             // Check for invalid input (e.g. 'abc' instead of a number)
             try
             {
-                userInput = scanner.nextLine();
+                // We strip the leading and trailing whitespaces from the user input string
+                userInput = scanner.nextLine().trim();
                 number = Integer.parseInt(userInput);
             }
             catch (NumberFormatException e)
