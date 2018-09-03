@@ -7,13 +7,19 @@ package com.ernstye.main;
  */
 public class Yahtzee
 {
+
+    /**
+     * Entry point for the program. Launches the Yahtzee.
+     *
+     * @param args not currently used
+     */
     public static void main(String[] args)
     {
         startGame();
     }
 
     /**
-     * Starts the game
+     * Starts the game, and play until the grid is full.
      */
     private static void startGame()
     {
