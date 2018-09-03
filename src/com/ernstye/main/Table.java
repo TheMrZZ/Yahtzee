@@ -54,9 +54,9 @@ public class Table
      * Table has this format:
      * <p>
      * <code>
-     * --------------------
-     * rowName  | X score | X potential Score
-     * --------------------
+     * -------------------<br>
+     * rowName | X score | X potential Score<br>
+     * -------------------<br>
      * </code>
      * </p>
      */
@@ -77,8 +77,8 @@ public class Table
      * The row is displayed in this format:
      * <p>
      * <code>
-     * rowName  | X score | X potential Score
-     * --------------------
+     * rowName | X score | X potential Score<br>
+     * -------------------<br>
      * </code>
      * </p>
      *
@@ -104,8 +104,8 @@ public class Table
      * Displays a single row, in this format:
      * <p>
      * <code>
-     * rowName  | X score | X potential Score
-     * --------------------
+     * rowName | X score | X potential Score<br>
+     * -------------------<br>
      * </code>
      * </p>
      *

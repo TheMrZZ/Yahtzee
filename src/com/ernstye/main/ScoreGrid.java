@@ -9,7 +9,7 @@ import static com.ernstye.main.UserInput.askNumber;
 /**
  * Score Grid model object.
  *
- * <p>Contains every row for the player to score</p>
+ * <p>Contains every row (upper section only) for the player to score</p>
  */
 class ScoreGrid
 {

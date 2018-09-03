@@ -1,15 +1,12 @@
 package com.ernstye.main;
 
+/**
+ * A working single-player implementation of Yahtzee's upper section.
+ *
+ * @author Florian ERNST, Céline YE
+ */
 public class Yahtzee
 {
-    /**
-     * A working Yahtzee implementation.
-     * <p>
-     * TODO:
-     * - Implement a single-player working version of the dices
-     * - Implement the upper section of the points
-     * </p>
-     */
     public static void main(String[] args)
     {
         startGame();
