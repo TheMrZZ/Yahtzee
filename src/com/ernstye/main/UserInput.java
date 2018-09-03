@@ -90,6 +90,7 @@ class UserInput
             // Check for invalid input (e.g. 'abc' instead of a number)
             try
             {
+                // We strip the leading and trailing whitespaces from the user input string
                 userInput = scanner.nextLine().trim();
                 number = Integer.parseInt(userInput);
             }
