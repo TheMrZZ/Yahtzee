@@ -5,8 +5,6 @@ import java.util.Collections;
 
 import static com.ernstye.main.Constants.*;
 import static com.ernstye.main.UserInput.askNumber;
-import static com.ernstye.main.StringUtilities.getLongestStringLength;
-import static com.ernstye.main.StringUtilities.stringFilledWith;
 
 /**
  * Score Grid model object.

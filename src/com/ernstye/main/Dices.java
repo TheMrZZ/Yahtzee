@@ -1,10 +1,10 @@
 package com.ernstye.main;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 import java.util.Random;
 
-import static com.ernstye.main.Constants.*;
+import static com.ernstye.main.Constants.DICE_FACES;
+import static com.ernstye.main.Constants.NUMBER_OF_DICES;
 import static com.ernstye.main.UserInput.askNumber;
 
 class Dices

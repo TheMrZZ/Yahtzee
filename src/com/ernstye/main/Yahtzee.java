@@ -1,13 +1,5 @@
 package com.ernstye.main;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Scanner;
-
-import static com.ernstye.main.Constants.*;
-import static com.ernstye.main.UserInput.askNumber;
-import static com.ernstye.main.Dices.*;
-
 public class Yahtzee
 {
     /**
@@ -23,6 +15,9 @@ public class Yahtzee
         startGame();
     }
 
+    /**
+     * Starts the game
+     */
     private static void startGame()
     {
         int turnNumber = 1;
