@@ -90,7 +90,7 @@ class UserInput
             // Check for invalid input (e.g. 'abc' instead of a number)
             try
             {
-                userInput = scanner.nextLine();
+                userInput = scanner.nextLine().trim();
                 number = Integer.parseInt(userInput);
             }
             catch (NumberFormatException e)
