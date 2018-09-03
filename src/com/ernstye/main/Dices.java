@@ -54,7 +54,9 @@ class Dices
             if (dicesToRoll > 0)
             {
                 nextTurn(dicesToRoll);
+                System.out.println();
                 scoreGrid.display(this);
+
                 display();
                 i++;
             }
@@ -109,7 +111,7 @@ class Dices
     private void nextTurn(int dicesToRoll)
     {
         Random random = new Random();
-        System.out.println("Which dices would you like to toss again?\n");
+        System.out.println("Which dices would you like to toss again?");
         ArrayList<Integer> dicesEnteredByUser = verifyDuplicate(dicesToRoll);
         for (int i = 0; i < dicesToRoll; i++)
         {
