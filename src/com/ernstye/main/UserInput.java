@@ -97,7 +97,6 @@ class UserInput
             catch (NumberFormatException e)
             {
                 System.out.println("This is not a number.");
-                scanner.nextLine(); // Cleans the buffer
                 continue;
             }
 

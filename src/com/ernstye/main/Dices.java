@@ -25,28 +25,23 @@ class Dices
 
     void play(ScoreGrid scoreGrid)
     {
-        int continue_ = 1;
+        int dicesToRoll = 1;
         int i = 0;
         roll();
         scoreGrid.display(this);
         display();
-        while (continue_ == 1 && i < 2)
+        while (dicesToRoll > 0 && i < 2)
         {
 
-            System.out.println("Would you like to play again? 0: No, 1: Yes");
-            continue_ = askNumber(2);
+            dicesToRoll = askNumber(0, 6, "How many dices do you want to toss again?");
 
-            if (continue_ == 1)
+            if (dicesToRoll > 0)
             {
-                nextTurn();
+                nextTurn(dicesToRoll);
                 scoreGrid.display(this);
                 display();
                 i++;
-            } else
-            {
-                continue_ = 0;
             }
-
         }
     }
 
@@ -83,13 +78,10 @@ class Dices
         return dicesEnteredByUser;
     }
 
-    private void nextTurn()
+    private void nextTurn(int dicesToRoll)
     {
         Random random = new Random();
         ArrayList<Integer> dicesEnteredByUser = new ArrayList<Integer>();
-        int dicesToRoll;
-        System.out.println("How many dices do you want to toss again?");
-        dicesToRoll = askNumber(1, 6);
         System.out.println("Which dices would you like to toss again?");
         dicesEnteredByUser = verifyDuplicate(dicesToRoll);
         for (int i = 0; i < dicesToRoll; i++)
