@@ -88,7 +88,7 @@ class Dices
         int i = 0;
         while (i < dicesToRoll)
         {
-            int dice = askNumber(6);
+            int dice = askNumber(NUMBER_OF_DICES);
             //if the user has already entered the dice's index, ask him to choose another one
             if (dicesEnteredByUser.contains(dice))
             {
