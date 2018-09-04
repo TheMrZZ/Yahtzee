@@ -179,7 +179,7 @@ class ScoreGrid
      */
     int getPointsBeforeUpperBonus()
     {
-        return Math.max(0, UPPER_SECTION_MINIMUM - getUpperBonus());
+        return Math.max(0, UPPER_SECTION_MINIMUM - getUpperSectionScore());
     }
 
     /**
