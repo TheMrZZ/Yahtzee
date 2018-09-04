@@ -49,7 +49,7 @@ class Dices
         //if the player wants to roll again the dices or if he hasn't played 3 times yet, continue the loop
         while (dicesToRoll > 0 && i < 2)
         {
-            dicesToRoll = askNumber(0, 6, "How many dices do you want to roll again?");
+            dicesToRoll = askNumber(0, NUMBER_OF_DICES, "How many dices do you want to roll again?");
 
             if (dicesToRoll > 0)
             {
