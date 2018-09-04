@@ -69,7 +69,13 @@ public class Table
             displayScoreRow(row);
         }
 
-        displayRow("Bonus", scoreGrid.getUpperBonus(), NO_SCORE);
+        int pointsBeforeBonus = scoreGrid.getPointsBeforeUpperBonus();
+        String pointsNeeded = "";
+        if (pointsBeforeBonus > 0)
+        {
+            pointsNeeded = String.format(rightColumnFormat, pointsBeforeBonus, "points needed before the bonus");
+        }
+        displayRow("Bonus", String.valueOf(scoreGrid.getUpperBonus()), pointsNeeded);
     }
 
     /**
@@ -97,7 +103,7 @@ public class Table
             potentialScore = scoreGrid.getPotentialScore(row, dices);
         }
 
-        displayRow(rowName, score, potentialScore);
+        displaySingleRow(rowName, score, potentialScore);
     }
 
     /**
@@ -116,7 +122,7 @@ public class Table
      *                       {@link com.ernstye.main.Constants#NO_SCORE} is given,
      *                       nothing will be displayed.
      */
-    private void displayRow(String rowName, int score, int potentialScore)
+    private void displaySingleRow(String rowName, int score, int potentialScore)
     {
         // If the score is NO_SCORE, don't show anything
         String scoreString = Integer.toString(score);
@@ -125,19 +131,40 @@ public class Table
             scoreString = "";
         }
 
-        System.out.printf(leftColumnFormat, rowName);
-        System.out.print("|");
-
-        System.out.printf(middleColumnFormat, scoreString);
-        System.out.print("|");
+        String potentialScoreString = "";
 
         // If the player already scored, we don't show the potential points
         if (potentialScore != NO_SCORE)
         {
-            System.out.printf(rightColumnFormat, potentialScore, "potential points");
+            potentialScoreString = String.format(rightColumnFormat, potentialScore, "potential points");
         }
 
-        System.out.println();
+        displayRow(rowName, scoreString, potentialScoreString);
+    }
+
+    /**
+     * Displays a single row, in this format:
+     * <p>
+     * <code>
+     * rowName | X score | X right<br>
+     * -------------------<br>
+     * </code>
+     * </p>
+     *
+     * @param rowName the name of the current row
+     * @param score   the score to display - if {@link com.ernstye.main.Constants#NO_SCORE} is given,
+     *                nothing will be displayed.
+     * @param right   the string to display at right of the table
+     */
+    private void displayRow(String rowName, String score, String right)
+    {
+        System.out.printf(leftColumnFormat, rowName);
+        System.out.print("|");
+
+        System.out.printf(middleColumnFormat, score);
+        System.out.print("|");
+
+        System.out.println(right);
         System.out.println(rowSeparator);
     }
 }
