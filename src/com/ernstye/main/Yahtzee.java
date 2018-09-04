@@ -1,5 +1,7 @@
 package com.ernstye.main;
 
+import static com.ernstye.main.UserInput.askNumber;
+
 /**
  * A working single-player implementation of Yahtzee's upper section.
  *
@@ -19,9 +21,25 @@ public class Yahtzee
     }
 
     /**
-     * Starts the game, and play until the grid is full.
+     * Starts a game and ask player for a new one, until the player asks to stop.
      */
     private static void startGame()
+    {
+        int continue_ = 1;
+        while (continue_ == 1)
+        {
+            startOneGame();
+
+            System.out.println("\n\n");
+            continue_ = askNumber(0, 1, "Would you like to play again? 0:No 1:Yes");
+            System.out.println("\n\n");
+        }
+    }
+
+    /**
+     * Starts one game, and play until the grid is full.
+     */
+    private static void startOneGame()
     {
         int turnNumber = 1;
         System.out.println("== YAHTZEE ==");
