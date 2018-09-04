@@ -1,38 +1,64 @@
 package com.ernstye.main;
 
-import java.util.Arrays;
+import static com.ernstye.main.UserInput.askNumber;
 
-import static com.ernstye.main.Constants.*;
-
+/**
+ * A working single-player implementation of Yahtzee's upper section.
+ *
+ * @author Florian ERNST, Céline YE
+ */
 public class Yahtzee
 {
-    /**
-     * A working Yahtzee implementation.
-     * <p>
-     * TODO:
-     * - Implement a single-player working version of the dices
-     * - Implement the upper section of the points
-     * </p>
-     */
 
+    /**
+     * Entry point for the program. Launches the Yahtzee.
+     *
+     * @param args not currently used
+     */
     public static void main(String[] args)
     {
+        startGame();
+    }
+
+    /**
+     * Starts a game and ask player for a new one, until the player asks to stop.
+     */
+    private static void startGame()
+    {
+        int continue_ = 1;
+        while (continue_ == 1)
+        {
+            startOneGame();
+
+            System.out.println("\n\n");
+            continue_ = askNumber(0, 2, "Would you like to play again? 0:No 1:Yes");
+            System.out.println("\n\n");
+        }
+    }
+
+    /**
+     * Starts one game, and play until the grid is full.
+     */
+    private static void startOneGame()
+    {
+        int turnNumber = 1;
         System.out.println("== YAHTZEE ==");
+        Dices dices = new Dices();
+        ScoreGrid scoreGrid = new ScoreGrid();
 
-        int[] upperSection = createUpperSection();
+        while (!scoreGrid.isFull())
+        {
+            System.out.println("\n=== TURN " + turnNumber + " ===");
+            dices.play(scoreGrid);
+
+            System.out.println();
+            scoreGrid.score(dices);
+
+            turnNumber++;
+        }
+
+        System.out.println("\n\n=== FINAL RESULTS ===\n\n");
+        scoreGrid.display(null);
+        System.out.println("You scored a total of " + scoreGrid.getTotalScore() + " points!");
     }
-
-    // Create the empty upper section: 6 rows for each possible scores
-    public static int[] createUpperSection()
-    {
-        int[] upperSection = new int[NUMBER_OF_DICES];
-        Arrays.fill(upperSection, NO_SCORE);
-        return upperSection;
-    }
-
-    public static void scorePoints(int[] upperSection)
-    {
-
-    }
-
 }
