@@ -14,6 +14,8 @@ import static com.ernstye.main.UserInput.askNumber;
 class ScoreGrid
 {
     private Integer[] upperSection;
+    final int UPPER_BONUS_POINTS = 35;
+    final int UPPER_SECTION_MINIMUM = 63;
 
     /**
      * Creates an empty score grid.
@@ -162,15 +164,22 @@ class ScoreGrid
      */
     int getUpperBonus()
     {
-        final int UPPER_BONUS_POINTS = 35;
-        final int UPPER_SECTION_MINIMUM = 63;
-
         if (getUpperSectionScore() >= UPPER_SECTION_MINIMUM)
         {
             return UPPER_BONUS_POINTS;
         }
 
         return 0;
+    }
+
+    /**
+     * Get the number of points needed to get the upper bonus
+     *
+     * @return the number of points needed to get the upper bonus, 0 if the player already has the bonus
+     */
+    int getPointsBeforeUpperBonus()
+    {
+        return Math.max(0, UPPER_SECTION_MINIMUM - getUpperBonus());
     }
 
     /**
