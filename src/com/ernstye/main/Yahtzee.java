@@ -31,7 +31,7 @@ public class Yahtzee
             startOneGame();
 
             System.out.println("\n\n");
-            continue_ = askNumber(0, 1, "Would you like to play again? 0:No 1:Yes");
+            continue_ = askNumber(0, 2, "Would you like to play again? 0:No 1:Yes");
             System.out.println("\n\n");
         }
     }
