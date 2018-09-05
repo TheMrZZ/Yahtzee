@@ -88,7 +88,7 @@ class Dices
         int i = 0;
         while (i < dicesToRoll)
         {
-            int dice = askNumber(NUMBER_OF_DICES);
+            int dice = askNumber(1, NUMBER_OF_DICES+1) - 1;
             //if the user has already entered the dice's index, ask him to choose another one
             if (dicesEnteredByUser.contains(dice))
             {
@@ -128,7 +128,7 @@ class Dices
         System.out.println("This is the result of your roll :");
         for (int i = 0; i < NUMBER_OF_DICES; i++)
         {
-            System.out.println(i + ")" + dices[i]);
+            System.out.println(i+1 + ")" + dices[i]);
         }
     }
 }
