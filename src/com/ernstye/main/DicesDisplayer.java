@@ -12,7 +12,7 @@ class DicesDisplayer
     /**
      * ASCII images for each dice face.
      * Will display correctly with any monospaced font: Consolas, Monospaced, Source Code Pro, Hack...
-     *
+     * <p>
      * All dices must have the same height and the same width for the program to work.
      */
     private final static String[][] DICES_IMAGES =

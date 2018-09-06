@@ -47,7 +47,7 @@ public class Yahtzee
         int turnNumber = 1;
         Scanner scanner = new Scanner(System.in);
         int showRules;
-        System.out.println("== YAHTZEE ==\n");
+        System.out.println("====== YAHTZEE ======\n");
         System.out.println("Do you want to know the rules? 0:No 1:Yes");
         showRules = scanner.nextInt();
         if (showRules == 1)
@@ -73,7 +73,11 @@ public class Yahtzee
         System.out.println("You scored a total of " + scoreGrid.getTotalScore() + " points!");
     }
 
-    public static void displayRules()
+    /**
+     * Display the rules of the Yahtzee game
+     * Open a txt file where the rules are read
+     */
+    private static void displayRules()
     {
         File file =
             new File("rules.txt");
@@ -81,8 +85,10 @@ public class Yahtzee
         try
         {
             scanner = new Scanner(file);
+            //while the text file has more text
             while (scanner.hasNextLine())
             {
+                //print t
                 System.out.println(scanner.nextLine());
             }
 
@@ -91,9 +97,6 @@ public class Yahtzee
         {
             System.out.println("The rules.txt was not found");
         }
-
-
-
     }
 }
 
