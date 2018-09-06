@@ -1,5 +1,7 @@
 package com.ernstye.main;
 
+import java.io.File;
+import java.util.Scanner;
 import static com.ernstye.main.UserInput.askNumber;
 
 /**
@@ -66,6 +68,25 @@ public class Yahtzee
 
     public static void displayRules()
     {
-        System.out.println("RULES : The game consists of a number of rounds. In each round, a player gets three rolls of the dice, although they can choose to end their turn after one or two rolls. After the first roll the player can save any dice they want and re-roll the other dice. This procedure is repeated after the second roll. The player has complete choice as to which dice to roll.");
+        File file =
+            new File("D:\\Programmation\\IdeaProjects\\Yahtzee\\src\\com\\ernstye\\main\\rules.txt");
+        Scanner scanner;
+        try
+        {
+            scanner = new Scanner(file);
+            while (scanner.hasNextLine())
+            {
+                System.out.println(scanner.nextLine());
+            }
+
+        }
+        catch (java.io.FileNotFoundException e)
+        {
+            System.out.println("The file was not found");
+        }
+
+
+
     }
 }
+
