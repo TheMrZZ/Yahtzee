@@ -11,7 +11,7 @@ class UserInput
     private static Scanner scanner = new Scanner(System.in);
 
     /**
-     * Returns number entered by the user between 0 and <code>max</code>
+     * Returns number entered by the user between 0 and {@code max}
      *
      * @param max upper bound, not included
      * @return the number entered by the user
@@ -22,7 +22,7 @@ class UserInput
     }
 
     /**
-     * Returns number entered by the user between <code>min</code> and <code>max</code>
+     * Returns number entered by the user between {@code min} and {@code max}
      *
      * @param min lower bound, included
      * @param max upper bound, not included
@@ -34,8 +34,8 @@ class UserInput
     }
 
     /**
-     * Returns number entered by the user between <code>min</code> and <code>max</code>.
-     * The <code>message</code> will be shown before asking the number.
+     * Returns number entered by the user between {@code min} and {@code max}.
+     * The {@code message} will be shown before asking the number.
      *
      * @param min     lower bound, included
      * @param max     upper bound, not included
@@ -67,7 +67,7 @@ class UserInput
 
     /**
      * Returns a number entered by the user.
-     * Shows the <code>message</code> before asking a number.
+     * Shows the {@code message} before asking a number.
      * Check if the user entered a number, else will ask again.
      *
      * @param message shown before asking the number

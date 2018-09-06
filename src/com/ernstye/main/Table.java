@@ -53,11 +53,11 @@ public class Table
      * Displays the score grid and the potential points, in a table shape
      * Table has this format:
      * <p>
-     * <code>
-     * -------------------<br>
-     * rowName | X score | X potential Score<br>
-     * -------------------<br>
-     * </code>
+     * <pre>
+     * -------------------
+     * rowName | X score | X potential Score
+     * -------------------
+     * </pre>
      * </p>
      */
     void display()
@@ -82,10 +82,10 @@ public class Table
      * Displays a score row - Ones, Twos, Threes etc...
      * The row is displayed in this format:
      * <p>
-     * <code>
-     * rowName | X score | X potential Score<br>
-     * -------------------<br>
-     * </code>
+     * <pre>
+     * rowName | X score | X potential Score
+     * -------------------
+     * </pre>
      * </p>
      *
      * @param row the number of the row to display
@@ -109,16 +109,16 @@ public class Table
     /**
      * Displays a single row, in this format:
      * <p>
-     * <code>
-     * rowName | X score | X potential Score<br>
-     * -------------------<br>
-     * </code>
+     * <pre>
+     * rowName | X score | X potential Score
+     * -------------------
+     * </pre>
      * </p>
      *
      * @param rowName        the name of the current row
      * @param score          the score to display - if {@link com.ernstye.main.Constants#NO_SCORE} is given,
      *                       nothing will be displayed.
-     * @param potentialScore the potential score given by the current <code>dices</code> - if
+     * @param potentialScore the potential score given by the current {@code dices} - if
      *                       {@link com.ernstye.main.Constants#NO_SCORE} is given,
      *                       nothing will be displayed.
      */
@@ -145,10 +145,10 @@ public class Table
     /**
      * Displays a single row, in this format:
      * <p>
-     * <code>
-     * rowName | X score | X right<br>
-     * -------------------<br>
-     * </code>
+     * <pre>
+     * rowName | X score | X right
+     * -------------------
+     * </pre>
      * </p>
      *
      * @param rowName the name of the current row
