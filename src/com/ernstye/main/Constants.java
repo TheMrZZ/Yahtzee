@@ -22,11 +22,6 @@ final class Constants
     static final int NUMBER_OF_DICES = 5;
 
     /**
-     * Images of each dice face in unicode
-     */
-    static final String[] DICE_IMAGES = {"\u2680", "\u2681", "\u2682", "\u2683", "\u2684", "\u2685"};
-
-    /**
      * The names of every line in the upper section
      */
     static final String[] UPPER_SECTION_ROWS = {

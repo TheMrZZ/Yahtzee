@@ -40,7 +40,7 @@ class ScoreGrid
     {
         System.out.println("Score points in which row?");
 
-        // Shows the potential score the player could get for each row
+        // Shows the potential score the player could getDices for each row
         for (int i = 0; i < upperSection.length; i++)
         {
             if (upperSection[i] == NO_SCORE)
@@ -66,7 +66,7 @@ class ScoreGrid
      *
      * @param row   the row where the player could score
      * @param dices the dices the player rolled
-     * @return the potential points he would get
+     * @return the potential points he would getDices
      */
     int getPotentialScore(int row, Dices dices)
     {
@@ -80,7 +80,7 @@ class ScoreGrid
          Get the number of dices with the correct face (1 for the "Ones" row, 2 for the "Twos"...
          ex: if the player rolled 4-3-3-2-6, and diceNumber is 3, then correctDices = 2
         */
-        int correctDices = Collections.frequency(Arrays.asList(dices.get()), diceNumber);
+        int correctDices = Collections.frequency(Arrays.asList(dices.getDices()), diceNumber);
 
         /*
          Points are the number of dices with the correct face x the digit
@@ -93,7 +93,7 @@ class ScoreGrid
     /**
      * Get the score of a particular row for the player
      *
-     * @param row the row to get the score from
+     * @param row the row to getDices the score from
      * @return the score of the row
      */
     int getRowScore(int row)
@@ -173,9 +173,9 @@ class ScoreGrid
     }
 
     /**
-     * Get the number of points needed to get the upper bonus
+     * Get the number of points needed to getDices the upper bonus
      *
-     * @return the number of points needed to get the upper bonus, 0 if the player already has the bonus
+     * @return the number of points needed to getDices the upper bonus, 0 if the player already has the bonus
      */
     int getPointsBeforeUpperBonus()
     {
@@ -192,7 +192,7 @@ class ScoreGrid
      * </p>
      *
      * @param dices if NULL, doesn't display potential points - else, display the potential points the
-     *              player could get
+     *              player could getDices
      */
     void display(Dices dices)
     {

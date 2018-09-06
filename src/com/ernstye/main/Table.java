@@ -24,7 +24,7 @@ public class Table
      * Creates a table used to display the score grid, with the potential scores given by the dices
      *
      * @param scoreGrid_ the score grid to display
-     * @param dices_     if not null, used to get the potential score for each empty row
+     * @param dices_     if not null, used to getDices the potential score for each empty row
      */
     Table(ScoreGrid scoreGrid_, Dices dices_)
     {
@@ -63,18 +63,33 @@ public class Table
     void display()
     {
         System.out.println(rowSeparator);
+
+        // Display the upper section
         Integer[] upperSection = scoreGrid.getUpperSection();
         for (int row = 0; row < upperSection.length; row++)
         {
             displayScoreRow(row);
         }
 
+        // Displays the upper bonus row
+        displayUpperBonusRow();
+
+        // Display the actual total score
+        displayRow("Total", String.valueOf(scoreGrid.getTotalScore()), "");
+        System.out.println();
+    }
+
+    private void displayUpperBonusRow()
+    {
         int pointsBeforeBonus = scoreGrid.getPointsBeforeUpperBonus();
+
+        // If the player doesn't have the bonus, displays the points needed
         String pointsNeeded = "";
         if (pointsBeforeBonus > 0)
         {
             pointsNeeded = String.format(rightColumnFormat, pointsBeforeBonus, "points needed before the bonus");
         }
+
         displayRow("Bonus", String.valueOf(scoreGrid.getUpperBonus()), pointsNeeded);
     }
 
@@ -97,7 +112,7 @@ public class Table
 
         int potentialScore = NO_SCORE;
 
-        // If the player didn't score in this row, get the score he could have
+        // If the player didn't score in this row, getDices the score he could have
         if (dices != null && score == NO_SCORE)
         {
             potentialScore = scoreGrid.getPotentialScore(row, dices);
@@ -140,6 +155,29 @@ public class Table
         }
 
         displayRow(rowName, scoreString, potentialScoreString);
+    }
+
+    /**
+     * Convenience wrapper for {@link com.ernstye.main.Table#displayRow(String, String, String)}
+     * Takes an {@code int} as a score instead of a String.
+     * Displays a single row, in this format:
+     *
+     * <p>
+     * <pre>
+     * rowName |  score  | right
+     * -------------------
+     * </pre>
+     * </p>
+     *
+     * @param rowName the name of the current row
+     * @param score   the score to display - if {@link com.ernstye.main.Constants#NO_SCORE} is given,
+     *                nothing will be displayed.
+     * @param right   the string to display at right of the table
+     * @see com.ernstye.main.Table#displayRow(String, String, String)
+     */
+    private void displayRow(String rowName, int score, String right)
+    {
+        displayRow(rowName, String.valueOf(score), right);
     }
 
     /**
