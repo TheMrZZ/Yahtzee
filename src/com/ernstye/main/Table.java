@@ -74,6 +74,8 @@ public class Table
         // Displays the upper bonus row
         displayUpperBonusRow();
 
+        // Display the actual total score
+        displayRow("Total", String.valueOf(scoreGrid.getTotalScore()), "");
         System.out.println();
     }
 
