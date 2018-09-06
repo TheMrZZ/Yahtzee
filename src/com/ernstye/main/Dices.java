@@ -126,10 +126,11 @@ class Dices
      */
     void display()
     {
-        System.out.println("This is the result of your roll :");
-        for (int i = 0; i < NUMBER_OF_DICES; i++)
+        DicesDisplayer dicesDisplayer = new DicesDisplayer(this);
+        dicesDisplayer.display();
+        /*for (int i = 0; i < NUMBER_OF_DICES; i++)
         {
             System.out.println(i+1 + ")" + DICE_IMAGES[dices[i]-1]);
-        }
+        }*/
     }
 }
