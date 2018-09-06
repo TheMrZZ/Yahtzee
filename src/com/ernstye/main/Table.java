@@ -76,6 +76,8 @@ public class Table
             pointsNeeded = String.format(rightColumnFormat, pointsBeforeBonus, "points needed before the bonus");
         }
         displayRow("Bonus", String.valueOf(scoreGrid.getUpperBonus()), pointsNeeded);
+
+        System.out.println();
     }
 
     /**

@@ -1,15 +1,19 @@
 package com.ernstye.main;
 
-import javax.xml.bind.annotation.XmlType;
-
-import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
-import static com.ernstye.main.Constants.*;
+import static com.ernstye.main.Constants.NUMBER_OF_DICES;
 
-public class DicesDisplayer
+/**
+ * A class used to display a dice roll
+ */
+class DicesDisplayer
 {
-    String[][] dicesImages =
+
+    /**
+     *
+     */
+    private final static String[][] DICES_IMAGES =
         {
             {
                 " _________ ",
@@ -19,7 +23,6 @@ public class DicesDisplayer
                 "|         |",
                 "|_________|"
             },
-
             {
                 " _________ ",
                 "|         |",
@@ -28,7 +31,6 @@ public class DicesDisplayer
                 "|      o  |",
                 "|_________|"
             },
-
             {
                 " _________ ",
                 "|         |",
@@ -37,7 +39,6 @@ public class DicesDisplayer
                 "|      o  |",
                 "|_________|"
             },
-
             {
                 " _________ ",
                 "|         |",
@@ -46,7 +47,6 @@ public class DicesDisplayer
                 "|  o   o  |",
                 "|_________|"
             },
-
             {
                 " _________ ",
                 "|         |",
@@ -55,7 +55,6 @@ public class DicesDisplayer
                 "|  o   o  |",
                 "|_________|"
             },
-
             {
                 " _________ ",
                 "|         |",
@@ -68,19 +67,25 @@ public class DicesDisplayer
 
     private Dices dices;
 
+    /**
+     * Creates a displayer for specific dices
+     *
+     * @param dices_ the dices to display
+     */
     DicesDisplayer(Dices dices_)
     {
         dices = dices_;
     }
 
 
+    /**
+     * Display the {@code dices} in a fancy way, using the {@code DICES_IMAGES}
+     */
     void display()
     {
-        displayAnimatedDice("This is the result of your roll :");
-
         Integer[] dicesFaces = dices.get();
-        final int HEIGHT = dicesImages[0].length;
-        final int WIDTH = dicesImages[0][0].length();
+        final int HEIGHT = DICES_IMAGES[0].length;
+        final int WIDTH = DICES_IMAGES[0][0].length();
         final String DICES_SEPARATOR = "   ";
         final String DICE_ANNOUNCEMENT = "";
         // Start by iterating on the rows
@@ -89,7 +94,7 @@ public class DicesDisplayer
             displayWhiteSpaces(DICE_ANNOUNCEMENT.length());
             for (int diceValue : dicesFaces)
             {
-                System.out.print(dicesImages[diceValue - 1][i] + DICES_SEPARATOR);
+                System.out.print(DICES_IMAGES[diceValue - 1][i] + DICES_SEPARATOR);
             }
             System.out.println();
         }
@@ -106,31 +111,22 @@ public class DicesDisplayer
 
     }
 
-    private void displayAnimatedDice(String message)
-    {
-        Random random = new Random();
-        for (int i = 0; i < 800; i++)
-        {
-            System.out.print(message + " " + DICE_IMAGES[random.nextInt(DICE_FACES)]);
-            try
-            {
-                TimeUnit.MILLISECONDS.sleep(1);
-            }
-            catch (InterruptedException e)
-            {
-
-            }
-            System.out.print("\r");
-        }
-        System.out.println(message);
-
-    }
-
     private void displayWhiteSpaces(int number)
     {
         for (int i = 0; i < number; i++)
         {
             System.out.print(" ");
+        }
+    }
+
+    private void sleep(int milliseconds)
+    {
+        try
+        {
+            TimeUnit.MILLISECONDS.sleep(milliseconds);
+        }
+        catch (InterruptedException ignored)
+        {
         }
     }
 }
