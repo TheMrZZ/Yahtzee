@@ -25,6 +25,7 @@ public class Yahtzee
      */
     private static void startGame()
     {
+
         int continue_ = 1;
         while (continue_ == 1)
         {
@@ -42,7 +43,8 @@ public class Yahtzee
     private static void startOneGame()
     {
         int turnNumber = 1;
-        System.out.println("== YAHTZEE ==");
+        System.out.println("== YAHTZEE ==\n");
+        displayRules();
         Dices dices = new Dices();
         ScoreGrid scoreGrid = new ScoreGrid();
 
@@ -60,5 +62,10 @@ public class Yahtzee
         System.out.println("\n\n=== FINAL RESULTS ===\n\n");
         scoreGrid.display(null);
         System.out.println("You scored a total of " + scoreGrid.getTotalScore() + " points!");
+    }
+
+    public static void displayRules()
+    {
+        System.out.println("RULES : The game consists of a number of rounds. In each round, a player gets three rolls of the dice, although they can choose to end their turn after one or two rolls. After the first roll the player can save any dice they want and re-roll the other dice. This procedure is repeated after the second roll. The player has complete choice as to which dice to roll.");
     }
 }
