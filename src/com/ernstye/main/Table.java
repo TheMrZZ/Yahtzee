@@ -71,15 +71,24 @@ public class Table
             displayScoreRow(row);
         }
 
+        // Displays the upper bonus row
+        displayUpperBonusRow();
+
+        System.out.println();
+    }
+
+    private void displayUpperBonusRow()
+    {
         int pointsBeforeBonus = scoreGrid.getPointsBeforeUpperBonus();
+
+        // If the player doesn't have the bonus, displays the points needed
         String pointsNeeded = "";
         if (pointsBeforeBonus > 0)
         {
             pointsNeeded = String.format(rightColumnFormat, pointsBeforeBonus, "points needed before the bonus");
         }
-        displayRow("Bonus", String.valueOf(scoreGrid.getUpperBonus()), pointsNeeded);
 
-        System.out.println();
+        displayRow("Bonus", String.valueOf(scoreGrid.getUpperBonus()), pointsNeeded);
     }
 
     /**
