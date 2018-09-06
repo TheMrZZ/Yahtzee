@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import static com.ernstye.main.Constants.DICE_FACES;
+import static com.ernstye.main.Constants.DICE_IMAGES;
 import static com.ernstye.main.Constants.NUMBER_OF_DICES;
 import static com.ernstye.main.UserInput.askNumber;
 
@@ -128,7 +129,7 @@ class Dices
         System.out.println("This is the result of your roll :");
         for (int i = 0; i < NUMBER_OF_DICES; i++)
         {
-            System.out.println(i+1 + ")" + dices[i]);
+            System.out.println(i+1 + ")" + DICE_IMAGES[dices[i]-1]);
         }
     }
 }
