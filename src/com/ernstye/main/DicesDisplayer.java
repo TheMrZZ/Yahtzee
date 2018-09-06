@@ -1,11 +1,10 @@
 package com.ernstye.main;
 
-import java.util.concurrent.TimeUnit;
-
 import static com.ernstye.main.Constants.NUMBER_OF_DICES;
 
 /**
- * A class used to display a dice roll
+ * A class used to display a dice roll.
+ * Stores the dice images and convenience methods for an easy display.
  */
 class DicesDisplayer
 {
@@ -79,27 +78,47 @@ class DicesDisplayer
 
 
     /**
-     * Display the {@code dices} in a fancy way, using the {@code DICES_IMAGES}
+     * Display the {@code dices} in a fancy way, using the {@link com.ernstye.main.DicesDisplayer#DICES_IMAGES}
+     *
+     * The format used is the following:
+     * <pre>
+     *  _________     _________     _________     _________     _________
+     * |         |   |         |   |         |   |         |   |         |
+     * |         |   |         |   |  o      |   |  o   o  |   |  o      |
+     * |    o    |   |    o    |   |         |   |         |   |         |
+     * |         |   |         |   |      o  |   |  o   o  |   |      o  |
+     * |_________|   |_________|   |_________|   |_________|   |_________|
+     *     n°1           n°2           n°3           n°4           n°5
+     * </pre>
      */
     void display()
     {
         Integer[] dicesFaces = dices.get();
+
+        // The height & the width of the dices images
         final int HEIGHT = DICES_IMAGES[0].length;
         final int WIDTH = DICES_IMAGES[0][0].length();
+
+        // The string used to separate dices
         final String DICES_SEPARATOR = "   ";
-        final String DICE_ANNOUNCEMENT = "";
-        // Start by iterating on the rows
-        for (int i = 0; i < HEIGHT; i++)
+
+        /*
+        We need to display the dices on an horizontal way.
+        Therefore, we need to iterate on the rows first: we display the top of the 1st dice, then top of the 2nd dice...
+        Then we keep going with the 2nd row, etc...
+         */
+        for (int row = 0; row < HEIGHT; row++)
         {
-            displayWhiteSpaces(DICE_ANNOUNCEMENT.length());
             for (int diceValue : dicesFaces)
             {
-                System.out.print(DICES_IMAGES[diceValue - 1][i] + DICES_SEPARATOR);
+                // We get the correct image for the dice, we then display the corresponding row
+                String[] diceImage = DICES_IMAGES[diceValue - 1];
+                System.out.print(diceImage[row] + DICES_SEPARATOR);
             }
             System.out.println();
         }
 
-        System.out.print(DICE_ANNOUNCEMENT);
+        // Now we display the dices indexes under their images
         for (int i = 0; i < NUMBER_OF_DICES; i++)
         {
             displayWhiteSpaces(WIDTH / 2 - 1);
@@ -108,25 +127,18 @@ class DicesDisplayer
             System.out.print(DICES_SEPARATOR);
         }
         System.out.println();
-
     }
 
+    /**
+     * Displays the specified number of white spaces
+     *
+     * @param number the number of white spaces to display
+     */
     private void displayWhiteSpaces(int number)
     {
         for (int i = 0; i < number; i++)
         {
             System.out.print(" ");
-        }
-    }
-
-    private void sleep(int milliseconds)
-    {
-        try
-        {
-            TimeUnit.MILLISECONDS.sleep(milliseconds);
-        }
-        catch (InterruptedException ignored)
-        {
         }
     }
 }
