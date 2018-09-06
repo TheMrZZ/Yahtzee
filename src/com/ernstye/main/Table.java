@@ -10,7 +10,7 @@ import static com.ernstye.main.StringUtilities.stringFilledWith;
  * Will show the grid as a table with the names and the points of each row,
  * and the potential points given by the current dices.
  */
-public class Table
+class Table
 {
     private int totalWidth;
     private String leftColumnFormat;

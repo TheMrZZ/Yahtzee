@@ -14,8 +14,8 @@ import static com.ernstye.main.UserInput.askNumber;
 class ScoreGrid
 {
     private Integer[] upperSection;
-    final int UPPER_BONUS_POINTS = 35;
-    final int UPPER_SECTION_MINIMUM = 63;
+    private final int UPPER_BONUS_POINTS = 35;
+    private final int UPPER_SECTION_MINIMUM = 63;
 
     /**
      * Creates an empty score grid.
