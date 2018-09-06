@@ -126,6 +126,7 @@ class Dices
     void display(int rollNumber)
     {
         System.out.println("=== ROLL " + (rollNumber) + " ===");
+        System.out.println("This is the result of your roll :");
         DicesDisplayer dicesDisplayer = new DicesDisplayer(this);
         dicesDisplayer.display();
         /*for (int i = 0; i < NUMBER_OF_DICES; i++)

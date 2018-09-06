@@ -75,7 +75,7 @@ public class DicesDisplayer
 
     void display()
     {
-        displayAnimatedDice("This is the result of your roll :");
+
 
         Integer[] dicesFaces = dices.get();
         final int HEIGHT = dicesImages[0].length;
