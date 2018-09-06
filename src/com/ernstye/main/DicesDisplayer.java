@@ -1,6 +1,5 @@
 package com.ernstye.main;
 
-import javax.xml.bind.annotation.XmlType;
 
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
