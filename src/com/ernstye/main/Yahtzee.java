@@ -45,8 +45,15 @@ public class Yahtzee
     private static void startOneGame()
     {
         int turnNumber = 1;
+        Scanner scanner = new Scanner(System.in);
+        int showRules;
         System.out.println("== YAHTZEE ==\n");
-        displayRules();
+        System.out.println("Do you want to know the rules? 0:No 1:Yes");
+        showRules = scanner.nextInt();
+        if (showRules == 1)
+        {
+            displayRules();
+        }
         Dices dices = new Dices();
         ScoreGrid scoreGrid = new ScoreGrid();
 
@@ -69,7 +76,7 @@ public class Yahtzee
     public static void displayRules()
     {
         File file =
-            new File("D:\\Programmation\\IdeaProjects\\Yahtzee\\src\\com\\ernstye\\main\\rules.txt");
+            new File("rules.txt");
         Scanner scanner;
         try
         {
@@ -82,7 +89,7 @@ public class Yahtzee
         }
         catch (java.io.FileNotFoundException e)
         {
-            System.out.println("The file was not found");
+            System.out.println("The rules.txt was not found");
         }
 
 
