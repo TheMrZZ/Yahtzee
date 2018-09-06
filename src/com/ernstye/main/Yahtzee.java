@@ -25,7 +25,6 @@ public class Yahtzee
      */
     private static void startGame()
     {
-
         int continue_ = 1;
         while (continue_ == 1)
         {
@@ -43,7 +42,7 @@ public class Yahtzee
     private static void startOneGame()
     {
         int turnNumber = 1;
-        System.out.println("== YAHTZEE ==\n");
+        System.out.println("====== YAHTZEE ======");
         displayRules();
         Dices dices = new Dices();
         ScoreGrid scoreGrid = new ScoreGrid();

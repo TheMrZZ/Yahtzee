@@ -10,7 +10,10 @@ class DicesDisplayer
 {
 
     /**
+     * ASCII images for each dice face.
+     * Will display correctly with any monospaced font: Consolas, Monospaced, Source Code Pro, Hack...
      *
+     * All dices must have the same height and the same width for the program to work.
      */
     private final static String[][] DICES_IMAGES =
         {
@@ -93,7 +96,7 @@ class DicesDisplayer
      */
     void display()
     {
-        Integer[] dicesFaces = dices.get();
+        Integer[] dicesFaces = dices.getDices();
 
         // The height & the width of the dices images
         final int HEIGHT = DICES_IMAGES[0].length;
@@ -111,7 +114,7 @@ class DicesDisplayer
         {
             for (int diceValue : dicesFaces)
             {
-                // We get the correct image for the dice, we then display the corresponding row
+                // We getDices the correct image for the dice, we then display the corresponding row
                 String[] diceImage = DICES_IMAGES[diceValue - 1];
                 System.out.print(diceImage[row] + DICES_SEPARATOR);
             }
