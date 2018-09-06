@@ -28,7 +28,7 @@ class StringUtilities
     }
 
     /**
-     * Creates a string of specified <code>length</code> filled with specified <code>character</code>
+     * Creates a string of specified {@code length} filled with specified {@code character}
      *
      * @param character the character to fill the string with
      * @param length    the length of the final string

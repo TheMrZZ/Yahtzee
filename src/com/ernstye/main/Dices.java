@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import static com.ernstye.main.Constants.DICE_FACES;
+import static com.ernstye.main.Constants.DICE_IMAGES;
 import static com.ernstye.main.Constants.NUMBER_OF_DICES;
 import static com.ernstye.main.UserInput.askNumber;
 
@@ -88,7 +89,7 @@ class Dices
         int i = 0;
         while (i < dicesToRoll)
         {
-            int dice = askNumber(NUMBER_OF_DICES);
+            int dice = askNumber(1, NUMBER_OF_DICES+1) - 1;
             //if the user has already entered the dice's index, ask him to choose another one
             if (dicesEnteredByUser.contains(dice))
             {
@@ -125,10 +126,11 @@ class Dices
      */
     void display()
     {
-        System.out.println("This is the result of your roll :");
-        for (int i = 0; i < NUMBER_OF_DICES; i++)
+        DicesDisplayer dicesDisplayer = new DicesDisplayer(this);
+        dicesDisplayer.display();
+        /*for (int i = 0; i < NUMBER_OF_DICES; i++)
         {
-            System.out.println(i + ")" + dices[i]);
-        }
+            System.out.println(i+1 + ")" + DICE_IMAGES[dices[i]-1]);
+        }*/
     }
 }
