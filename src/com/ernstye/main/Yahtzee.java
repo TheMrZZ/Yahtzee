@@ -1,5 +1,7 @@
 package com.ernstye.main;
 
+import java.io.File;
+import java.util.Scanner;
 import static com.ernstye.main.UserInput.askNumber;
 
 /**
@@ -25,6 +27,7 @@ public class Yahtzee
      */
     private static void startGame()
     {
+
         int continue_ = 1;
         while (continue_ == 1)
         {
@@ -42,8 +45,15 @@ public class Yahtzee
     private static void startOneGame()
     {
         int turnNumber = 1;
-        System.out.println("====== YAHTZEE ======");
-        displayRules();
+        Scanner scanner = new Scanner(System.in);
+        int showRules;
+        System.out.println("====== YAHTZEE ======\n");
+        System.out.println("Do you want to know the rules? 0:No 1:Yes");
+        showRules = scanner.nextInt();
+        if (showRules == 1)
+        {
+            displayRules();
+        }
         Dices dices = new Dices();
         ScoreGrid scoreGrid = new ScoreGrid();
 
@@ -63,8 +73,30 @@ public class Yahtzee
         System.out.println("You scored a total of " + scoreGrid.getTotalScore() + " points!");
     }
 
-    public static void displayRules()
+    /**
+     * Display the rules of the Yahtzee game
+     * Open a txt file where the rules are read
+     */
+    private static void displayRules()
     {
-        System.out.println("RULES : The game consists of a number of rounds. In each round, a player gets three rolls of the dice, although they can choose to end their turn after one or two rolls. After the first roll the player can save any dice they want and re-roll the other dice. This procedure is repeated after the second roll. The player has complete choice as to which dice to roll.");
+        File file =
+            new File("rules.txt");
+        Scanner scanner;
+        try
+        {
+            scanner = new Scanner(file);
+            //while the text file has more text
+            while (scanner.hasNextLine())
+            {
+                //print t
+                System.out.println(scanner.nextLine());
+            }
+
+        }
+        catch (java.io.FileNotFoundException e)
+        {
+            System.out.println("The rules.txt was not found");
+        }
     }
 }
+
