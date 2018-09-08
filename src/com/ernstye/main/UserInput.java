@@ -93,14 +93,12 @@ class UserInput
                 // We strip the leading and trailing whitespaces from the user input string
                 userInput = scanner.nextLine().trim();
                 number = Integer.parseInt(userInput);
+                return number;
             }
             catch (NumberFormatException e)
             {
                 System.out.println("This is not a number.");
-                continue;
             }
-
-            return number;
         }
     }
 }
