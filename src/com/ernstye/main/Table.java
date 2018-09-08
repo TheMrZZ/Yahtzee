@@ -169,6 +169,8 @@ class Table
      * </pre>
      * </p>
      *
+     *
+     * {@}
      * @param rowName the name of the current row
      * @param score   the score to display - if {@link com.ernstye.main.Constants#NO_SCORE} is given,
      *                nothing will be displayed.
