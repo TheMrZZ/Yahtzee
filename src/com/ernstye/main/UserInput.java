@@ -10,6 +10,24 @@ class UserInput
 {
     private static Scanner scanner = new Scanner(System.in);
 
+    static int askPositiveNumber(int min)
+    {
+        int number;
+        boolean validInput;
+
+        do
+        {
+            number = askNumberRaw("");
+            validInput = (min <= number);
+            if (!validInput)
+            {
+                System.out.println(number + " is not a positive number");
+            }
+        } while (!validInput);
+
+
+        return number;
+    }
     /**
      * Returns number entered by the user between 0 and {@code max}
      *

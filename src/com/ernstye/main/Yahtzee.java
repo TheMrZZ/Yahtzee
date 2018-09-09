@@ -54,23 +54,10 @@ public class Yahtzee
         {
             displayRules();
         }
-        Dices dices = new Dices();
-        ScoreGrid scoreGrid = new ScoreGrid();
+        Players players = new Players();
 
-        while (!scoreGrid.isFull())
-        {
-            System.out.println("\n=== TURN " + turnNumber + " ===");
-            dices.play(scoreGrid);
 
-            System.out.println();
-            scoreGrid.score(dices);
 
-            turnNumber++;
-        }
-
-        System.out.println("\n\n=== FINAL RESULTS ===\n\n");
-        scoreGrid.display(null);
-        System.out.println("You scored a total of " + scoreGrid.getTotalScore() + " points!");
     }
 
     /**
