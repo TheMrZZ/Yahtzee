@@ -13,7 +13,7 @@ public class Player
         dices = new Dices();
         scoreGrid = new ScoreGrid();
         Scanner scanner = new Scanner(System.in);
-        System.out.println("please enter your name");
+        System.out.println("please enter your name:");
         name = scanner.nextLine();
 
     }

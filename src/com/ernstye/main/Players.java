@@ -29,7 +29,7 @@ public class Players
 
     void playGame()
     {
-        int i = 0;
+
         int turnNumber = 1;
         while (!players[players.length - 1].getScoreGrid().isFull())
         {
@@ -39,10 +39,17 @@ public class Players
         if (isDraw())
         {
             ArrayList<Integer> drawPlayers = drawPlayers();
-            for (Integer player : drawPlayers)
+            for (int i = 0; i < drawPlayers.size(); i++)
             {
-                System.out.print(players[player].getName() + " have a draw! ");
+                Integer player = drawPlayers.get(i);
+                if (i != 0)
+                {
+                    System.out.print(" and ");
+                }
+                System.out.print(players[player].getName());
+
             }
+            System.out.print(" have a draw!");
         } else
         {
             System.out.print(players[getWinner()].getName() + " has won!");
@@ -57,7 +64,7 @@ public class Players
         {
             Player player = players[playerNumber];
             System.out.println("\n=== TURN " + turnNumber + " ===\n");
-            System.out.println("PLAYER " + (playerNumber + 1) + ": " + player.getName() + "'S TURN");
+            System.out.println("PLAYER " + (playerNumber + 1) + ", It's " + player.getName() + "'s turn!");
             player.play();
         }
 
