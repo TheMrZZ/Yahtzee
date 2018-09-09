@@ -44,7 +44,7 @@ public class Yahtzee
      */
     private static void startOneGame()
     {
-        int turnNumber = 1;
+
         Scanner scanner = new Scanner(System.in);
         int showRules;
         System.out.println("====== YAHTZEE ======\n");
@@ -56,9 +56,12 @@ public class Yahtzee
         }
         Players players = new Players();
 
+        players.playGame();
+
 
 
     }
+
 
     /**
      * Display the rules of the Yahtzee game

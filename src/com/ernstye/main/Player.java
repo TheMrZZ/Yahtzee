@@ -6,7 +6,7 @@ public class Player
 {
     private String name;
     private Dices dices;
-    ScoreGrid scoreGrid;
+    private ScoreGrid scoreGrid;
 
     Player()
     {
@@ -22,4 +22,20 @@ public class Player
     {
         return dices;
     }
+
+    String getName()
+    {
+        return name;
+    }
+
+    ScoreGrid getScoreGrid()
+    {
+        return scoreGrid;
+    }
+
+   /* play()
+    {
+
+    }
+*/
 }
