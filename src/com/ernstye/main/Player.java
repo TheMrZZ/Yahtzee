@@ -33,9 +33,23 @@ public class Player
         return scoreGrid;
     }
 
-   /* play()
+    void play()
     {
 
+        dices.play(scoreGrid);
+        System.out.println();
+        scoreGrid.score(dices);
+        if (scoreGrid.isFull())
+        {
+            System.out.println("\n\n=== FINAL RESULTS PLAYER " + name + " ===\n\n");
+            scoreGrid.display(null);
+            System.out.println("You scored a total of " + scoreGrid.getTotalScore() + " points!");
+        }
     }
-*/
+
+    int totalScore()
+    {
+        return scoreGrid.getTotalScore();
+    }
+
 }

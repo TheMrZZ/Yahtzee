@@ -1,6 +1,7 @@
 package com.ernstye.main;
 
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import static com.ernstye.main.UserInput.askNumber;
@@ -35,8 +36,18 @@ public class Players
             turnPlayers(turnNumber);
             turnNumber++;
         }
+        if (isDraw())
+        {
+            ArrayList<Integer> drawPlayers = drawPlayers();
+            for (Integer player : drawPlayers)
+            {
+                System.out.print(players[player].getName() + " have a draw! ");
+            }
+        } else
+        {
+            System.out.print(players[getWinner()].getName() + " has won!");
+        }
 
-        System.out.print(players[winner()].getName() + " has won!");
 
     }
 
@@ -46,32 +57,23 @@ public class Players
         {
             Player player = players[playerNumber];
             System.out.println("\n=== TURN " + turnNumber + " ===\n");
-            System.out.println(player.getName() + "'S TURN");
-            player.getDices().play(player.getScoreGrid());
-
-            System.out.println();
-            player.getScoreGrid().score(player.getDices());
-
-            if (player.getScoreGrid().isFull())
-            {
-                System.out.println("\n\n=== FINAL RESULTS PLAYER " + player.getName() + " ===\n\n");
-                player.getScoreGrid().display(null);
-                System.out.println("You scored a total of " + player.getScoreGrid().getTotalScore() + " points!");
-            }
+            System.out.println("PLAYER " + (playerNumber + 1) + ": " + player.getName() + "'S TURN");
+            player.play();
         }
 
     }
 
-    int winner()
+    int getWinner()
     {
         int max = 0;
         int winner = 0;
-        for (int player = 0; player < players.length; player++)
+        for (int playerNumber = 0; playerNumber < players.length; playerNumber++)
         {
-            if (max < players[player].getScoreGrid().getTotalScore())
+            Player player = players[playerNumber];
+            if (max < player.totalScore())
             {
-                max = players[player].getScoreGrid().getTotalScore();
-                winner = player;
+                max = player.totalScore();
+                winner = playerNumber;
             }
 
         }
@@ -79,7 +81,39 @@ public class Players
 
     }
 
+
+    ArrayList<Integer> drawPlayers()
+    {
+
+        ArrayList<Integer> drawPlayers = new ArrayList<Integer>();
+        drawPlayers.add(getWinner());
+        for (int playerNumber = 0; playerNumber < players.length; playerNumber++)
+        {
+            Player player = players[playerNumber];
+            if (playerNumber != getWinner() && player.totalScore() == players[getWinner()].totalScore())
+            {
+                drawPlayers.add(playerNumber);
+            }
+
+        }
+        return drawPlayers;
+    }
+
+    boolean isDraw()
+    {
+        boolean isDraw = false;
+        for (int playerNumber = 0; playerNumber < players.length; playerNumber++)
+        {
+            Player player = players[playerNumber];
+            if (playerNumber != getWinner() && player.totalScore() == players[getWinner()].totalScore())
+            {
+                isDraw = true;
+            }
+
+        }
+        return isDraw;
+    }
 }
 
-        
+
 
