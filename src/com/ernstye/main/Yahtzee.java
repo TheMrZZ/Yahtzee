@@ -2,6 +2,7 @@ package com.ernstye.main;
 
 import java.io.File;
 import java.util.Scanner;
+
 import static com.ernstye.main.UserInput.askNumber;
 
 /**
@@ -95,7 +96,7 @@ public class Yahtzee
         }
         catch (java.io.FileNotFoundException e)
         {
-            System.out.println("The rules.txt was not found");
+            System.out.println("The rules.txt file was not found");
         }
     }
 }
