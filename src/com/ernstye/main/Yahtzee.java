@@ -89,7 +89,7 @@ public class Yahtzee
             //while the text file has more text
             while (scanner.hasNextLine())
             {
-                //print t
+                //print it
                 System.out.println(scanner.nextLine());
             }
 
