@@ -1,7 +1,6 @@
 package com.ernstye.main;
 
-import java.util.ArrayList;
-import java.util.Random;
+import java.util.*;
 
 import static com.ernstye.main.Constants.DICE_FACES;
 import static com.ernstye.main.Constants.NUMBER_OF_DICES;
@@ -132,9 +131,110 @@ class Dices
         System.out.println("This is the result of your roll :");
         DicesDisplayer dicesDisplayer = new DicesDisplayer(this);
         dicesDisplayer.display();
-        /*for (int i = 0; i < NUMBER_OF_DICES; i++)
+    }
+
+    /**
+     * Get the sum of every dices
+     *
+     * @return the sum of all dices
+     */
+    int sum()
+    {
+        int total = 0;
+        for (int value : dices)
         {
-            System.out.println(i+1 + ")" + DICE_IMAGES[dices[i]-1]);
-        }*/
+            total += value;
+        }
+        return total;
+    }
+
+    /**
+     * Get the number of dices equals to {@code value}
+     *
+     * @param value the value to look for
+     * @return the number of dices with the wanted {@code value}
+     */
+    int getOccurrencesOf(int value)
+    {
+        int numberOfDices = 0;
+        for (Integer dice : dices)
+        {
+            if (dice == value)
+            {
+                numberOfDices++;
+            }
+        }
+
+        return numberOfDices;
+    }
+
+    /**
+     * Get a list of occurrences for each possible {@link com.ernstye.main.Constants#DICE_FACES}
+     *
+     * @param sorted if false, then the index 0 will correspond to the number of Aces, index 1 number of Twos etc...
+     *               if true, then the list will be sorted in descending order
+     * @return a list of occurrences of size {@value com.ernstye.main.Constants#DICE_FACES}
+     */
+    List<Integer> getAllOccurrences(boolean sorted)
+    {
+        // First get the number of each faces in the list
+        List<Integer> diceOccurrences = Arrays.asList(new Integer[DICE_FACES]);
+        for (int i = 0; i < DICE_FACES; i++)
+        {
+            diceOccurrences.set(i, getOccurrencesOf(i + 1));
+        }
+
+        if (sorted)
+        {
+            diceOccurrences.sort(Collections.reverseOrder());
+        }
+
+        return diceOccurrences;
+    }
+
+    /**
+     * Get the size of the longest straight in the current dices.
+     * A straight is a consecutive sequence of dice (e.g. 1, 2, 3 ; 2, 3, 4, 5, 6 ; 3, 4, 5)
+     *
+     * @return the size of the longest straight in the current dices
+     */
+    int getLongestStraightSize()
+    {
+        List<Integer> diceList = Arrays.asList(dices);
+        diceList.sort(null);
+
+        int max = 1;
+        int actual = 1;
+        for (int i = 1; i < diceList.size(); i++)
+        {
+            // If the current number is the previous number + 1
+            if (diceList.get(i) == diceList.get(i - 1) + 1)
+            {
+                actual++;
+                if (actual > max)
+                {
+                    max = actual;
+                }
+            } else
+            {
+                actual = 1;
+            }
+        }
+
+        return max;
+    }
+
+    /**
+     * <strong>
+     * Should not be used in production.
+     * Only present for testing purposes.
+     * </strong>
+     * Set the dices values to the given integers.
+     *
+     * @param dices the new value for {@code dices}
+     */
+    public void setDices(Integer[] dices)
+    {
+        this.dices = dices;
     }
 }

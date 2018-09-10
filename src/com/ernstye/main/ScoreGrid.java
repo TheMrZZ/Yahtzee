@@ -1,7 +1,7 @@
 package com.ernstye.main;
 
 import java.util.Arrays;
-import java.util.Collections;
+import java.util.List;
 
 import static com.ernstye.main.Constants.*;
 import static com.ernstye.main.UserInput.askNumber;
@@ -13,22 +13,25 @@ import static com.ernstye.main.UserInput.askNumber;
  */
 class ScoreGrid
 {
-    private Integer[] upperSection;
-    private final int UPPER_BONUS_POINTS = 35;
-    private final int UPPER_SECTION_MINIMUM = 63;
+    // The rows where the points are stored
+    private Integer[] scoreSheet;
+    private int YahtzeeBonuses = 0;
+
+    static final int UPPER_BONUS_POINTS = 35;
+    static final int UPPER_SECTION_MINIMUM = 63;
 
     /**
      * Creates an empty score grid.
      */
     ScoreGrid()
     {
-        upperSection = new Integer[DICE_FACES];
-        Arrays.fill(upperSection, NO_SCORE);
+        scoreSheet = new Integer[SCORE_SHEET_ROWS.length];
+        Arrays.fill(scoreSheet, NO_SCORE);
     }
 
-    Integer[] getUpperSection()
+    Integer[] getScoreSheet()
     {
-        return upperSection.clone();
+        return scoreSheet;
     }
 
     /**
@@ -41,34 +44,142 @@ class ScoreGrid
         System.out.println("Score points in which row?");
 
         // Shows the potential score the player could getDices for each row
-        for (int i = 0; i < upperSection.length; i++)
+        for (int i = 0; i < scoreSheet.length; i++)
         {
-            if (upperSection[i] == NO_SCORE)
+            if (scoreSheet[i] == NO_SCORE)
             {
-                System.out.println((i + 1) + ") " + UPPER_SECTION_ROWS[i]);
+                System.out.println((i + 1) + ") " + SCORE_SHEET_ROWS[i]);
             }
         }
 
         int row;
         do
         {
-            row = askNumber(1, upperSection.length + 1) - 1;
+            row = askNumber(1, scoreSheet.length + 1) - 1;
             if (getRowScore(row) != NO_SCORE)
             {
                 System.out.println("This row is already taken.");
             }
         } while (getRowScore(row) != NO_SCORE);
-        addScore(row, dices);
+        setScore(row, dices);
     }
 
     /**
-     * Get the points a player would score, if he choose a particular row with his dices
+     * Returns the potential score of a player, in the Three Of A Kind row (at least 3 times the same dice value)
      *
-     * @param row   the row where the player could score
+     * @param dices the dices the player have
+     * @return the potential score the player would get by scoring a Three Of A Kind
+     */
+    private int getThreeOfAKindScore(Dices dices)
+    {
+        // Get the sorted list of dice occurrences.
+        List<Integer> diceOccurrencesSorted = dices.getAllOccurrences(true);
+
+        if (diceOccurrencesSorted.get(0) >= 3)
+        {
+            return dices.sum();
+        }
+        return 0;
+    }
+
+
+    /**
+     * Returns the potential score of a player, in the Four Of A Kind row (at least 4 times the same dice value)
+     *
+     * @param dices the dices the player have
+     * @return the potential score the player would get by scoring a Four Of A Kind
+     */
+    private int getFourOfAKindScore(Dices dices)
+    {
+        // Get the sorted list of dice occurrences.
+        List<Integer> diceOccurrencesSorted = dices.getAllOccurrences(true);
+
+        if (diceOccurrencesSorted.get(0) >= 4)
+        {
+            return dices.sum();
+        }
+        return 0;
+    }
+
+
+    /**
+     * Returns the potential score of a player, in the Full House row
+     * (3 dices of same value, and 2 other dices of same value)
+     *
+     * @param dices the dices the player have
+     * @return the potential score the player would get by scoring a Full House
+     */
+    private int getFullHouseScore(Dices dices)
+    {
+        // Get the sorted list of dice occurrences.
+        List<Integer> diceOccurrencesSorted = dices.getAllOccurrences(true);
+
+        if (diceOccurrencesSorted.get(0) >= 3 && diceOccurrencesSorted.get(1) >= 2)
+        {
+            return FULL_HOUSE_POINTS;
+        }
+        return 0;
+    }
+
+
+    /**
+     * Returns the potential score of a player, in the Small Straight row
+     * (A straight of at least 4 dices)
+     *
+     * @param dices the dices the player have
+     * @return the potential score the player would get by scoring a Full House
+     */
+    private int getSmallStraightScore(Dices dices)
+    {
+        if (dices.getLongestStraightSize() >= 4)
+        {
+            return SMALL_STRAIGHT_POINTS;
+        }
+        return 0;
+    }
+
+    /**
+     * Returns the potential score of a player, in the Large Straight row
+     * (A straight of at least 5 dices)
+     *
+     * @param dices the dices the player have
+     * @return the potential score the player would get by scoring a Full House
+     */
+    private int getLargeStraightScore(Dices dices)
+    {
+        if (dices.getLongestStraightSize() >= 5)
+        {
+            return LARGE_STRAIGHT_POINTS;
+        }
+        return 0;
+    }
+
+    /**
+     * Returns the potential score of a player, in the Yahtzee row (all dices have the same value)
+     *
+     * @param dices the dices the player have
+     * @return the potential score the player would get by scoring a Four Of A Kind
+     */
+    private int getYahtzeeScore(Dices dices)
+    {
+        // Get the sorted list of dice occurrences.
+        List<Integer> diceOccurrencesSorted = dices.getAllOccurrences(true);
+
+        if (diceOccurrencesSorted.get(0) == NUMBER_OF_DICES)
+        {
+            return YAHTZEE_POINTS;
+        }
+        return 0;
+    }
+
+    /**
+     * Get the points a player would score, if he choose an upper section row with his dices
+     *
+     * @param row   the row of the upper section where the player could score
      * @param dices the dices the player rolled
      * @return the potential points he would getDices
      */
-    int getPotentialScore(int row, Dices dices)
+    int getUpperPotentialScore(int row, Dices dices)
     {
         /*
          If the row is 0, then we're looking for Ones: the number on the dice's face must be 1
@@ -80,7 +191,7 @@ class ScoreGrid
          Get the number of dices with the correct face (1 for the "Ones" row, 2 for the "Twos"...
          ex: if the player rolled 4-3-3-2-6, and diceNumber is 3, then correctDices = 2
         */
-        int correctDices = Collections.frequency(Arrays.asList(dices.getDices()), diceNumber);
+        int correctDices = dices.getOccurrencesOf(diceNumber);
 
         /*
          Points are the number of dices with the correct face x the digit
@@ -88,6 +199,50 @@ class ScoreGrid
         */
         int score = correctDices * diceNumber;
         return score;
+    }
+
+    int getLowerPotentialScore(int row, Dices dices)
+    {
+        switch (row)
+        {
+            case THREE_OF_A_KIND_ROW:
+                return getThreeOfAKindScore(dices);
+            case FOUR_OF_A_KIND_ROW:
+                return getFourOfAKindScore(dices);
+            case FULL_HOUSE_ROW:
+                return getFullHouseScore(dices);
+            case SMALL_STRAIGHT_ROW:
+                return getSmallStraightScore(dices);
+            case LARGE_STRAIGHT_ROW:
+                return getLargeStraightScore(dices);
+            case YAHTZEE_ROW:
+                return getYahtzeeScore(dices);
+            case CHANCE_ROW:
+                return dices.sum();
+        }
+
+        // In case of incorrect row...
+        return 0;
+    }
+
+    /**
+     * Get the points a player would score, if he choose a particular row with his dices
+     *
+     * @param row   the row where the player could score
+     * @param dices the dices the player rolled
+     * @return the potential points he would getDices
+     */
+    int getPotentialScore(int row, Dices dices)
+    {
+        if (row < UPPER_SECTION_SIZE)
+        {
+            return getUpperPotentialScore(row, dices);
+        }
+
+        // The row of the lower section is the actual row, minus the number of rows in the upper section
+        int lowerSectionRow = row - UPPER_SECTION_SIZE;
+
+        return getLowerPotentialScore(lowerSectionRow, dices);
     }
 
     /**
@@ -98,18 +253,19 @@ class ScoreGrid
      */
     int getRowScore(int row)
     {
-        return upperSection[row];
+        return scoreSheet[row];
     }
 
     /**
-     * Mark the score of dices in a row
+     * Set the score given by {@code dices} in the given {@code row}
      *
      * @param row   the row to write the score in
      * @param dices the dices rolled by the player
      */
-    private void addScore(int row, Dices dices)
+    void setScore(int row, Dices dices)
     {
-        upperSection[row] = getPotentialScore(row, dices);
+        int score = getPotentialScore(row, dices);
+        scoreSheet[row] = score;
     }
 
     /**
@@ -121,7 +277,7 @@ class ScoreGrid
     boolean isFull()
     {
         // If the upper section contains a row without a score, then the grid is not full.
-        return !Arrays.asList(upperSection).contains(NO_SCORE);
+        return !Arrays.asList(scoreSheet).contains(NO_SCORE);
     }
 
     /**
@@ -142,15 +298,16 @@ class ScoreGrid
      *
      * @return the upper section score
      */
-    int getUpperSectionScore()
+    private int getUpperSectionScore()
     {
         int total = 0;
-        for (int i = 0; i < upperSection.length; i++)
+        for (int i = 0; i < UPPER_SECTION_SIZE; i++)
         {
+            int score = scoreSheet[i];
             // If the player didn't score, we don't add the current row to the total points
-            if (upperSection[i] != NO_SCORE)
+            if (score != NO_SCORE)
             {
-                total += upperSection[i];
+                total += score;
             }
         }
 
@@ -186,9 +343,11 @@ class ScoreGrid
      * Displays the score grid and the potential points, in a table shape
      * Table has this format:
      * <p>
+     * <pre>
      * ---------------------
      * RowName  | X Points | X Potential points
      * ---------------------
+     * </pre>
      * </p>
      *
      * @param dices if NULL, doesn't display potential points - else, display the potential points the

@@ -1,7 +1,6 @@
 package com.ernstye.main;
 
-import static com.ernstye.main.Constants.NO_SCORE;
-import static com.ernstye.main.Constants.UPPER_SECTION_ROWS;
+import static com.ernstye.main.Constants.*;
 import static com.ernstye.main.StringUtilities.getLongestStringLength;
 import static com.ernstye.main.StringUtilities.stringFilledWith;
 
@@ -32,7 +31,8 @@ class Table
         dices = dices_;
 
         // The width of the left column, containing the names of the rows
-        final int LEFT_COLUMN_WIDTH = getLongestStringLength(UPPER_SECTION_ROWS);
+        final int LEFT_COLUMN_WIDTH = getLongestStringLength(SCORE_SHEET_ROWS);
+
         // We then right-pad the names with spaces
         leftColumnFormat = "%-" + LEFT_COLUMN_WIDTH + "s";
 
@@ -64,15 +64,22 @@ class Table
     {
         System.out.println(rowSeparator);
 
+        Integer[] scoreSheet = scoreGrid.getScoreSheet();
+
         // Display the upper section
-        Integer[] upperSection = scoreGrid.getUpperSection();
-        for (int row = 0; row < upperSection.length; row++)
+        for (int row = 0; row < UPPER_SECTION_SIZE; row++)
         {
             displayScoreRow(row);
         }
 
         // Displays the upper bonus row
         displayUpperBonusRow();
+
+        // Display the lower section
+        for (int row = UPPER_SECTION_SIZE; row < scoreSheet.length; row++)
+        {
+            displayScoreRow(row);
+        }
 
         // Display the actual total score
         displayRow("Total", String.valueOf(scoreGrid.getTotalScore()), "");
@@ -107,7 +114,7 @@ class Table
      */
     private void displayScoreRow(int row)
     {
-        String rowName = UPPER_SECTION_ROWS[row];
+        String rowName = SCORE_SHEET_ROWS[row];
         int score = scoreGrid.getRowScore(row);
 
         int potentialScore = NO_SCORE;
@@ -170,7 +177,7 @@ class Table
      * </p>
      *
      *
-     * {@}
+     *
      * @param rowName the name of the current row
      * @param score   the score to display - if {@link com.ernstye.main.Constants#NO_SCORE} is given,
      *                nothing will be displayed.
