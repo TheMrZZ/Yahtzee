@@ -1,7 +1,6 @@
 package com.ernstye.main;
 
-import java.util.ArrayList;
-import java.util.Random;
+import java.util.*;
 
 import static com.ernstye.main.Constants.DICE_FACES;
 import static com.ernstye.main.Constants.NUMBER_OF_DICES;
@@ -85,7 +84,7 @@ class Dices
      */
     private ArrayList<Integer> verifyDuplicate(int dicesToRoll)
     {
-        ArrayList<Integer> dicesEnteredByUser = new ArrayList<Integer>();
+        ArrayList<Integer> dicesEnteredByUser = new ArrayList<>();
 
         int i = 0;
         while (i < dicesToRoll)
@@ -234,7 +233,7 @@ class Dices
      *
      * @param dices the new value for {@code dices}
      */
-    public void setDices(Integer[] dices)
+    void setDices(Integer[] dices)
     {
         this.dices = dices;
     }

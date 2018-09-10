@@ -2,7 +2,6 @@ package com.ernstye.main;
 
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import static com.ernstye.main.UserInput.askNumber;
 
@@ -10,7 +9,7 @@ import static com.ernstye.main.UserInput.askNumber;
  * Players model object
  * contains all the players playing the game
  */
-public class Players
+class Players
 {
 
     private Player players[];
@@ -74,7 +73,7 @@ public class Players
      *
      * @param turnNumber One game has 13 turns, show the turn number
      */
-    void turnPlayers(int turnNumber)
+    private void turnPlayers(int turnNumber)
     {
 
         for (int playerNumber = 0; playerNumber < players.length; playerNumber++)
@@ -91,7 +90,7 @@ public class Players
      * get the player that won the Yahtzee game, having the most points at the end
      * @return the winner of the game
      */
-    int getWinner()
+    private int getWinner()
     {
         int max = 0;
         int winner = 0;
@@ -113,10 +112,10 @@ public class Players
      * In case of a draw, find all the players that have a draw
      * @return all the players that are winners
      */
-    ArrayList<Integer> drawPlayers()
+    private ArrayList<Integer> drawPlayers()
     {
 
-        ArrayList<Integer> drawPlayers = new ArrayList<Integer>();
+        ArrayList<Integer> drawPlayers = new ArrayList<>();
         drawPlayers.add(getWinner());
         for (int playerNumber = 0; playerNumber < players.length; playerNumber++)
         {
@@ -134,7 +133,7 @@ public class Players
      * Find out if there's a draw in the game
      * @return true if there's a draw, false otherwise
      */
-    boolean isDraw()
+    private boolean isDraw()
     {
         boolean isDraw = false;
         for (int playerNumber = 0; playerNumber < players.length; playerNumber++)

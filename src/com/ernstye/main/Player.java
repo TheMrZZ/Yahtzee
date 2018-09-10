@@ -6,7 +6,7 @@ import java.util.Scanner;
  * PLayer model object
  * contains one player who can play the game
  */
-public class Player
+class Player
 {
     private String name;
     private Dices dices;
