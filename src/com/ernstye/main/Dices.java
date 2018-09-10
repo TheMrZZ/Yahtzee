@@ -1,6 +1,7 @@
 package com.ernstye.main;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Random;
 
 import static com.ernstye.main.Constants.DICE_FACES;
 import static com.ernstye.main.Constants.NUMBER_OF_DICES;
