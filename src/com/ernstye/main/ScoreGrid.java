@@ -290,6 +290,7 @@ class ScoreGrid
         int total = 0;
         total += getUpperSectionScore();
         total += getUpperBonus();
+        total += getLowerSectionScore();
         return total;
     }
 
@@ -302,6 +303,27 @@ class ScoreGrid
     {
         int total = 0;
         for (int i = 0; i < UPPER_SECTION_SIZE; i++)
+        {
+            int score = scoreSheet[i];
+            // If the player didn't score, we don't add the current row to the total points
+            if (score != NO_SCORE)
+            {
+                total += score;
+            }
+        }
+
+        return total;
+    }
+
+    /**
+     * Get the sum of the points of each row in the upper section
+     *
+     * @return the upper section score
+     */
+    private int getLowerSectionScore()
+    {
+        int total = 0;
+        for (int i = UPPER_SECTION_SIZE; i < SCORE_SHEET_ROWS.length; i++)
         {
             int score = scoreSheet[i];
             // If the player didn't score, we don't add the current row to the total points

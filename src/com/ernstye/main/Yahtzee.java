@@ -45,12 +45,10 @@ public class Yahtzee
      */
     private static void startOneGame()
     {
-
-        Scanner scanner = new Scanner(System.in);
         int showRules;
         System.out.println("====== YAHTZEE ======\n");
         System.out.println("Do you want to know the rules? 0:No 1:Yes");
-        showRules = scanner.nextInt();
+        showRules = askNumber(0, 2);
         if (showRules == 1)
         {
             displayRules();
