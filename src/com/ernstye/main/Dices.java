@@ -44,12 +44,13 @@ class Dices
     void play(ScoreGrid scoreGrid)
     {
         int dicesToRoll = 1;
-        int i = 0;
+        int rollNumber = 0;
         roll();
+        displayRollNumber(rollNumber + 1);
         scoreGrid.display(this);
-        display(i + 1);
+        display();
         //if the player wants to roll again the dices or if he hasn't played 3 times yet, continue the loop
-        while (dicesToRoll > 0 && i < 2)
+        while (dicesToRoll > 0 && rollNumber < 2)
         {
             dicesToRoll = askNumber(0, NUMBER_OF_DICES, "How many dices do you want to roll again?");
 
@@ -57,13 +58,18 @@ class Dices
             {
                 nextTurn(dicesToRoll);
                 System.out.println();
+                rollNumber++;
+                displayRollNumber(rollNumber + 1);
                 scoreGrid.display(this);
-                i++;
-                display(i + 1);
+                display();
             }
         }
     }
 
+    private void displayRollNumber(int rollNumber)
+    {
+        System.out.println("\n=== ROLL " + (rollNumber) + " ===");
+    }
     /**
      * roll the {@value com.ernstye.main.Constants#NUMBER_OF_DICES}  dices randomly
      */
@@ -126,9 +132,8 @@ class Dices
     /**
      * This method shows the roll of the {@value com.ernstye.main.Constants#NUMBER_OF_DICES}  dices
      */
-    private void display(int rollNumber)
+    private void display()
     {
-        System.out.println("=== ROLL " + (rollNumber) + " ===");
         System.out.println("This is the result of your roll :");
         DicesDisplayer dicesDisplayer = new DicesDisplayer(this);
         dicesDisplayer.display();
