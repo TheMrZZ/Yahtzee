@@ -10,7 +10,7 @@ class UserInput
 {
     private static Scanner scanner = new Scanner(System.in);
 
-    static int askPositiveNumber(int min)
+    static int askPositiveNumber()
     {
         int number;
         boolean validInput;
@@ -18,7 +18,7 @@ class UserInput
         do
         {
             number = askNumberRaw("");
-            validInput = (min <= number);
+            validInput = (0 < number);
             if (!validInput)
             {
                 System.out.println(number + " is not a positive number");

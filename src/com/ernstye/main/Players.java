@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import static com.ernstye.main.UserInput.askNumber;
+import static com.ernstye.main.UserInput.askPositiveNumber;
 
 /**
  * Players model object
@@ -22,8 +23,7 @@ public class Players
     Players()
     {
         System.out.println("Please enter the number of players");
-        //TODO ASKPOSITIVE NUMBER
-        numberOfPlayers = askNumber(5);
+        numberOfPlayers = askPositiveNumber();
 
         players = new Player[numberOfPlayers];
         for (int i = 0; i < players.length; i++)
