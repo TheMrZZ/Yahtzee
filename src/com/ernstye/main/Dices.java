@@ -126,7 +126,7 @@ class Dices
     /**
      * This method shows the roll of the {@value com.ernstye.main.Constants#NUMBER_OF_DICES}  dices
      */
-    void display(int rollNumber)
+    private void display(int rollNumber)
     {
         System.out.println("=== ROLL " + (rollNumber) + " ===");
         System.out.println("This is the result of your roll :");

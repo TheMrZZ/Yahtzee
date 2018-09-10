@@ -25,6 +25,6 @@ final class Constants
      * The names of every line in the upper section
      */
     static final String[] UPPER_SECTION_ROWS = {
-            "Ones", "Twos", "Threes", "Fours", "Fives", "Sixes"
+        "Aces", "Twos", "Threes", "Fours", "Fives", "Sixes"
     };
 }

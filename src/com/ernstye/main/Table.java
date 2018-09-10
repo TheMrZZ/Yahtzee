@@ -10,7 +10,7 @@ import static com.ernstye.main.StringUtilities.stringFilledWith;
  * Will show the grid as a table with the names and the points of each row,
  * and the potential points given by the current dices.
  */
-public class Table
+class Table
 {
     private int totalWidth;
     private String leftColumnFormat;
@@ -169,6 +169,8 @@ public class Table
      * </pre>
      * </p>
      *
+     *
+     * {@}
      * @param rowName the name of the current row
      * @param score   the score to display - if {@link com.ernstye.main.Constants#NO_SCORE} is given,
      *                nothing will be displayed.

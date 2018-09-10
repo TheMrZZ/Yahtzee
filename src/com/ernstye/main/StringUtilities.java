@@ -36,7 +36,7 @@ class StringUtilities
      */
     static String stringFilledWith(char character, int length)
     {
-        if (length < 0)
+        if (length <= 0)
         {
             return "";
         }

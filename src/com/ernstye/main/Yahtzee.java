@@ -2,6 +2,7 @@ package com.ernstye.main;
 
 import java.io.File;
 import java.util.Scanner;
+
 import static com.ernstye.main.UserInput.askNumber;
 
 /**
@@ -78,14 +79,14 @@ public class Yahtzee
             //while the text file has more text
             while (scanner.hasNextLine())
             {
-                //print t
+                //print it
                 System.out.println(scanner.nextLine());
             }
 
         }
         catch (java.io.FileNotFoundException e)
         {
-            System.out.println("The rules.txt was not found");
+            System.out.println("The rules.txt file was not found");
         }
     }
 }
