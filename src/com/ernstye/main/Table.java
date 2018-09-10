@@ -82,6 +82,7 @@ class Table
         }
 
         // Display the actual total score
+        System.out.println(rowSeparator);
         displayRow("Total", String.valueOf(scoreGrid.getTotalScore()), "");
         System.out.println();
     }
@@ -97,7 +98,9 @@ class Table
             pointsNeeded = String.format(rightColumnFormat, pointsBeforeBonus, "points needed before the bonus");
         }
 
+        // The upper bonus row has a double separation, to make the difference between the upper & lower section
         displayRow("Bonus", String.valueOf(scoreGrid.getUpperBonus()), pointsNeeded);
+        System.out.println(rowSeparator);
     }
 
     /**
