@@ -270,7 +270,7 @@ class ScoreGridTest
                                         "full when there is one NO_SCORE inside");
     }
 
-    /*
+    /**
     Score 62 points in the upper section, in the Fours, Fives and Sixes rows.
      */
     private void score62UpperPoints()
@@ -290,8 +290,8 @@ class ScoreGridTest
         }
     }
 
-    /*
-    Score a Yahtzee
+    /**
+     Score a Yahtzee (the first Yahtzee given {@link ScoreGridTest#YAHTZEE})
      */
     private void scoreYahtzee()
     {
@@ -357,5 +357,28 @@ class ScoreGridTest
         scoreGrid.setScore(2, dices);
         assertEquals(0, scoreGrid.getPointsBeforeUpperBonus(),
                      "At more than 63 points, the player should have 0 points to score left for the bonus");
+    }
+
+    /**
+     * Test the {@link ScoreGrid#getTotalScore()} method
+     */
+    @Test
+    void getTotalScore()
+    {
+        assertEquals(0, scoreGrid.getTotalScore(), "Total score should be 0 when the game starts");
+
+        // Score in the lower section
+        scoreYahtzee();
+        assertEquals(YAHTZEE_POINTS, scoreGrid.getTotalScore(), "Total score should take lower section into account");
+
+        // Score in the upper section, without triggering the upper bonus
+        score62UpperPoints();
+        assertEquals(YAHTZEE_POINTS + 62, scoreGrid.getTotalScore(), "Total score should take upper section into account");
+
+        // Score 1 point
+        dices.setDices(new Integer[]{1, 2, 2, 2, 2});
+        scoreGrid.setScore(0, dices);
+        assertEquals(YAHTZEE_POINTS + 63 + ScoreGrid.UPPER_BONUS_POINTS, scoreGrid.getTotalScore(),
+                     "Total score should take upper bonus into account");
     }
 }
