@@ -3,12 +3,11 @@ package com.ernstye.main;
 
 import java.util.ArrayList;
 
-import static com.ernstye.main.UserInput.askNumber;
 import static com.ernstye.main.UserInput.askPositiveNumber;
 
 /**
- * Players model object
- * contains all the players playing the game
+ * Players model object.
+ * Contains all the players playing the game
  */
 class Players
 {
@@ -17,7 +16,7 @@ class Players
     private int numberOfPlayers;
 
     /**
-     * Create the new players
+     * Create the new players.
      */
     Players()
     {
@@ -34,7 +33,7 @@ class Players
     }
 
     /**
-     * Let the players play the game until the scoreGrid is not full, show the winner/or all the players that have a draw
+     * Let the players play the game until the scoreGrid is not full, show the winner/or all the players that have a draw.
      */
     void playGame()
     {
@@ -69,7 +68,7 @@ class Players
     }
 
     /**
-     * Playing one turn for each player
+     * Playing one turn for each player.
      *
      * @param turnNumber One game has 13 turns, show the turn number
      */
@@ -87,7 +86,7 @@ class Players
     }
 
     /**
-     * get the player that won the Yahtzee game, having the most points at the end
+     * get the player that won the Yahtzee game, having the most points at the end.
      *
      * @return the winner of the game
      */
@@ -110,7 +109,7 @@ class Players
     }
 
     /**
-     * In case of a draw, find all the players that have a draw
+     * In case of a draw, find all the players that have a draw.
      *
      * @return all the players that are winners
      */
@@ -132,7 +131,7 @@ class Players
     }
 
     /**
-     * Find out if there's a draw in the game
+     * Find out if there's a draw in the game.
      *
      * @return true if there's a draw, false otherwise
      */

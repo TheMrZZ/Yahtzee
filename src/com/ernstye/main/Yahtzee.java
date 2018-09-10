@@ -10,7 +10,7 @@ import static com.ernstye.main.UserInput.askNumber;
  *
  * @author Florian ERNST, Céline YE
  */
-public class Yahtzee
+class Yahtzee
 {
 
     /**
@@ -62,8 +62,8 @@ public class Yahtzee
 
 
     /**
-     * Display the rules of the Yahtzee game
-     * Open a txt file where the rules are read
+     * Display the rules of the Yahtzee game.
+     * Rules are kept in the {@code rules.txt} file.
      */
     private static void displayRules()
     {

@@ -34,7 +34,7 @@ class UserInput
     }
 
     /**
-     * Returns number entered by the user between 0 and {@code max}
+     * Returns number entered by the user between 0 and {@code max}.
      *
      * @param max upper bound, not included
      * @return the number entered by the user
@@ -45,7 +45,7 @@ class UserInput
     }
 
     /**
-     * Returns number entered by the user between {@code min} and {@code max}
+     * Returns number entered by the user between {@code min} and {@code max}.
      *
      * @param min lower bound, included
      * @param max upper bound, not included

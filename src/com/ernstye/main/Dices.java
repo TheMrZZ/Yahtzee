@@ -13,20 +13,20 @@ import static com.ernstye.main.UserInput.askNumber;
  */
 class Dices
 {
+
+    private Integer dices[];
+
     /**
      * Create and roll the {@value com.ernstye.main.Constants#NUMBER_OF_DICES}  dices randomly
      */
-    private Integer dices[];
-
     Dices()
     {
         dices = new Integer[NUMBER_OF_DICES];
-
         roll();
     }
 
     /**
-     * Dices getter
+     * Dices getter.
      *
      * @return the array of dices
      */
@@ -36,7 +36,7 @@ class Dices
     }
 
     /**
-     * Give 0 to 2 chances for the player to roll again the dices he has chosen
+     * Give 0 to 2 chances for the player to roll again the dices he has chosen.
      *
      * @param scoreGrid the scoreGrid of the player
      */
@@ -65,12 +65,18 @@ class Dices
         }
     }
 
+    /**
+     * Display the current roll number.
+     *
+     * @param rollNumber the current roll number
+     */
     private void displayRollNumber(int rollNumber)
     {
         System.out.println("\n=== ROLL " + (rollNumber) + " ===");
     }
+
     /**
-     * roll the {@value com.ernstye.main.Constants#NUMBER_OF_DICES}  dices randomly
+     * roll the {@value com.ernstye.main.Constants#NUMBER_OF_DICES} dices randomly
      */
     private void roll()
     {
@@ -83,7 +89,7 @@ class Dices
     }
 
     /**
-     * Ask the user the dices' index to be rerolled, and verify there isn't duplicates in the dices chosen
+     * Ask the user the dices' index to be rerolled, and verify there isn't duplicates in the dices chosen.
      *
      * @param dicesToRoll Number of dices to be rerolled
      * @return a list of the dices' index to be rerolled
@@ -112,7 +118,7 @@ class Dices
     }
 
     /**
-     * Reroll randomly the dices the player has chosen
+     * Reroll randomly the dices the player has chosen.
      *
      * @param dicesToRoll Number of dices to be rerolled
      */
@@ -139,7 +145,7 @@ class Dices
     }
 
     /**
-     * Get the sum of every dices
+     * Get the sum of every dices.
      *
      * @return the sum of all dices
      */
@@ -154,7 +160,7 @@ class Dices
     }
 
     /**
-     * Get the number of dices equals to {@code value}
+     * Get the number of dices equals to {@code value}.
      *
      * @param value the value to look for
      * @return the number of dices with the wanted {@code value}

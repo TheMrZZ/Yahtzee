@@ -3,7 +3,7 @@ package com.ernstye.main;
 import java.util.Scanner;
 
 /**
- * PLayer model object
+ * PLayer model object.
  * contains one player who can play the game
  */
 class Player
@@ -26,18 +26,17 @@ class Player
     }
 
     /**
-     * Dices getter
+     * Dices getter.
      *
      * @return {@code dices}
      */
     Dices getDices()
     {
-
         return dices;
     }
 
     /**
-     * Name getter
+     * Name getter.
      * @return the {@code name} of the player
      */
     String getName()
@@ -46,7 +45,7 @@ class Player
     }
 
     /**
-     * scoreGrid getter
+     * scoreGrid getter.
      * @return the {@code scoreGrid}
      */
     ScoreGrid getScoreGrid()
@@ -55,7 +54,7 @@ class Player
     }
 
     /**
-     * let the Player play one turn, if the {@code scoreGrid} is full, show the final results of the Player
+     * let the Player play one turn, if the {@code scoreGrid} is full, show the final results of the Player.
      */
     void play()
     {
@@ -72,7 +71,7 @@ class Player
     }
 
     /**
-     * get the total score of the scoreGrid
+     * get the total score of the scoreGrid.
      * @return the total score of the player
      */
     int totalScore()

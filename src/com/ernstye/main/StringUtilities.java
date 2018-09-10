@@ -3,13 +3,13 @@ package com.ernstye.main;
 import java.util.Arrays;
 
 /**
- * String Utilities class
+ * String Utilities class.
  * Methods used for string - or arrays of strings - manipulation
  */
 class StringUtilities
 {
     /**
-     * Return the length of the longest string
+     * Return the length of the longest string.
      *
      * @param strings the array to search for the longest string
      * @return the longest string's length
@@ -28,7 +28,7 @@ class StringUtilities
     }
 
     /**
-     * Creates a string of specified {@code length} filled with specified {@code character}
+     * Creates a string of specified {@code length} filled with specified {@code character}.
      *
      * @param character the character to fill the string with
      * @param length    the length of the final string

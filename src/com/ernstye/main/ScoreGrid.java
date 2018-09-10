@@ -65,7 +65,7 @@ class ScoreGrid
     }
 
     /**
-     * Returns the potential score of a player, in the Three Of A Kind row (at least 3 times the same dice value)
+     * Returns the potential score of a player, in the Three Of A Kind row (at least 3 times the same dice value).
      *
      * @param dices the dices the player have
      * @return the potential score the player would get by scoring a Three Of A Kind
@@ -84,7 +84,7 @@ class ScoreGrid
 
 
     /**
-     * Returns the potential score of a player, in the Four Of A Kind row (at least 4 times the same dice value)
+     * Returns the potential score of a player, in the Four Of A Kind row (at least 4 times the same dice value).
      *
      * @param dices the dices the player have
      * @return the potential score the player would get by scoring a Four Of A Kind
@@ -104,7 +104,7 @@ class ScoreGrid
 
     /**
      * Returns the potential score of a player, in the Full House row
-     * (3 dices of same value, and 2 other dices of same value)
+     * (3 dices of same value, and 2 other dices of same value).
      *
      * @param dices the dices the player have
      * @return the potential score the player would get by scoring a Full House
@@ -124,7 +124,7 @@ class ScoreGrid
 
     /**
      * Returns the potential score of a player, in the Small Straight row
-     * (A straight of at least 4 dices)
+     * (A straight of at least 4 dices).
      *
      * @param dices the dices the player have
      * @return the potential score the player would get by scoring a Full House
@@ -140,7 +140,7 @@ class ScoreGrid
 
     /**
      * Returns the potential score of a player, in the Large Straight row
-     * (A straight of at least 5 dices)
+     * (A straight of at least 5 dices).
      *
      * @param dices the dices the player have
      * @return the potential score the player would get by scoring a Full House
@@ -155,7 +155,7 @@ class ScoreGrid
     }
 
     /**
-     * Returns the potential score of a player, in the Yahtzee row (all dices have the same value)
+     * Returns the potential score of a player, in the Yahtzee row (all dices have the same value).
      *
      * @param dices the dices the player have
      * @return the potential score the player would get by scoring a Four Of A Kind
@@ -173,7 +173,7 @@ class ScoreGrid
     }
 
     /**
-     * Get the points a player would score, if he choose an upper section row with his dices
+     * Get the points a player would score, if he choose an upper section row with his dices.
      *
      * @param row   the row of the upper section where the player could score
      * @param dices the dices the player rolled
@@ -226,7 +226,7 @@ class ScoreGrid
     }
 
     /**
-     * Get the points a player would score, if he choose a particular row with his dices
+     * Get the points a player would score, if he choose a particular row with his dices.
      *
      * @param row   the row where the player could score
      * @param dices the dices the player rolled
@@ -246,7 +246,7 @@ class ScoreGrid
     }
 
     /**
-     * Get the score of a particular row for the player
+     * Get the score of a particular row for the player.
      *
      * @param row the row to getDices the score from
      * @return the score of the row
@@ -257,7 +257,7 @@ class ScoreGrid
     }
 
     /**
-     * Set the score given by {@code dices} in the given {@code row}
+     * Set the score given by {@code dices} in the given {@code row}.
      *
      * @param row   the row to write the score in
      * @param dices the dices rolled by the player
@@ -269,8 +269,8 @@ class ScoreGrid
     }
 
     /**
-     * Checks if the score grid is full
-     * An full grid means that the game must stops
+     * Checks if the score grid is full.
+     * A full grid means that the game must stops.
      *
      * @return True if the grid is full, False if there is still a row with no score
      */
@@ -281,7 +281,7 @@ class ScoreGrid
     }
 
     /**
-     * Get the total points of the grid
+     * Get the total points of the grid.
      *
      * @return the upper section grid plus the bonus if the player has one
      */
@@ -295,7 +295,7 @@ class ScoreGrid
     }
 
     /**
-     * Get the sum of the points of each row in the upper section
+     * Get the sum of the points of each row in the upper section.
      *
      * @return the upper section score
      */
@@ -316,7 +316,7 @@ class ScoreGrid
     }
 
     /**
-     * Get the sum of the points of each row in the upper section
+     * Get the sum of the points of each row in the upper section.
      *
      * @return the upper section score
      */
@@ -352,7 +352,7 @@ class ScoreGrid
     }
 
     /**
-     * Get the number of points needed to getDices the upper bonus
+     * Get the number of points needed to getDices the upper bonus.
      *
      * @return the number of points needed to getDices the upper bonus, 0 if the player already has the bonus
      */
@@ -362,15 +362,14 @@ class ScoreGrid
     }
 
     /**
-     * Displays the score grid and the potential points, in a table shape
+     * Displays the score grid and the potential points, in a table shape.
      * Table has this format:
-     * <p>
+     *
      * <pre>
      * ---------------------
      * RowName  | X Points | X Potential points
      * ---------------------
      * </pre>
-     * </p>
      *
      * @param dices if NULL, doesn't display potential points - else, display the potential points the
      *              player could getDices

@@ -98,7 +98,7 @@ class ScoreGridTest
     };
 
     /**
-     * Start each test with an empty scoreGrid
+     * Start each test with an empty scoreGrid.
      */
     @BeforeEach
     void setUp()
@@ -248,7 +248,7 @@ class ScoreGridTest
     }
 
     /**
-     * Test the {@link ScoreGrid#isFull()} method
+     * Test the {@link ScoreGrid#isFull()} method.
      */
     @Test
     void isFull()
@@ -291,7 +291,7 @@ class ScoreGridTest
     }
 
     /**
-     Score a Yahtzee (the first Yahtzee given {@link ScoreGridTest#YAHTZEE})
+     Score a Yahtzee (the first Yahtzee given {@link ScoreGridTest#YAHTZEE}).
      */
     private void scoreYahtzee()
     {
@@ -301,7 +301,7 @@ class ScoreGridTest
     }
 
     /**
-     * Test the {@link ScoreGrid#getUpperBonus()} method
+     * Test the {@link ScoreGrid#getUpperBonus()} method.
      */
     @Test
     void getUpperBonus()
@@ -327,7 +327,7 @@ class ScoreGridTest
     }
 
     /**
-     * Test the {@link ScoreGrid#getPointsBeforeUpperBonus()} method
+     * Test the {@link ScoreGrid#getPointsBeforeUpperBonus()} method.
      */
     @Test
     void getPointsBeforeUpperBonus()
@@ -360,7 +360,7 @@ class ScoreGridTest
     }
 
     /**
-     * Test the {@link ScoreGrid#getTotalScore()} method
+     * Test the {@link ScoreGrid#getTotalScore()} method.
      */
     @Test
     void getTotalScore()

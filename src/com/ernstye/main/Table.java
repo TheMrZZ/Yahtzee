@@ -20,7 +20,7 @@ class Table
     private Dices dices;
 
     /**
-     * Creates a table used to display the score grid, with the potential scores given by the dices
+     * Creates a table used to display the score grid, with the potential scores given by the dices.
      *
      * @param scoreGrid_ the score grid to display
      * @param dices_     if not null, used to getDices the potential score for each empty row
@@ -50,15 +50,14 @@ class Table
     }
 
     /**
-     * Displays the score grid and the potential points, in a table shape
+     * Displays the score grid and the potential points, in a table shape.
      * Table has this format:
-     * <p>
+     *
      * <pre>
      * -------------------
      * rowName | X score | X potential Score
      * -------------------
      * </pre>
-     * </p>
      */
     void display()
     {
@@ -87,6 +86,19 @@ class Table
         System.out.println();
     }
 
+    /**
+     * Displays the upper bonus row.
+     * If the player doesn't have enough points for the bonus yet, the score will be 0, and a message with the number
+     * of points missing will be displayed. If he has enough points, the {@value ScoreGrid#UPPER_BONUS_POINTS} points
+     * will be displayed, and the other message will not be displayed.<br>
+     * <p>
+     * The row is displayed in this format:
+     *
+     * <pre>
+     * Bonus | X score | X points needed before the bonus
+     * -------------------
+     * </pre>
+     */
     private void displayUpperBonusRow()
     {
         int pointsBeforeBonus = scoreGrid.getPointsBeforeUpperBonus();
@@ -106,12 +118,11 @@ class Table
     /**
      * Displays a score row - Ones, Twos, Threes etc...
      * The row is displayed in this format:
-     * <p>
+     *
      * <pre>
      * rowName | X score | X potential Score
      * -------------------
      * </pre>
-     * </p>
      *
      * @param row the number of the row to display
      */
@@ -132,13 +143,13 @@ class Table
     }
 
     /**
-     * Displays a single row, in this format:
-     * <p>
+     * Displays a single row.
+     * Row is displayed in this format:
+     *
      * <pre>
      * rowName | X score | X potential Score
      * -------------------
      * </pre>
-     * </p>
      *
      * @param rowName        the name of the current row
      * @param score          the score to display - if {@link com.ernstye.main.Constants#NO_SCORE} is given,
@@ -172,14 +183,10 @@ class Table
      * Takes an {@code int} as a score instead of a String.
      * Displays a single row, in this format:
      *
-     * <p>
      * <pre>
      * rowName |  score  | right
      * -------------------
      * </pre>
-     * </p>
-     *
-     *
      *
      * @param rowName the name of the current row
      * @param score   the score to display - if {@link com.ernstye.main.Constants#NO_SCORE} is given,
@@ -193,13 +200,13 @@ class Table
     }
 
     /**
-     * Displays a single row, in this format:
-     * <p>
+     * Displays a single row.
+     * Row is displayed in this format:
+     *
      * <pre>
      * rowName | X score | X right
      * -------------------
      * </pre>
-     * </p>
      *
      * @param rowName the name of the current row
      * @param score   the score to display - if {@link com.ernstye.main.Constants#NO_SCORE} is given,

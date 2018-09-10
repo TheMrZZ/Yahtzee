@@ -70,7 +70,7 @@ class DicesDisplayer
     private Dices dices;
 
     /**
-     * Creates a displayer for specific dices
+     * Creates a displayer for specific dices.
      *
      * @param dices_ the dices to display
      */
@@ -133,7 +133,7 @@ class DicesDisplayer
     }
 
     /**
-     * Displays the specified number of white spaces
+     * Displays the specified number of white spaces.
      *
      * @param number the number of white spaces to display
      */
