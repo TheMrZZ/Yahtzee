@@ -60,7 +60,6 @@ public class Yahtzee
         players.playGame();
 
 
-
     }
 
 
@@ -88,6 +87,8 @@ public class Yahtzee
         {
             System.out.println("The rules.txt file was not found");
         }
+
+        System.out.println();
     }
 }
 
