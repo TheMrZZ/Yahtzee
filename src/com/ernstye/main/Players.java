@@ -80,7 +80,7 @@ class Players
         {
             Player player = players[playerNumber];
             System.out.println("\n=== TURN " + turnNumber + " ===\n");
-            System.out.println("PLAYER " + (playerNumber + 1) + ", It's " + player.getName() + "'s turn!");
+            System.out.println("It's " + player.getName() + "'s (Player " + (playerNumber + 1) + ") turn!");
             player.play();
         }
 
@@ -88,6 +88,7 @@ class Players
 
     /**
      * get the player that won the Yahtzee game, having the most points at the end
+     *
      * @return the winner of the game
      */
     private int getWinner()
@@ -110,6 +111,7 @@ class Players
 
     /**
      * In case of a draw, find all the players that have a draw
+     *
      * @return all the players that are winners
      */
     private ArrayList<Integer> drawPlayers()
@@ -131,6 +133,7 @@ class Players
 
     /**
      * Find out if there's a draw in the game
+     *
      * @return true if there's a draw, false otherwise
      */
     private boolean isDraw()
