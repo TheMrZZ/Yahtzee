@@ -200,7 +200,7 @@ class Dices
      */
     int getLongestStraightSize()
     {
-        List<Integer> diceList = Arrays.asList(dices);
+        List<Integer> diceList = Arrays.asList(dices.clone());
         diceList.sort(null);
 
         int max = 1;
