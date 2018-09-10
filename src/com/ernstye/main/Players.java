@@ -6,14 +6,21 @@ import java.util.Scanner;
 
 import static com.ernstye.main.UserInput.askNumber;
 
+/**
+ * Players model object
+ * contains all the players playing the game
+ */
 public class Players
 {
+
     private Player players[];
     private int numberOfPlayers;
 
+    /**
+     * Create the new players
+     */
     Players()
     {
-        Scanner scanner = new Scanner(System.in);
         System.out.println("Please enter the number of players");
         //TODO ASKPOSITIVE NUMBER
         numberOfPlayers = askNumber(5);
@@ -27,6 +34,9 @@ public class Players
         }
     }
 
+    /**
+     * Let the players play the game until the scoreGrid is not full, show the winner/or all the players that have a draw
+     */
     void playGame()
     {
 
@@ -36,6 +46,7 @@ public class Players
             turnPlayers(turnNumber);
             turnNumber++;
         }
+        //
         if (isDraw())
         {
             ArrayList<Integer> drawPlayers = drawPlayers();
@@ -58,8 +69,14 @@ public class Players
 
     }
 
+    /**
+     * Playing one turn for each player
+     *
+     * @param turnNumber One game has 13 turns, show the turn number
+     */
     void turnPlayers(int turnNumber)
     {
+
         for (int playerNumber = 0; playerNumber < players.length; playerNumber++)
         {
             Player player = players[playerNumber];
@@ -70,6 +87,10 @@ public class Players
 
     }
 
+    /**
+     * get the player that won the Yahtzee game, having the most points at the end
+     * @return the winner of the game
+     */
     int getWinner()
     {
         int max = 0;
@@ -88,7 +109,10 @@ public class Players
 
     }
 
-
+    /**
+     * In case of a draw, find all the players that have a draw
+     * @return all the players that are winners
+     */
     ArrayList<Integer> drawPlayers()
     {
 
@@ -106,6 +130,10 @@ public class Players
         return drawPlayers;
     }
 
+    /**
+     * Find out if there's a draw in the game
+     * @return true if there's a draw, false otherwise
+     */
     boolean isDraw()
     {
         boolean isDraw = false;
