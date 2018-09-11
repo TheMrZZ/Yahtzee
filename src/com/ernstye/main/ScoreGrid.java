@@ -48,7 +48,7 @@ class ScoreGrid
     {
         System.out.println("Score points in which row?");
 
-        // Shows the potential score the player could getDices for each row
+        // Shows the potential score the player could get for each row
         for (int i = 0; i < scoreSheet.length; i++)
         {
             if (scoreSheet[i] == NO_SCORE)
@@ -182,7 +182,7 @@ class ScoreGrid
      *
      * @param row   the row of the upper section where the player could score
      * @param dices the dices the player rolled
-     * @return the potential points he would getDices
+     * @return the potential points he would get
      */
     int getUpperPotentialScore(int row, Dices dices)
     {
@@ -245,7 +245,7 @@ class ScoreGrid
      *
      * @param row   the row where the player could score
      * @param dices the dices the player rolled
-     * @return the potential points he would getDices
+     * @return the potential points he would get
      */
     int getPotentialScore(int row, Dices dices)
     {
@@ -263,7 +263,7 @@ class ScoreGrid
     /**
      * Get the score of a particular row for the player.
      *
-     * @param row the row to getDices the score from
+     * @param row the row to get the score from
      * @return the score of the row
      */
     int getRowScore(int row)
@@ -367,9 +367,9 @@ class ScoreGrid
     }
 
     /**
-     * Get the number of points needed to getDices the upper bonus.
+     * Get the number of points needed to get the upper bonus.
      *
-     * @return the number of points needed to getDices the upper bonus, 0 if the player already has the bonus
+     * @return the number of points needed to get the upper bonus, 0 if the player already has the bonus
      */
     int getPointsBeforeUpperBonus()
     {
@@ -387,7 +387,7 @@ class ScoreGrid
      * </pre>
      *
      * @param dices if NULL, doesn't display potential points - else, display the potential points the
-     *              player could getDices
+     *              player could get
      */
     void display(Dices dices)
     {
