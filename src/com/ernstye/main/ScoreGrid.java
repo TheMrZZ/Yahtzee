@@ -1,7 +1,6 @@
 package com.ernstye.main;
 
 import java.util.Arrays;
-import java.util.List;
 
 import static com.ernstye.main.Constants.*;
 import static com.ernstye.main.UserInput.askNumber;
@@ -9,13 +8,14 @@ import static com.ernstye.main.UserInput.askNumber;
 /**
  * Score Grid model object.
  *
- * <p>Contains every row (upper section only) for the player to score</p>
+ * <p>Contains every row for the player to score</p>
  */
 class ScoreGrid
 {
     // The rows where the points are stored
     private Integer[] scoreSheet;
     private int YahtzeeBonuses = 0;
+    private Scorer scorer;
 
     static final int UPPER_BONUS_POINTS = 35;
     static final int UPPER_SECTION_MINIMUM = 63;
@@ -27,6 +27,7 @@ class ScoreGrid
     {
         scoreSheet = new Integer[SCORE_SHEET_ROWS.length];
         Arrays.fill(scoreSheet, NO_SCORE);
+        scorer = new Scorer();
     }
 
     /**
@@ -47,134 +48,35 @@ class ScoreGrid
     void score(Dices dices)
     {
         System.out.println("Score points in which row?");
+        displayFreeRows();
 
-        // Shows the potential score the player could get for each row
-        for (int i = 0; i < scoreSheet.length; i++)
-        {
-            if (scoreSheet[i] == NO_SCORE)
-            {
-                System.out.println((i + 1) + ") " + SCORE_SHEET_ROWS[i]);
-            }
-        }
+        int row = askFreeRow();
+        setScore(row, dices);
 
+
+    }
+
+    /**
+     * Ask a "free" row to the user.
+     * Formally, ask for a row having the {@link Constants#NO_SCORE} value.
+     *
+     * @return a free row index entered by the user.
+     */
+    private int askFreeRow()
+    {
         int row;
         do
         {
             row = askNumber(1, scoreSheet.length + 1) - 1;
+
+            // If the player tries to score in a already taken row
             if (getRowScore(row) != NO_SCORE)
             {
                 System.out.println("This row is already taken.");
             }
         } while (getRowScore(row) != NO_SCORE);
-        setScore(row, dices);
-    }
 
-    /**
-     * Returns the potential score of a player, in the Three Of A Kind row (at least 3 times the same dice value).
-     *
-     * @param dices the dices the player have
-     * @return the potential score the player would get by scoring a Three Of A Kind
-     */
-    private int getThreeOfAKindScore(Dices dices)
-    {
-        // Get the sorted list of dice occurrences.
-        List<Integer> diceOccurrencesSorted = dices.getAllOccurrences(true);
-
-        if (diceOccurrencesSorted.get(0) >= 3)
-        {
-            return dices.sum();
-        }
-        return 0;
-    }
-
-
-    /**
-     * Returns the potential score of a player, in the Four Of A Kind row (at least 4 times the same dice value).
-     *
-     * @param dices the dices the player have
-     * @return the potential score the player would get by scoring a Four Of A Kind
-     */
-    private int getFourOfAKindScore(Dices dices)
-    {
-        // Get the sorted list of dice occurrences.
-        List<Integer> diceOccurrencesSorted = dices.getAllOccurrences(true);
-
-        if (diceOccurrencesSorted.get(0) >= 4)
-        {
-            return dices.sum();
-        }
-        return 0;
-    }
-
-
-    /**
-     * Returns the potential score of a player, in the Full House row
-     * (3 dices of same value, and 2 other dices of same value).
-     *
-     * @param dices the dices the player have
-     * @return the potential score the player would get by scoring a Full House
-     */
-    private int getFullHouseScore(Dices dices)
-    {
-        // Get the sorted list of dice occurrences.
-        List<Integer> diceOccurrencesSorted = dices.getAllOccurrences(true);
-
-        if (diceOccurrencesSorted.get(0) >= 3 && diceOccurrencesSorted.get(1) >= 2)
-        {
-            return FULL_HOUSE_POINTS;
-        }
-        return 0;
-    }
-
-
-    /**
-     * Returns the potential score of a player, in the Small Straight row
-     * (A straight of at least 4 dices).
-     *
-     * @param dices the dices the player have
-     * @return the potential score the player would get by scoring a Full House
-     */
-    private int getSmallStraightScore(Dices dices)
-    {
-        if (dices.getLongestStraightSize() >= 4)
-        {
-            return SMALL_STRAIGHT_POINTS;
-        }
-        return 0;
-    }
-
-    /**
-     * Returns the potential score of a player, in the Large Straight row
-     * (A straight of at least 5 dices).
-     *
-     * @param dices the dices the player have
-     * @return the potential score the player would get by scoring a Full House
-     */
-    private int getLargeStraightScore(Dices dices)
-    {
-        if (dices.getLongestStraightSize() >= 5)
-        {
-            return LARGE_STRAIGHT_POINTS;
-        }
-        return 0;
-    }
-
-    /**
-     * Returns the potential score of a player, in the Yahtzee row (all dices have the same value).
-     *
-     * @param dices the dices the player have
-     * @return the potential score the player would get by scoring a Four Of A Kind
-     */
-    private int getYahtzeeScore(Dices dices)
-    {
-        // Get the sorted list of dice occurrences.
-        List<Integer> diceOccurrencesSorted = dices.getAllOccurrences(true);
-
-        if (diceOccurrencesSorted.get(0) == NUMBER_OF_DICES)
-        {
-            return YAHTZEE_POINTS;
-        }
-        return 0;
+        return row;
     }
 
     /**
@@ -186,23 +88,8 @@ class ScoreGrid
      */
     int getUpperPotentialScore(int row, Dices dices)
     {
-        /*
-         If the row is 0, then we're looking for Ones: the number on the dice's face must be 1
-         If the row is 1 then we're looking for 2 etc...
-        */
-        int diceNumber = row + 1;
-
-        /*
-         Get the number of dices with the correct face (1 for the "Ones" row, 2 for the "Twos"...
-         ex: if the player rolled 4-3-3-2-6, and diceNumber is 3, then correctDices = 2
-        */
-        int correctDices = dices.getOccurrencesOf(diceNumber);
-
-        /*
-         Points are the number of dices with the correct face x the digit
-         ex: for the Sixes row, if three dices shows 6, the player gets 18 points.
-        */
-        return correctDices * diceNumber;
+        scorer.setDices(dices);
+        return scorer.getUpperRowScore(row);
     }
 
     /**
@@ -218,22 +105,23 @@ class ScoreGrid
      */
     int getLowerPotentialScore(int row, Dices dices)
     {
+        scorer.setDices(dices);
         switch (row)
         {
             case THREE_OF_A_KIND_ROW:
-                return getThreeOfAKindScore(dices);
+                return scorer.getThreeOfAKindScore();
             case FOUR_OF_A_KIND_ROW:
-                return getFourOfAKindScore(dices);
+                return scorer.getFourOfAKindScore();
             case FULL_HOUSE_ROW:
-                return getFullHouseScore(dices);
+                return scorer.getFullHouseScore();
             case SMALL_STRAIGHT_ROW:
-                return getSmallStraightScore(dices);
+                return scorer.getSmallStraightScore();
             case LARGE_STRAIGHT_ROW:
-                return getLargeStraightScore(dices);
+                return scorer.getLargeStraightScore();
             case YAHTZEE_ROW:
-                return getYahtzeeScore(dices);
+                return scorer.getYahtzeeScore();
             case CHANCE_ROW:
-                return dices.sum();
+                return scorer.getChanceScore();
         }
 
         // In case of incorrect row...
@@ -393,5 +281,20 @@ class ScoreGrid
     {
         Table table = new Table(this, dices);
         table.display();
+    }
+
+    /**
+     * Display the "free" rows, in which the player didn't score.
+     * Formally, displays the rows having the {@link Constants#NO_SCORE} value.
+     */
+    private void displayFreeRows()
+    {
+        for (int i = 0; i < scoreSheet.length; i++)
+        {
+            if (scoreSheet[i] == NO_SCORE)
+            {
+                System.out.println((i + 1) + ") " + SCORE_SHEET_ROWS[i]);
+            }
+        }
     }
 }
