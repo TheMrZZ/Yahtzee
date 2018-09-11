@@ -82,7 +82,7 @@ class DicesDisplayer
 
     /**
      * Display the {@code dices} in a fancy way, using the {@link com.ernstye.main.DicesDisplayer#DICES_IMAGES}
-     *
+     * <p>
      * The format used is the following:
      * <pre>
      *  _________     _________     _________     _________     _________

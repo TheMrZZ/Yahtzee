@@ -139,6 +139,7 @@ class Dices
 
     /**
      * Show the values of the {@value com.ernstye.main.Constants#NUMBER_OF_DICES} dices
+     *
      * @param rollNumber the number of the actual roll
      */
     private void display(int rollNumber)
@@ -251,7 +252,6 @@ class Dices
      * Only present for testing purposes.
      * </strong>
      * Set the dices values to the given integers values.
-     *
      *
      * @param dices the new value for {@code dices}
      */
