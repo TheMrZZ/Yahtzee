@@ -44,12 +44,15 @@ class Players
     {
 
         int turnNumber = 1;
+
+        // While the last player can still play
         while (!players[players.length - 1].getScoreGrid().isFull())
         {
             turnPlayers(turnNumber);
             turnNumber++;
         }
-        //
+
+        // If there is a draw, display all winners
         if (isDraw())
         {
             ArrayList<Integer> drawPlayers = drawPlayers();
@@ -76,7 +79,7 @@ class Players
     /**
      * Playing one turn for each player.
      *
-     * @param turnNumber One game has 13 turns, show the turn number
+     * @param turnNumber the turn we're at - one game has 13 turns
      */
     private void turnPlayers(int turnNumber)
     {
@@ -84,9 +87,9 @@ class Players
         for (int playerNumber = 0; playerNumber < players.length; playerNumber++)
         {
             Player player = players[playerNumber];
-            System.out.println("\n=== TURN " + turnNumber + " ===\n");
-            System.out.println("It's " + player.getName() + "'s (Player " + (playerNumber + 1) + ") turn!");
-            player.play();
+            System.out.println("\n==== TURN " + turnNumber + " ====\n");
+            System.out.println("Player n°" + (playerNumber + 1) + ": it's " + player.getName() + "'s turn!");
+            player.play(playerNumber);
         }
 
     }

@@ -66,19 +66,23 @@ class Player
     /**
      * Let the Player play one turn.
      * If the {@link Player#scoreGrid} is full, show the final results of the Player.
+     *
+     * @param playerNumber the number of the player, used to display final result
      */
-    void play()
+    void play(int playerNumber)
     {
 
         dices.play(scoreGrid);
         System.out.println();
         scoreGrid.score(dices);
+
         if (scoreGrid.isFull())
         {
-            System.out.println("\n\n=== FINAL RESULTS PLAYER " + name + " ===\n\n");
+            System.out.println("\n\n=== FINAL RESULTS FOR PLAYER n°" + (playerNumber + 1) + ": " + name + " ===\n");
             scoreGrid.display(null);
             System.out.println("You scored a total of " + scoreGrid.getTotalScore() + " points!");
         }
+
     }
 
     /**
