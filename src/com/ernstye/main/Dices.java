@@ -13,7 +13,10 @@ import static com.ernstye.main.UserInput.askNumber;
  */
 class Dices
 {
-
+    /**
+     * Array of values of the dices.
+     * (e.g. [1, 2, 1, 2, 3] means the player rolled two Ones, two Twos and one Three).
+     */
     private Integer dices[];
 
     /**
@@ -28,7 +31,7 @@ class Dices
     /**
      * Dices getter.
      *
-     * @return the array of dices
+     * @return the array of {@link Dices#dices}
      */
     Integer[] getDices()
     {
@@ -76,7 +79,7 @@ class Dices
     }
 
     /**
-     * roll the {@value com.ernstye.main.Constants#NUMBER_OF_DICES} dices randomly
+     * Roll the {@value com.ernstye.main.Constants#NUMBER_OF_DICES} dices randomly
      */
     private void roll()
     {
@@ -118,7 +121,7 @@ class Dices
     }
 
     /**
-     * Reroll randomly the dices the player has chosen.
+     * Let the player choose the dices he want to roll again, then roll them randomly.
      *
      * @param dicesToRoll Number of dices to be rerolled
      */
@@ -135,7 +138,7 @@ class Dices
     }
 
     /**
-     * This method shows the roll of the {@value com.ernstye.main.Constants#NUMBER_OF_DICES}  dices
+     * Show the values of the {@value com.ernstye.main.Constants#NUMBER_OF_DICES} dices
      */
     private void display(int rollNumber)
     {
@@ -214,7 +217,7 @@ class Dices
         List<Integer> diceList = Arrays.asList(dices.clone());
 
         // Remove duplicates from the list by passing values into a set, then back into the list
-        Set<Integer> temporarySet = new HashSet<Integer>(diceList);
+        Set<Integer> temporarySet = new HashSet<>(diceList);
         diceList = new ArrayList<>(temporarySet);
 
         diceList.sort(null);

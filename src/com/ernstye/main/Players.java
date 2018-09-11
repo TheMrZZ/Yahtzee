@@ -2,6 +2,7 @@ package com.ernstye.main;
 
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import static com.ernstye.main.UserInput.askPositiveNumber;
 
@@ -11,7 +12,6 @@ import static com.ernstye.main.UserInput.askPositiveNumber;
  */
 class Players
 {
-
     private Player players[];
     private int numberOfPlayers;
 
@@ -20,14 +20,19 @@ class Players
      */
     Players()
     {
+        Scanner scanner = new Scanner(System.in);
+
         System.out.println("Please enter the number of players");
         numberOfPlayers = askPositiveNumber();
 
         players = new Player[numberOfPlayers];
         for (int i = 0; i < players.length; i++)
         {
-            System.out.print("Player " + (i + 1) + ", ");
-            players[i] = new Player();
+            System.out.println("Player " + (i + 1) + ", please enter your name:");
+            System.out.print("> ");
+            String name = scanner.nextLine();
+
+            players[i] = new Player(name);
 
         }
     }

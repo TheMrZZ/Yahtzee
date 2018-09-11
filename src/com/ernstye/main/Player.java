@@ -1,34 +1,42 @@
 package com.ernstye.main;
 
-import java.util.Scanner;
-
 /**
  * PLayer model object.
  * contains one player who can play the game
  */
 class Player
 {
+    /**
+     * The name of the player.
+     */
     private String name;
+
+    /**
+     * The {@value Constants#NUMBER_OF_DICES} dices the player have.
+     */
     private Dices dices;
+
+    /**
+     * The score grid of the player.
+     */
     private ScoreGrid scoreGrid;
 
     /**
-     * Create a player who owns a {@code scoreGrid}, {@code #NUMBER_OF_DICES} dices and has a {@code name}.
+     * Create a new player with an empty {@link Player#scoreGrid}.
+     *
+     * @param name_ the name of the player
      */
-    Player()
+    Player(String name_)
     {
         dices = new Dices();
         scoreGrid = new ScoreGrid();
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("please enter your name:");
-        name = scanner.nextLine();
-
+        name = name_;
     }
 
     /**
      * Dices getter.
      *
-     * @return {@code dices}
+     * @return {@link Player#dices}
      */
     Dices getDices()
     {
@@ -37,7 +45,8 @@ class Player
 
     /**
      * Name getter.
-     * @return the {@code name} of the player
+     *
+     * @return the {@link Player#name} of the player
      */
     String getName()
     {
@@ -46,7 +55,8 @@ class Player
 
     /**
      * scoreGrid getter.
-     * @return the {@code scoreGrid}
+     *
+     * @return the {@link Player#scoreGrid}
      */
     ScoreGrid getScoreGrid()
     {
@@ -54,7 +64,8 @@ class Player
     }
 
     /**
-     * let the Player play one turn, if the {@code scoreGrid} is full, show the final results of the Player.
+     * Let the Player play one turn.
+     * If the {@link Player#scoreGrid} is full, show the final results of the Player.
      */
     void play()
     {
@@ -71,7 +82,8 @@ class Player
     }
 
     /**
-     * get the total score of the scoreGrid.
+     * Get the total score of the scoreGrid.
+     *
      * @return the total score of the player
      */
     int totalScore()
