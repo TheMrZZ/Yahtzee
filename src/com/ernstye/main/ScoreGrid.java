@@ -29,6 +29,11 @@ class ScoreGrid
         Arrays.fill(scoreSheet, NO_SCORE);
     }
 
+    /**
+     * {@link ScoreGrid#scoreSheet} getter.
+     *
+     * @return the score sheet
+     */
     Integer[] getScoreSheet()
     {
         return scoreSheet;
@@ -195,12 +200,22 @@ class ScoreGrid
 
         /*
          Points are the number of dices with the correct face x the digit
-         ex: for the Sixes row, if 3 dices shows 6, the player gets 18 points.
+         ex: for the Sixes row, if three dices shows 6, the player gets 18 points.
         */
-        int score = correctDices * diceNumber;
-        return score;
+        return correctDices * diceNumber;
     }
 
+    /**
+     * Get the score a player would get by scoring into a lower's section row.
+     *
+     * @param row   the row from the lower section. Potential values are
+     *              {@link Constants#THREE_OF_A_KIND_ROW}, {@link Constants#FOUR_OF_A_KIND_ROW},
+     *              {@link Constants#FULL_HOUSE_ROW}, {@link Constants#SMALL_STRAIGHT_ROW},
+     *              {@link Constants#LARGE_STRAIGHT_ROW}, {@link Constants#YAHTZEE_ROW}
+     * @param dices the dices the player has
+     * @return the potential points the player would get by scoring in the specified {@code row}.
+     * 0 if the row is incorrect.
+     */
     int getLowerPotentialScore(int row, Dices dices)
     {
         switch (row)

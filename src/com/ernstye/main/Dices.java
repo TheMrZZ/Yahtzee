@@ -135,7 +135,8 @@ class Dices
     }
 
     /**
-     * This method shows the roll of the {@value com.ernstye.main.Constants#NUMBER_OF_DICES}  dices
+     * This method shows the roll of the {@value com.ernstye.main.Constants#NUMBER_OF_DICES} dices
+     * @param rollNumber the number of the actual roll
      */
     private void display(int rollNumber)
     {
@@ -214,7 +215,7 @@ class Dices
         List<Integer> diceList = Arrays.asList(dices.clone());
 
         // Remove duplicates from the list by passing values into a set, then back into the list
-        Set<Integer> temporarySet = new HashSet<Integer>(diceList);
+        Set<Integer> temporarySet = new HashSet<>(diceList);
         diceList = new ArrayList<>(temporarySet);
 
         diceList.sort(null);
