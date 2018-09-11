@@ -82,7 +82,7 @@ class Table
 
         // Display the actual total score
         System.out.println(rowSeparator);
-        displayRow("Total", String.valueOf(scoreGrid.getTotalScore()), "");
+        displayRow("Total", scoreGrid.getTotalScore(), "");
         System.out.println();
     }
 
@@ -111,7 +111,7 @@ class Table
         }
 
         // The upper bonus row has a double separation, to make the difference between the upper & lower section
-        displayRow("Bonus", String.valueOf(scoreGrid.getUpperBonus()), pointsNeeded);
+        displayRow("Bonus", scoreGrid.getUpperBonus(), pointsNeeded);
         System.out.println(rowSeparator);
     }
 
