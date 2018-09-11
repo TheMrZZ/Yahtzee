@@ -271,7 +271,7 @@ class ScoreGridTest
     }
 
     /**
-    Score 62 points in the upper section, in the Fours, Fives and Sixes rows.
+     * Score 62 points in the upper section, in the Fours, Fives and Sixes rows.
      */
     private void score62UpperPoints()
     {
@@ -291,7 +291,7 @@ class ScoreGridTest
     }
 
     /**
-     Score a Yahtzee (the first Yahtzee given {@link ScoreGridTest#YAHTZEE}).
+     * Score a Yahtzee (the first Yahtzee given {@link ScoreGridTest#YAHTZEE}).
      */
     private void scoreYahtzee()
     {

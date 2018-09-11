@@ -47,7 +47,7 @@ class Dices
         roll();
         displayRollNumber(rollNumber + 1);
         scoreGrid.display(this);
-        display();
+        display(rollNumber + 1);
         //if the player wants to roll again the dices or if he hasn't played 3 times yet, continue the loop
         while (dicesToRoll > 0 && rollNumber < 2)
         {
@@ -60,7 +60,7 @@ class Dices
                 rollNumber++;
                 displayRollNumber(rollNumber + 1);
                 scoreGrid.display(this);
-                display();
+                display(rollNumber + 1);
             }
         }
     }
@@ -137,9 +137,9 @@ class Dices
     /**
      * This method shows the roll of the {@value com.ernstye.main.Constants#NUMBER_OF_DICES}  dices
      */
-    private void display()
+    private void display(int rollNumber)
     {
-        System.out.println("This is the result of your roll :");
+        System.out.println("This is the result of roll n°" + rollNumber + ":");
         DicesDisplayer dicesDisplayer = new DicesDisplayer(this);
         dicesDisplayer.display();
     }
@@ -212,13 +212,19 @@ class Dices
     int getLongestStraightSize()
     {
         List<Integer> diceList = Arrays.asList(dices.clone());
+
+        // Remove duplicates from the list by passing values into a set, then back into the list
+        Set<Integer> temporarySet = new HashSet<Integer>(diceList);
+        diceList = new ArrayList<>(temporarySet);
+
         diceList.sort(null);
 
         int max = 1;
         int actual = 1;
         for (int i = 1; i < diceList.size(); i++)
         {
-            // If the current number is the previous number + 1
+            // If the current number is the previous number + 1, then the straight length is larger by 1.
+            // Else, start a new straight.
             if (diceList.get(i) == diceList.get(i - 1) + 1)
             {
                 actual++;
@@ -240,7 +246,8 @@ class Dices
      * Should not be used in production.
      * Only present for testing purposes.
      * </strong>
-     * Set the dices values to the given integers.
+     * Set the dices values to the given integers values.
+     *
      *
      * @param dices the new value for {@code dices}
      */
