@@ -64,7 +64,8 @@ class Players
 
             }
             System.out.print(" have a draw!");
-        } else
+        }
+        else
         {
             System.out.print(players[getWinner()].getName() + " has won!");
         }

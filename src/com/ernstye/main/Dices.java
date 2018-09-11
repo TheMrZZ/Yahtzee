@@ -237,7 +237,8 @@ class Dices
                 {
                     max = actual;
                 }
-            } else
+            }
+            else
             {
                 actual = 1;
             }
