@@ -302,7 +302,7 @@ class ScoreGrid
     void display(Dices dices)
     {
         Table table = new Table(this, dices);
-        table.display();
+        System.out.println(table);
     }
 
     /**

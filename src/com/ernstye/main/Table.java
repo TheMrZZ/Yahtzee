@@ -87,7 +87,7 @@ class Table
     }
 
     /**
-     * Displays the score grid and the potential points, in a table shape.
+     * Return the score grid and the potential points representation, in a table shape.
      * Table has this format:
      *
      * <pre>
@@ -95,45 +95,49 @@ class Table
      * rowName | X score | X potential Score
      * -------------------
      * </pre>
+     *
+     * @return the table representation
      */
-    void display()
+    @Override
+    public String toString()
     {
-        System.out.println(rowSeparator);
+        String result = "";
+        result += rowSeparator + "\n";
 
         Integer[] scoreSheet = scoreGrid.getScoreSheet();
 
         // Display the header, for example the player's name
         if (header != null)
         {
-            displayRow("", header, "");
+            result += getRow("", header, "");
         }
 
         // Display the upper section
         for (int row = 0; row < UPPER_SECTION_SIZE; row++)
         {
-            displayScoreRow(row);
+            result += getScoreRow(row);
         }
 
         // Displays the upper bonus row
-        displayUpperBonusRow();
+        result += getUpperBonusRow();
 
         // Display the lower section
         for (int row = UPPER_SECTION_SIZE; row < scoreSheet.length; row++)
         {
-            displayScoreRow(row);
+            result += getScoreRow(row);
         }
 
         // Display the Yahtzee Bonus Points row
-        displayYahtzeeBonusRow();
+        result += getYahtzeeBonusRow();
 
         // Display the actual total score
-        System.out.println(rowSeparator);
-        displayRow("Total", scoreGrid.getTotalScore(), "");
-        System.out.println();
+        result += rowSeparator + "\n";
+        result += getRow("Total", scoreGrid.getTotalScore(), "");
+        return result;
     }
 
     /**
-     * Displays the upper bonus row.
+     * Get the upper bonus row display.
      * If the player doesn't have enough points for the bonus yet, the score will be 0, and a message with the number
      * of points missing will be displayed. If he has enough points, the {@value ScoreGrid#UPPER_BONUS_POINTS} points
      * will be displayed, and the other message will not be displayed.<br>
@@ -144,8 +148,10 @@ class Table
      * Bonus | X score | X points needed before the bonus
      * -------------------
      * </pre>
+     *
+     * @return the upper bonus row representation
      */
-    private void displayUpperBonusRow()
+    private String getUpperBonusRow()
     {
         int pointsBeforeBonus = scoreGrid.getPointsBeforeUpperBonus();
 
@@ -156,13 +162,15 @@ class Table
             pointsNeeded = String.format(rightColumnFormat, pointsBeforeBonus, "points needed before the bonus");
         }
 
+        String result = "";
         // The upper bonus row has a double separation, to make the difference between the upper & lower section
-        displayRow("Bonus", scoreGrid.getUpperBonus(), pointsNeeded);
-        System.out.println(rowSeparator);
+        result += getRow("Bonus", scoreGrid.getUpperBonus(), pointsNeeded);
+        result += rowSeparator + "\n";
+        return result;
     }
 
     /**
-     * Display the yahtzee bonus row, on two lines.
+     * Get the yahtzee bonus row display, on two lines.
      *
      * <p>
      * The row is displayed in this format:
@@ -172,8 +180,10 @@ class Table
      * Bonus Points  | X BonusesPoints |
      * ---------------------------------
      * </pre>
+     *
+     * @return the yahtzee bonus row representation
      */
-    private void displayYahtzeeBonusRow()
+    private String getYahtzeeBonusRow()
     {
         int yahtzeeBonuses = scoreGrid.getYahtzeeBonuses();
         String bonuses = String.valueOf(yahtzeeBonuses);
@@ -187,12 +197,14 @@ class Table
 
         String bonusPointsExplanation = String.format(rightColumnFormat, YAHTZEE_BONUS_POINTS, "points per bonus");
 
-        displayRowWithoutSeparator("Yahtzee Bonus", bonuses, " Number of bonuses");
-        displayRow("Bonus Points", bonusesPoints, bonusPointsExplanation);
+        String result = "";
+        result += getRowWithoutSeparator("Yahtzee Bonus", bonuses, " Number of bonuses");
+        result += getRow("Bonus Points", bonusesPoints, bonusPointsExplanation);
+        return result;
     }
 
     /**
-     * Displays a score row - Ones, Twos, Threes etc...
+     * Get a score row display - Ones, Twos, Threes etc...
      * The row is displayed in this format:
      *
      * <pre>
@@ -201,8 +213,9 @@ class Table
      * </pre>
      *
      * @param row the number of the row to display
+     * @return the score row representation
      */
-    private void displayScoreRow(int row)
+    private String getScoreRow(int row)
     {
         String rowName = SCORE_SHEET_ROWS[row];
         int score = scoreGrid.getRowScore(row);
@@ -215,11 +228,11 @@ class Table
             potentialScore = scoreGrid.getPotentialScore(row, dices);
         }
 
-        displaySingleRow(rowName, score, potentialScore);
+        return getSingleRow(rowName, score, potentialScore);
     }
 
     /**
-     * Displays a single row.
+     * Get a single row display.
      * Row is displayed in this format:
      *
      * <pre>
@@ -228,13 +241,13 @@ class Table
      * </pre>
      *
      * @param rowName        the name of the current row
-     * @param score          the score to display - if {@link com.ernstye.main.Constants#NO_SCORE} is given,
+     * @param score          the score to display - if {@link Constants#NO_SCORE} is given,
      *                       nothing will be displayed.
      * @param potentialScore the potential score given by the current {@code dices} - if
-     *                       {@link com.ernstye.main.Constants#NO_SCORE} is given,
-     *                       nothing will be displayed.
+     *                       {@link Constants#NO_SCORE} is given, nothing is shown
+     * @return the single row representation.
      */
-    private void displaySingleRow(String rowName, int score, int potentialScore)
+    private String getSingleRow(String rowName, int score, int potentialScore)
     {
         // If the score is NO_SCORE, don't show anything
         String scoreString = Integer.toString(score);
@@ -251,11 +264,11 @@ class Table
             potentialScoreString = String.format(rightColumnFormat, potentialScore, "potential points");
         }
 
-        displayRow(rowName, scoreString, potentialScoreString);
+        return getRow(rowName, scoreString, potentialScoreString);
     }
 
     /**
-     * Convenience wrapper for {@link com.ernstye.main.Table#displayRow(String, String, String)}
+     * Convenience wrapper for {@link com.ernstye.main.Table#getRow(String, String, String)}
      * Takes an {@code int} as a score instead of a String.
      * Displays a single row, in this format:
      *
@@ -265,19 +278,20 @@ class Table
      * </pre>
      *
      * @param rowName the name of the current row
-     * @param score   the score to display - if {@link com.ernstye.main.Constants#NO_SCORE} is given,
+     * @param score   the score to display - if {@link Constants#NO_SCORE} is given,
      *                nothing will be displayed.
      * @param right   the string to display at right of the table
-     * @see com.ernstye.main.Table#displayRow(String, String, String)
+     * @return the single row representation
+     * @see com.ernstye.main.Table#getRow(String, String, String)
      */
-    private void displayRow(String rowName, int score, String right)
+    private String getRow(String rowName, int score, String right)
     {
-        displayRow(rowName, String.valueOf(score), right);
+        return getRow(rowName, String.valueOf(score), right);
     }
 
     /**
-     * Displays a single row.
-     * Row is displayed in this format:
+     * Returns a single row display.
+     * Display in this format:
      *
      * <pre>
      * rowName | X score | X right
@@ -288,35 +302,39 @@ class Table
      * @param score   the score to display - if {@link com.ernstye.main.Constants#NO_SCORE} is given,
      *                nothing will be displayed.
      * @param right   the string to display at right of the table
+     * @return the single row representation
      */
-    private void displayRow(String rowName, String score, String right)
+    private String getRow(String rowName, String score, String right)
     {
-        displayRowWithoutSeparator(rowName, score, right);
-        System.out.println(rowSeparator);
+        String result = getRowWithoutSeparator(rowName, score, right);
+        result += rowSeparator + "\n";
+        return result;
     }
 
     /**
-     * Displays a single row, without the row separator.
-     * Row is displayed in this format:
+     * Return a single row display, without the row separator.
+     * Display is in this format:
      *
      * <pre>
      * rowName | X score | X right
      * </pre>
      *
      * @param rowName the name of the current row
-     * @param score   the score to display - if {@link com.ernstye.main.Constants#NO_SCORE} is given,
+     * @param score   the score to display - if {@link Constants#NO_SCORE} is given,
      *                nothing will be displayed.
      * @param right   the string to display at right of the table
+     * @return the single row display
      */
-    private void displayRowWithoutSeparator(String rowName, String score, String right)
+    private String getRowWithoutSeparator(String rowName, String score, String right)
     {
-        System.out.printf(leftColumnFormat, rowName);
-        displayMiddleColumn(score);
-        System.out.println(right);
+        String result = String.format(leftColumnFormat, rowName);
+        result += getMiddleColumn(score);
+        result += right + "\n";
+        return result;
     }
 
     /**
-     * Displays the middle column, in a centered way.
+     * Gte the middle column display, in a centered way.
      * Centered according to the width given by {@link Table#middleColumnWidth}.
      * <p>
      * Column is displayed in this format (<i> _ represents a white space</i>):
@@ -325,9 +343,10 @@ class Table
      * </pre>
      *
      * @param string the string to display in the middle column
+     * @return the middle column display
      */
-    private void displayMiddleColumn(String string)
+    private String getMiddleColumn(String string)
     {
-        System.out.print(StringUtilities.center(string, middleColumnWidth) + "|");
+        return StringUtilities.center(string, middleColumnWidth) + "|";
     }
 }
