@@ -81,7 +81,7 @@ class Table
         }
 
         // Display the Yahtzee Bonus Points row
-        displayYathzeeBonusRow();
+        displayYahtzeeBonusRow();
 
         // Display the actual total score
         System.out.println(rowSeparator);
@@ -130,7 +130,7 @@ class Table
      * ---------------------------------
      * </pre>
      */
-    void displayYathzeeBonusRow()
+    private void displayYahtzeeBonusRow()
     {
         int yahtzeeBonuses = scoreGrid.getYahtzeeBonuses();
         String bonuses = String.format(middleColumnFormat, yahtzeeBonuses);
