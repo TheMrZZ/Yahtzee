@@ -317,10 +317,11 @@ class Table
 
     /**
      * Displays the middle column, in a centered way.
+     * Centered according to the width given by {@link Table#middleColumnWidth}.
      * <p>
-     * Column is displayed in this format:
+     * Column is displayed in this format (<i> _ represents a white space</i>):
      * <pre>
-     *     string    |
+     * ___ string ___|
      * </pre>
      *
      * @param string the string to display in the middle column
