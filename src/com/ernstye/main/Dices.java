@@ -45,27 +45,29 @@ class Dices
      */
     void play(ScoreGrid scoreGrid)
     {
-        int dicesToRoll = 1;
-        int rollNumber = 0;
         roll();
-        displayRollNumber(rollNumber + 1);
-        scoreGrid.display(this);
-        display(rollNumber + 1);
-        //if the player wants to roll again the dices or if he hasn't played 3 times yet, continue the loop
-        while (dicesToRoll > 0 && rollNumber < 2)
+
+        int dicesToRoll;
+        int rollNumber = 0;
+
+        do
         {
+            // Display current roll
+            displayRoll(scoreGrid, rollNumber);
+
+            // Ask if the player wants a new roll
             dicesToRoll = askNumber(0, NUMBER_OF_DICES + 1, "How many dices do you want to roll again?");
 
+            // If the player wants to roll other dices
             if (dicesToRoll > 0)
             {
+                // Roll the dices he wants
                 nextTurn(dicesToRoll);
-                System.out.println();
-                rollNumber++;
-                displayRollNumber(rollNumber + 1);
-                scoreGrid.display(this);
-                display(rollNumber + 1);
             }
+
+            rollNumber++;
         }
+        while (dicesToRoll > 0 && rollNumber < 2); // If the player wants to roll again the dices or if he hasn't played 3 times yet, continue the loop
     }
 
     /**
@@ -147,6 +149,19 @@ class Dices
         System.out.println("This is the result of roll n°" + rollNumber + ":");
         DicesDisplayer dicesDisplayer = new DicesDisplayer(this);
         dicesDisplayer.display();
+    }
+
+    /**
+     * Display the current roll, and the score grid.
+     *
+     * @param scoreGrid  the score grid to display
+     * @param rollNumber the current roll number
+     */
+    private void displayRoll(ScoreGrid scoreGrid, int rollNumber)
+    {
+        displayRollNumber(rollNumber + 1);
+        scoreGrid.display(this);
+        display(rollNumber + 1);
     }
 
     /**
