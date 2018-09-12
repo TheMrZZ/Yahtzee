@@ -48,11 +48,11 @@ class ScoreGrid
      */
     void score(Dices dices)
     {
-        System.out.println("Score points in which row?");
-        displayFreeRows();
-
         // If applicable, give the automatic Yahtzee bonus.
         scorePossibleYahtzeeBonus(dices);
+
+        System.out.println("Score points in which row?");
+        displayFreeRows();
 
         int row = askFreeRow();
         setScore(row, dices);
@@ -73,6 +73,7 @@ class ScoreGrid
         if (scorer.getYahtzeeScore() > 0 && getRowScore(YAHTZEE_ROW + UPPER_SECTION_SIZE) > 0)
         {
             yahtzeeBonuses++;
+            System.out.println("You scored a " + YAHTZEE_BONUS_POINTS + " points yahtzee bonus!");
         }
     }
 
