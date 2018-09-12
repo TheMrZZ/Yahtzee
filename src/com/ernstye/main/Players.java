@@ -65,8 +65,7 @@ class Players
                 System.out.print(players[player].getName());
             }
             System.out.print(" have a draw!");
-        }
-        else
+        } else
         {
             System.out.print(players[getWinner()].getName() + " has won!");
         }
@@ -84,9 +83,27 @@ class Players
         {
             Player player = players[playerNumber];
             System.out.println("\n==== TURN " + turnNumber + " ====\n");
-            System.out.println("Player n°" + (playerNumber + 1) + ": it's " + player.getName() + "'s turn!");
-            player.play(playerNumber);
+
+            ScoreGrid scoreGrid = player.getScoreGrid();
+            if (scoreGrid.isFull())
+            {
+                System.out.println("\n\n=== FINAL RESULTS FOR PLAYER n°" + (playerNumber + 1) + ": " + player.getName() + " ===\n");
+                System.out.println(scoreGrid.getDisplay(null));
+                System.out.println("You scored a total of " + scoreGrid.getTotalScore() + " points!");
+            }
         }
+    }
+
+    /**
+     * Let one player play one turn.
+     *
+     * @param player       the player
+     * @param playerNumber the number of the player
+     */
+    private void onePlayerTurn(Player player, int playerNumber)
+    {
+        System.out.println("Player n°" + (playerNumber + 1) + ": it's " + player.getName() + "'s turn!");
+        player.playOneTurn(playerNumber);
     }
 
     /**

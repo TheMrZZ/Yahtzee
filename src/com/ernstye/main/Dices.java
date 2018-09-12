@@ -160,7 +160,7 @@ class Dices
     private void displayRoll(ScoreGrid scoreGrid, int rollNumber)
     {
         displayRollNumber(rollNumber + 1);
-        scoreGrid.display(this);
+        System.out.println(scoreGrid.getDisplay(this));
         display(rollNumber + 1);
     }
 

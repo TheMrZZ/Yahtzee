@@ -287,7 +287,7 @@ class ScoreGrid
     }
 
     /**
-     * Displays the score grid and the potential points, in a table shape.
+     * Get the score grid and the potential points representation, in a table shape.
      * Table has this format:
      *
      * <pre>
@@ -298,11 +298,12 @@ class ScoreGrid
      *
      * @param dices if NULL, doesn't display potential points - else, display the potential points the
      *              player could get
+     * @return the score grid representation
      */
-    void display(Dices dices)
+    String getDisplay(Dices dices)
     {
         Table table = new Table(this, dices);
-        System.out.println(table);
+        return table.toString();
     }
 
     /**
