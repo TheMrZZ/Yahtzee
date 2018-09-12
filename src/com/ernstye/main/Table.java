@@ -317,6 +317,11 @@ class Table
 
     /**
      * Displays the middle column, in a centered way.
+     * <p>
+     * Column is displayed in this format:
+     * <pre>
+     *     string    |
+     * </pre>
      *
      * @param string the string to display in the middle column
      */
