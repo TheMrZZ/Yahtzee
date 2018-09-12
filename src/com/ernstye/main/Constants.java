@@ -68,5 +68,10 @@ final class Constants
      */
     static final int YAHTZEE_POINTS = 50;
 
-
+    /**
+     * The points given for a Yahtzee Bonus.
+     *
+     * @see ScoreGrid#scorePossibleYahtzeeBonus(Dices)
+     */
+    static final int YAHTZEE_BONUS_POINTS = 100;
 }

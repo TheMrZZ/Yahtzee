@@ -80,6 +80,9 @@ class Table
             displayScoreRow(row);
         }
 
+        // Display the Yahtzee Bonus Points row
+        displayYathzeeBonusRow();
+
         // Display the actual total score
         System.out.println(rowSeparator);
         displayRow("Total", scoreGrid.getTotalScore(), "");
@@ -113,6 +116,36 @@ class Table
         // The upper bonus row has a double separation, to make the difference between the upper & lower section
         displayRow("Bonus", scoreGrid.getUpperBonus(), pointsNeeded);
         System.out.println(rowSeparator);
+    }
+
+    /**
+     * Display the yahtzee bonus row, on two lines.
+     *
+     * <p>
+     * The row is displayed in this format:
+     *
+     * <pre>
+     * Yahtzee Bonus | X Bonuses       |
+     * Bonus Points  | X BonusesPoints |
+     * ---------------------------------
+     * </pre>
+     */
+    void displayYathzeeBonusRow()
+    {
+        int yahtzeeBonuses = scoreGrid.getYahtzeeBonuses();
+        String bonuses = String.format(middleColumnFormat, yahtzeeBonuses);
+        if (yahtzeeBonuses == 0)
+        {
+            bonuses = String.format(middleColumnFormat, "");
+        }
+
+        int yahtzeeBonusesPoints = scoreGrid.getYahtzeeBonusPoints();
+        String bonusesPoints = String.format(middleColumnFormat, yahtzeeBonusesPoints);
+
+        String bonusPointsExplanation = String.format(rightColumnFormat, YAHTZEE_BONUS_POINTS, "points per bonus");
+
+        displayRowWithoutSeparator("Yahtzee Bonus", bonuses, " Number of bonuses");
+        displayRow("Bonus Points", bonusesPoints, bonusPointsExplanation);
     }
 
     /**
@@ -215,6 +248,25 @@ class Table
      */
     private void displayRow(String rowName, String score, String right)
     {
+        displayRowWithoutSeparator(rowName, score, right);
+        System.out.println(rowSeparator);
+    }
+
+    /**
+     * Displays a single row, without the row separator.
+     * Row is displayed in this format:
+     *
+     * <pre>
+     * rowName | X score | X right
+     * </pre>
+     *
+     * @param rowName the name of the current row
+     * @param score   the score to display - if {@link com.ernstye.main.Constants#NO_SCORE} is given,
+     *                nothing will be displayed.
+     * @param right   the string to display at right of the table
+     */
+    private void displayRowWithoutSeparator(String rowName, String score, String right)
+    {
         System.out.printf(leftColumnFormat, rowName);
         System.out.print("|");
 
@@ -222,6 +274,5 @@ class Table
         System.out.print("|");
 
         System.out.println(right);
-        System.out.println(rowSeparator);
     }
 }

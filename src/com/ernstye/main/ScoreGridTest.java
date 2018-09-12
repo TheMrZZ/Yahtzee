@@ -291,12 +291,14 @@ class ScoreGridTest
     }
 
     /**
-     * Score a Yahtzee (the first Yahtzee given {@link ScoreGridTest#YAHTZEE}).
+     * Score a Yahtzee of the given value.
+     *
+     * @param value the value of the dices wanted for the Yahtzee
      */
-    private void scoreYahtzee()
+    private void scoreYahtzee(int value)
     {
         // Get a Yahtzee from the Yahtzee's list
-        dices.setDices(YAHTZEE[0]);
+        dices.setDices(YAHTZEE[value - 1]);
         scoreGrid.setScore(YAHTZEE_ROW + UPPER_SECTION_SIZE, dices);
     }
 
@@ -311,7 +313,7 @@ class ScoreGridTest
         score62UpperPoints();
         assertEquals(0, scoreGrid.getUpperBonus(), "Upper bonus should be active ONLY for 63 upper points or more");
 
-        scoreYahtzee();
+        scoreYahtzee(1);
         assertEquals(0, scoreGrid.getUpperBonus(), "Upper bonus should not depend on the lower section points");
 
         // Score one more point to get to 63 points
@@ -341,7 +343,7 @@ class ScoreGridTest
         assertEquals(1, scoreGrid.getPointsBeforeUpperBonus(),
                      "At 62 points, the player should only score 1 more point");
 
-        scoreYahtzee();
+        scoreYahtzee(1);
         assertEquals(1, scoreGrid.getPointsBeforeUpperBonus(),
                      "Upper bonus should not depend on the lower section points");
 
@@ -365,20 +367,69 @@ class ScoreGridTest
     @Test
     void getTotalScore()
     {
-        assertEquals(0, scoreGrid.getTotalScore(), "Total score should be 0 when the game starts");
+        int expectedPoints = 0;
+        assertEquals(expectedPoints, scoreGrid.getTotalScore(), "Total score should be 0 when the game starts");
 
         // Score in the lower section
-        scoreYahtzee();
-        assertEquals(YAHTZEE_POINTS, scoreGrid.getTotalScore(), "Total score should take lower section into account");
+        scoreYahtzee(1);
+        expectedPoints += YAHTZEE_POINTS;
+        assertEquals(expectedPoints, scoreGrid.getTotalScore(), "Total score should take lower section into account");
 
         // Score in the upper section, without triggering the upper bonus
         score62UpperPoints();
-        assertEquals(YAHTZEE_POINTS + 62, scoreGrid.getTotalScore(), "Total score should take upper section into account");
+        expectedPoints += 62;
+        assertEquals(expectedPoints, scoreGrid.getTotalScore(), "Total score should take upper section into account");
 
         // Score 1 point
         dices.setDices(new Integer[]{1, 2, 2, 2, 2});
         scoreGrid.setScore(0, dices);
-        assertEquals(YAHTZEE_POINTS + 63 + ScoreGrid.UPPER_BONUS_POINTS, scoreGrid.getTotalScore(),
+        expectedPoints += 1 + ScoreGrid.UPPER_BONUS_POINTS;
+        assertEquals(expectedPoints, scoreGrid.getTotalScore(),
                      "Total score should take upper bonus into account");
+
+        // Get a Yahtzee bonus
+        dices.setDices(YAHTZEE[0]);
+        scoreGrid.scorePossibleYahtzeeBonus(dices);
+        expectedPoints += YAHTZEE_BONUS_POINTS;
+        assertEquals(expectedPoints, scoreGrid.getTotalScore(),
+                     "Total score should take upper bonus into account");
+    }
+
+    /**
+     * Test the {@link ScoreGrid#scorePossibleYahtzeeBonus(Dices)} method:
+     * if the player score one Yahtzee then has another one, he gets a bonus.
+     */
+    @Test
+    void scorePossibleYahtzeeBonus()
+    {
+        // Test if the bonus is given when it should
+
+        assertEquals(0, scoreGrid.getYahtzeeBonuses(), "The score grid should start with no Yahtzee bonus");
+
+        // Score a yahtzee of Ones
+        scoreYahtzee(1);
+
+        assertEquals(0, scoreGrid.getYahtzeeBonuses(), "One Yahtzee should not give a Yahtzee bonus");
+
+        // Get a yahtzee of Twos, and check if the bonus is increased
+        dices.setDices(YAHTZEE[1]);
+        scoreGrid.scorePossibleYahtzeeBonus(dices);
+
+        assertEquals(1, scoreGrid.getYahtzeeBonuses(), "Getting a Yahtzee after having successfully scored" +
+                                                       "in the Yahtzee section should give one bonus");
+
+        // Now, check if the bonus is not given when it should not be
+        scoreGrid = new ScoreGrid();
+        dices.setDices(new Integer[]{1, 2, 3, 4, 5});
+
+        // Score a 0 in the yahtzee section
+        scoreGrid.setScore(YAHTZEE_ROW + UPPER_SECTION_SIZE, dices);
+
+        // Get a yahtzee of Twos, and check if the bonus is NOT increased
+        dices.setDices(YAHTZEE[1]);
+        scoreGrid.scorePossibleYahtzeeBonus(dices);
+
+        assertEquals(0, scoreGrid.getYahtzeeBonuses(), "Getting a Yahtzee after having already scored a 0" +
+                                                       "in the Yahtzee section should NOT give a bonus");
     }
 }

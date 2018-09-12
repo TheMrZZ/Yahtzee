@@ -14,7 +14,7 @@ class ScoreGrid
 {
     // The rows where the points are stored
     private Integer[] scoreSheet;
-    private int YahtzeeBonuses = 0;
+    private int yahtzeeBonuses;
     private Scorer scorer;
 
     static final int UPPER_BONUS_POINTS = 35;
@@ -27,6 +27,7 @@ class ScoreGrid
     {
         scoreSheet = new Integer[SCORE_SHEET_ROWS.length];
         Arrays.fill(scoreSheet, NO_SCORE);
+        yahtzeeBonuses = 0;
         scorer = new Scorer();
     }
 
@@ -50,10 +51,29 @@ class ScoreGrid
         System.out.println("Score points in which row?");
         displayFreeRows();
 
+        // If applicable, give the automatic Yahtzee bonus.
+        scorePossibleYahtzeeBonus(dices);
+
         int row = askFreeRow();
         setScore(row, dices);
+    }
 
-
+    /**
+     * If possible, will score a Yahtzee Bonus. A Yahtzee Bonus is a bonus you get when the player already scored a
+     * Yahtzee, and got the {@value Constants#YAHTZEE_POINTS} points.
+     * If he "wasted" his Yahtzee by scoring a 0 into it, the bonus is not applicable.<br>
+     * If the bonus is applicable, the player will get an additional {@value Constants#}
+     *
+     * @param dices the dices the player currently have
+     */
+    void scorePossibleYahtzeeBonus(Dices dices)
+    {
+        scorer.setDices(dices);
+        // If the player has a Yahtzee, and already scored successfully in the Yahtzee row, give him the bonus
+        if (scorer.getYahtzeeScore() > 0 && getRowScore(YAHTZEE_ROW + UPPER_SECTION_SIZE) > 0)
+        {
+            yahtzeeBonuses++;
+        }
     }
 
     /**
@@ -194,6 +214,7 @@ class ScoreGrid
         total += getUpperSectionScore();
         total += getUpperBonus();
         total += getLowerSectionScore();
+        total += getYahtzeeBonusPoints();
         return total;
     }
 
@@ -296,5 +317,25 @@ class ScoreGrid
                 System.out.println((i + 1) + ") " + SCORE_SHEET_ROWS[i]);
             }
         }
+    }
+
+    /**
+     * Get the {@link ScoreGrid#yahtzeeBonuses} value.
+     *
+     * @return the yahtzeeBonuses value
+     */
+    int getYahtzeeBonuses()
+    {
+        return yahtzeeBonuses;
+    }
+
+    /**
+     * Get the Yahtzee Bonuses score. Each Yahtzee bonus give {@value Constants#YAHTZEE_BONUS_POINTS} points.
+     *
+     * @return the current points given by the yahtzee bonuses.
+     */
+    int getYahtzeeBonusPoints()
+    {
+        return yahtzeeBonuses * YAHTZEE_BONUS_POINTS;
     }
 }

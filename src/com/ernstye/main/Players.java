@@ -33,7 +33,6 @@ class Players
             String name = scanner.nextLine();
 
             players[i] = new Player(name);
-
         }
     }
 
@@ -64,7 +63,6 @@ class Players
                     System.out.print(" and ");
                 }
                 System.out.print(players[player].getName());
-
             }
             System.out.print(" have a draw!");
         }
@@ -72,8 +70,6 @@ class Players
         {
             System.out.print(players[getWinner()].getName() + " has won!");
         }
-
-
     }
 
     /**
@@ -91,11 +87,10 @@ class Players
             System.out.println("Player n°" + (playerNumber + 1) + ": it's " + player.getName() + "'s turn!");
             player.play(playerNumber);
         }
-
     }
 
     /**
-     * get the player that won the Yahtzee game, having the most points at the end.
+     * Get the player that won the Yahtzee game, having the most points at the end.
      *
      * @return the winner of the game
      */
@@ -111,10 +106,8 @@ class Players
                 max = player.totalScore();
                 winner = playerNumber;
             }
-
         }
         return winner;
-
     }
 
     /**
@@ -134,7 +127,6 @@ class Players
             {
                 drawPlayers.add(playerNumber);
             }
-
         }
         return drawPlayers;
     }
@@ -154,7 +146,6 @@ class Players
             {
                 isDraw = true;
             }
-
         }
         return isDraw;
     }

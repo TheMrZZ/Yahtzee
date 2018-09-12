@@ -48,16 +48,15 @@ class Yahtzee
         int showRules;
         System.out.println("====== YAHTZEE ======\n");
         System.out.println("Do you want to know the rules? 0:No 1:Yes");
+
         showRules = askNumber(0, 2);
         if (showRules == 1)
         {
             displayRules();
         }
+
         Players players = new Players();
-
         players.playGame();
-
-
     }
 
 
@@ -79,7 +78,6 @@ class Yahtzee
                 //print it
                 System.out.println(scanner.nextLine());
             }
-
         }
         catch (java.io.FileNotFoundException e)
         {

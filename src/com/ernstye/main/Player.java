@@ -82,7 +82,6 @@ class Player
             scoreGrid.display(null);
             System.out.println("You scored a total of " + scoreGrid.getTotalScore() + " points!");
         }
-
     }
 
     /**
@@ -94,5 +93,4 @@ class Player
     {
         return scoreGrid.getTotalScore();
     }
-
 }
