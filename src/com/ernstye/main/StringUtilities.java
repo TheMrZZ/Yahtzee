@@ -47,4 +47,29 @@ class StringUtilities
         String filledString = new String(chars);
         return filledString;
     }
+
+    /**
+     * Center a string with white spaces.
+     *
+     * @param string the string to center
+     * @param width  the total width of the centered string
+     * @return the centered string
+     */
+    static String center(String string, int width)
+    {
+        if (string.length() >= width)
+        {
+            return string;
+        }
+
+        int diff = width - string.length();
+        int leftSpaces = diff / 2;
+        int rightSpaces = (diff + 1) / 2;
+
+        String centered = stringFilledWith(' ', leftSpaces) +
+                          string +
+                          stringFilledWith(' ', rightSpaces);
+
+        return centered;
+    }
 }

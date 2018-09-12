@@ -12,8 +12,9 @@ import static com.ernstye.main.StringUtilities.stringFilledWith;
 class Table
 {
     private int totalWidth;
+    private String header;
+    private int middleColumnWidth;
     private String leftColumnFormat;
-    private String middleColumnFormat;
     private String rightColumnFormat;
     private String rowSeparator;
     private ScoreGrid scoreGrid;
@@ -27,24 +28,60 @@ class Table
      */
     Table(ScoreGrid scoreGrid_, Dices dices_)
     {
+        this(scoreGrid_, dices_, 3, null, false);
+    }
+
+    /**
+     * Creates a table used to display the score grid, with the potential scores given by the dices. A potential header
+     * can be displayed on top of the middle column, and left & right rows can be hidden.
+     *
+     * @param scoreGrid_         the score grid to display
+     * @param dices_             if not null, used to getDices the potential score for each empty row
+     * @param middleColumnWidth_ the width of the middle column
+     * @param header_            the header of the middle column
+     * @param onlyPointsColumn   if true, left and right columns won't be displayed. Else they will.
+     */
+    Table(ScoreGrid scoreGrid_, Dices dices_, int middleColumnWidth_, String header_, boolean onlyPointsColumn)
+    {
         scoreGrid = scoreGrid_;
         dices = dices_;
+        header = header_;
 
         // The width of the left column, containing the names of the rows
         final int LEFT_COLUMN_WIDTH = getLongestStringLength(SCORE_SHEET_ROWS);
 
         // We then right-pad the names with spaces
-        leftColumnFormat = "%-" + LEFT_COLUMN_WIDTH + "s";
+        leftColumnFormat = "%-" + LEFT_COLUMN_WIDTH + "s|";
 
-        // The length of the middle column, containing the points the player already scored
-        final int MIDDLE_COLUMN_WIDTH = 3;
-        middleColumnFormat = "%" + MIDDLE_COLUMN_WIDTH + "s";
+        // The middle column, containing the points the player already scored, and the potential header
+        if (header_ != null)
+        {
+            middleColumnWidth_ = Math.max(middleColumnWidth_, header_.length());
+        }
+        middleColumnWidth = middleColumnWidth_;
 
         // The right column contains the -optional- potential points
         rightColumnFormat = " %3d %s";
 
         // The total width, equivalent of is (RowName + "|" + Points + "|").length
-        totalWidth = LEFT_COLUMN_WIDTH + 1 + MIDDLE_COLUMN_WIDTH + 1;
+        totalWidth = middleColumnWidth_ + 1;
+        if (!onlyPointsColumn)
+        {
+            totalWidth += LEFT_COLUMN_WIDTH + 1;
+        }
+
+        // If onlyPointsColumn is true, then we don't display the left & right columns at all
+        if (onlyPointsColumn)
+        {
+            leftColumnFormat = "";
+            rightColumnFormat = "";
+        }
+
+        // Center the header
+        if (header != null)
+        {
+            header = StringUtilities.center(header, middleColumnWidth);
+        }
 
         rowSeparator = stringFilledWith('-', totalWidth);
     }
@@ -64,6 +101,12 @@ class Table
         System.out.println(rowSeparator);
 
         Integer[] scoreSheet = scoreGrid.getScoreSheet();
+
+        // Display the header, for example the player's name
+        if (header != null)
+        {
+            displayRow("", header, "");
+        }
 
         // Display the upper section
         for (int row = 0; row < UPPER_SECTION_SIZE; row++)
@@ -133,14 +176,14 @@ class Table
     private void displayYahtzeeBonusRow()
     {
         int yahtzeeBonuses = scoreGrid.getYahtzeeBonuses();
-        String bonuses = String.format(middleColumnFormat, yahtzeeBonuses);
+        String bonuses = String.valueOf(yahtzeeBonuses);
         if (yahtzeeBonuses == 0)
         {
-            bonuses = String.format(middleColumnFormat, "");
+            bonuses = "";
         }
 
         int yahtzeeBonusesPoints = scoreGrid.getYahtzeeBonusPoints();
-        String bonusesPoints = String.format(middleColumnFormat, yahtzeeBonusesPoints);
+        String bonusesPoints = String.valueOf(yahtzeeBonusesPoints);
 
         String bonusPointsExplanation = String.format(rightColumnFormat, YAHTZEE_BONUS_POINTS, "points per bonus");
 
@@ -268,11 +311,17 @@ class Table
     private void displayRowWithoutSeparator(String rowName, String score, String right)
     {
         System.out.printf(leftColumnFormat, rowName);
-        System.out.print("|");
-
-        System.out.printf(middleColumnFormat, score);
-        System.out.print("|");
-
+        displayMiddleColumn(score);
         System.out.println(right);
+    }
+
+    /**
+     * Displays the middle column, in a centered way.
+     *
+     * @param string the string to display in the middle column
+     */
+    private void displayMiddleColumn(String string)
+    {
+        System.out.print(StringUtilities.center(string, middleColumnWidth) + "|");
     }
 }
