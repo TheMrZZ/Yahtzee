@@ -11,7 +11,30 @@ class UserInput
     private static Scanner scanner = new Scanner(System.in);
 
     /**
-     * Returns number entered by the user between 0 and {@code max}
+     * Ask a number to the user, strictly greater than 0.
+     *
+     * @return a number greater than 0
+     */
+    static int askPositiveNumber()
+    {
+        int number;
+        boolean validInput;
+
+        do
+        {
+            number = askNumberRaw("");
+
+            if (number <= 0)
+            {
+                System.out.println(number + " is not a positive number");
+            }
+        } while (number <= 0);
+
+        return number;
+    }
+
+    /**
+     * Returns number entered by the user between 0 and {@code max}.
      *
      * @param max upper bound, not included
      * @return the number entered by the user
@@ -22,7 +45,7 @@ class UserInput
     }
 
     /**
-     * Returns number entered by the user between {@code min} and {@code max}
+     * Returns number entered by the user between {@code min} and {@code max}.
      *
      * @param min lower bound, included
      * @param max upper bound, not included
@@ -93,14 +116,12 @@ class UserInput
                 // We strip the leading and trailing whitespaces from the user input string
                 userInput = scanner.nextLine().trim();
                 number = Integer.parseInt(userInput);
+                return number;
             }
             catch (NumberFormatException e)
             {
                 System.out.println("This is not a number.");
-                continue;
             }
-
-            return number;
         }
     }
 }

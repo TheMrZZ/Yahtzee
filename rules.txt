@@ -1,0 +1,38 @@
+===== RULES =====
+
+The game consists of a number of rounds
+In each round, a player gets three rolls of the dice, although they can choose to end their turn after one or two rolls.
+After the first roll the player can save any dice they want and re-roll the other dice. This procedure is repeated after
+the second roll. The player has complete choice as to which dice to roll. The Yahtzee scorecard contains 13 different
+category boxes and in each round, after the third roll, the player must choose one of these categories. The score
+entered in the box depends on how well the five dice match the scoring rule for the category. The game is completed
+after 13 rounds by each player, with each of the 13 boxes filled. The total score is calculated by summing all thirteen
+boxes, together with any bonuses.
+The 13 boxes are divided in two sections :
+         - The Upper section (6 boxes), where the score in each of these boxes is determined by adding the total
+         number of dice matching that box.
+         - The Lower section contains a number of poker-themed categories with specific point values
+         If a category is chosen but the dice do not match the requirements of the category the player scores 0 in that category.
+
++-----------------+----------------------------------------+-----------------+
+|   Categories    |              Descriptions              |     Scores      |
++-----------------+----------------------------------------+-----------------+
+| Three Of A Kind | At least three dice the same           | Sum of all dice |
+| Four Of A Kind  | At least four dice the same            | Sum of all dice |
+| Full House      | Three of one number and two of another | 25              |
+| Small Straight  | Four sequential dice                   | 30              |
+| Large Straight  | Five sequential dice                   | 40              |
+| Yahtzee         | All five dice the same                 | 50              |
+| Chance          | Any combination                        | Sum of all dice |
++-----------------+----------------------------------------+-----------------+
+
+BONUSES :
+- If a player scores a total of 63 or more points in these six boxes, a bonus of 35 is added to the upper section score.
+- If the player throws a Yahtzee and has already filled the Yahtzee box with a score of 50, they score a Yahtzee bonus and
+get an extra 100 points. However, if they throw a Yahtzee and have filled the Yahtzee category with a score of 0,
+they do not get a Yahtzee bonus
+
+Source : https://en.wikipedia.org/wiki/Yahtzee
+
+And now, just PLAY, have FUN and ENJOY the game!
+================================================
