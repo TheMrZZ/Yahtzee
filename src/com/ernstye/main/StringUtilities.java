@@ -50,6 +50,14 @@ class StringUtilities
 
     /**
      * Center a string with white spaces.
+     * If the number of white spaces to be inserted is odd, the remaining white space will be added to the left.
+     *
+     * <p>
+     * Ex:
+     * <pre>
+     *     |  String  |
+     * or   |  String |
+     * </pre>
      *
      * @param string the string to center
      * @param width  the total width of the centered string
@@ -63,8 +71,8 @@ class StringUtilities
         }
 
         int diff = width - string.length();
-        int leftSpaces = diff / 2;
-        int rightSpaces = (diff + 1) / 2;
+        int leftSpaces = (diff + 1) / 2;
+        int rightSpaces = diff / 2;
 
         String centered = stringFilledWith(' ', leftSpaces) +
                           string +
