@@ -1,5 +1,6 @@
 package com.ernstye.main;
 
+import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
 /**
@@ -8,7 +9,7 @@ import java.util.Scanner;
  */
 class UserInput
 {
-    private static Scanner scanner = new Scanner(System.in);
+    private static Scanner scanner = new Scanner(System.in, StandardCharsets.UTF_8.name());
 
     /**
      * Ask a number to the user, strictly greater than 0.
@@ -18,7 +19,6 @@ class UserInput
     static int askPositiveNumber()
     {
         int number;
-        boolean validInput;
 
         do
         {

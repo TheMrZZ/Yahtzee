@@ -1,6 +1,7 @@
 package com.ernstye.main;
 
 import java.io.File;
+import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
 import static com.ernstye.main.UserInput.askNumber;
@@ -71,7 +72,7 @@ class Yahtzee
         Scanner scanner;
         try
         {
-            scanner = new Scanner(file);
+            scanner = new Scanner(file, StandardCharsets.UTF_8.name());
             //while the text file has more text
             while (scanner.hasNextLine())
             {
