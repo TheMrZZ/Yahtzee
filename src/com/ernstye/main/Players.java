@@ -50,7 +50,7 @@ class Players
             turnPlayers(turnNumber);
             turnNumber++;
         }
-
+        displayScores();
         // If there is a draw, display all winners
         if (isDraw())
         {
@@ -68,6 +68,15 @@ class Players
         } else
         {
             System.out.print(players[getWinner()].getName() + " has won!");
+        }
+    }
+
+    private void displayScores()
+    {
+        for (int i = 0; i < players.length; i++)
+        {
+            System.out.println("Player " + (i + 1) + ": " + players[i].getName() + " got " + players[i].totalScore() + " points.");
+
         }
     }
 
@@ -91,7 +100,7 @@ class Players
             {
                 System.out.println("\n\n=== FINAL RESULTS FOR PLAYER n°" + (playerNumber + 1) + ": " + player.getName() + " ===\n");
                 System.out.println(scoreGrid.getDisplay(null));
-                System.out.println("You scored a total of " + scoreGrid.getTotalScore() + " points!");
+                System.out.println("You scored a total of " + scoreGrid.getTotalScore() + " points!\n");
             }
         }
     }
