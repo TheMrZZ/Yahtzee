@@ -83,6 +83,8 @@ class Players
         {
             Player player = players[playerNumber];
             System.out.println("\n==== TURN " + turnNumber + " ====\n");
+            System.out.println("Player n°" + (playerNumber + 1) + ": it's " + player.getName() + "'s turn!");
+            player.playOneTurn(playerNumber);
 
             ScoreGrid scoreGrid = player.getScoreGrid();
             if (scoreGrid.isFull())
@@ -95,6 +97,9 @@ class Players
     }
 
     /**
+     * <strong style='color:red'>UNDER DEVELOPMENT, DO NOT USE.</strong>
+     *
+     * <p>
      * Let one player play one turn.
      *
      * @param player       the player
