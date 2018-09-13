@@ -268,7 +268,7 @@ class Table
     }
 
     /**
-     * Convenience wrapper for {@link com.ernstye.main.Table#getRow(String, String, String)}
+     * Convenience wrapper for {@link Table#getRow(String, String, String)}
      * Takes an {@code int} as a score instead of a String.
      * Displays a single row, in this format:
      *
@@ -282,7 +282,7 @@ class Table
      *                nothing will be displayed.
      * @param right   the string to display at right of the table
      * @return the single row representation
-     * @see com.ernstye.main.Table#getRow(String, String, String)
+     * @see Table#getRow(String, String, String)
      */
     private String getRow(String rowName, int score, String right)
     {
@@ -299,7 +299,7 @@ class Table
      * </pre>
      *
      * @param rowName the name of the current row
-     * @param score   the score to display - if {@link com.ernstye.main.Constants#NO_SCORE} is given,
+     * @param score   the score to display - if {@link Constants#NO_SCORE} is given,
      *                nothing will be displayed.
      * @param right   the string to display at right of the table
      * @return the single row representation
