@@ -62,7 +62,7 @@ class ScoreGrid
      * If possible, will score a Yahtzee Bonus. A Yahtzee Bonus is a bonus you get when the player already scored a
      * Yahtzee, and got the {@value Constants#YAHTZEE_POINTS} points.
      * If he "wasted" his Yahtzee by scoring a 0 into it, the bonus is not applicable.<br>
-     * If the bonus is applicable, the player will get an additional {@value Constants#}
+     * If the bonus is applicable, the player will get an additional {@value Constants#YAHTZEE_BONUS_POINTS} points
      *
      * @param dices the dices the player currently have
      */

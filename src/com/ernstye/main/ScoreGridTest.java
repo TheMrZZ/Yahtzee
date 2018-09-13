@@ -30,8 +30,8 @@ class ScoreGridTest
     /**
      * Flag the "expected points" as the sum of the dices.<br>
      * <p>
-     * Useful for {@link com.ernstye.main.ScoreGridTest#THREE_OF_A_KIND}
-     * and {@link com.ernstye.main.ScoreGridTest#FOUR_OF_A_KIND},
+     * Useful for {@link ScoreGridTest#THREE_OF_A_KIND}
+     * and {@link ScoreGridTest#FOUR_OF_A_KIND},
      * because their expected results are not constants.
      */
     static private final int SUM_OF_DICES = -1;
@@ -47,7 +47,7 @@ class ScoreGridTest
     };
 
     /**
-     * Four of a kind presets. Can get considered as {@link com.ernstye.main.ScoreGridTest#THREE_OF_A_KIND}.
+     * Four of a kind presets. Can get considered as {@link ScoreGridTest#THREE_OF_A_KIND}.
      */
     private static final Integer[][] FOUR_OF_A_KIND = {
         {1, 6, 6, 6, 6},
@@ -59,7 +59,7 @@ class ScoreGridTest
     };
 
     /**
-     * Full House presets. Can get considered as {@link com.ernstye.main.ScoreGridTest#THREE_OF_A_KIND}.
+     * Full House presets. Can get considered as {@link ScoreGridTest#THREE_OF_A_KIND}.
      */
     private static final Integer[][] FULL_HOUSES = {
         {1, 2, 1, 1, 2},
@@ -77,7 +77,7 @@ class ScoreGridTest
     };
 
     /**
-     * Large Straight presets. Can get considered as {@link com.ernstye.main.ScoreGridTest#SMALL_STRAIGHTS}
+     * Large Straight presets. Can get considered as {@link ScoreGridTest#SMALL_STRAIGHTS}
      */
     private static final Integer[][] LARGE_STRAIGHTS = {
         {1, 2, 5, 4, 3},
@@ -85,8 +85,8 @@ class ScoreGridTest
     };
 
     /**
-     * Yahtzee presets. Can get considered as {@link com.ernstye.main.ScoreGridTest#THREE_OF_A_KIND} and
-     * as {@link com.ernstye.main.ScoreGridTest#FOUR_OF_A_KIND}.
+     * Yahtzee presets. Can get considered as {@link ScoreGridTest#THREE_OF_A_KIND} and
+     * as {@link ScoreGridTest#FOUR_OF_A_KIND}.
      */
     private static final Integer[][] YAHTZEE = {
         {1, 1, 1, 1, 1},
@@ -112,7 +112,7 @@ class ScoreGridTest
      *
      * @param row      the row to test
      * @param actual   the actual score given by the
-     *                 {@link com.ernstye.main.ScoreGrid#getLowerPotentialScore(int, Dices)} method
+     *                 {@link ScoreGrid#getLowerPotentialScore(int, Dices)} method
      * @param expected the expected score
      */
     private void assertRowEquals(int row, int actual, int expected)
@@ -146,7 +146,7 @@ class ScoreGridTest
      * Tests if a lower section row gets the correct values for a bunch presets.
      *
      * @param row         the row to test
-     * @param expected    the expected score - If {@link com.ernstye.main.ScoreGridTest#SUM_OF_DICES} is given,
+     * @param expected    the expected score - If {@link ScoreGridTest#SUM_OF_DICES} is given,
      *                    the sum of the dices will be considered as the expected score.
      * @param dicesValues the values of the dices
      * @param nonZeroRows the rows that should NOT have a potential score of 0
@@ -171,15 +171,15 @@ class ScoreGridTest
     }
 
     /**
-     * Tests the {@link com.ernstye.main.ScoreGrid#getLowerPotentialScore(int, Dices)}
+     * Tests the {@link ScoreGrid#getLowerPotentialScore(int, Dices)}
      * method with preset dices rolls, and with known expected scores.<br>
      * Dices presets are:
-     * {@link com.ernstye.main.ScoreGridTest#THREE_OF_A_KIND},
-     * {@link com.ernstye.main.ScoreGridTest#FOUR_OF_A_KIND},
-     * {@link com.ernstye.main.ScoreGridTest#FULL_HOUSES},
-     * {@link com.ernstye.main.ScoreGridTest#SMALL_STRAIGHTS},
-     * {@link com.ernstye.main.ScoreGridTest#LARGE_STRAIGHTS},
-     * {@link com.ernstye.main.ScoreGridTest#YAHTZEE},
+     * {@link ScoreGridTest#THREE_OF_A_KIND},
+     * {@link ScoreGridTest#FOUR_OF_A_KIND},
+     * {@link ScoreGridTest#FULL_HOUSES},
+     * {@link ScoreGridTest#SMALL_STRAIGHTS},
+     * {@link ScoreGridTest#LARGE_STRAIGHTS},
+     * {@link ScoreGridTest#YAHTZEE},
      */
     @Test
     void getLowerPotentialScore()
@@ -212,7 +212,7 @@ class ScoreGridTest
     }
 
     /**
-     * Test the {@link com.ernstye.main.ScoreGrid#getUpperPotentialScore(int, Dices)} for a set of dices.
+     * Test the {@link ScoreGrid#getUpperPotentialScore(int, Dices)} for a set of dices.
      */
     @Test
     void getUpperPotentialScore()

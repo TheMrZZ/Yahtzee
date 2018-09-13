@@ -20,7 +20,7 @@ class Dices
     private Integer dices[];
 
     /**
-     * Create and roll the {@value com.ernstye.main.Constants#NUMBER_OF_DICES}  dices randomly
+     * Create and roll the {@value Constants#NUMBER_OF_DICES}  dices randomly
      */
     Dices()
     {
@@ -84,7 +84,7 @@ class Dices
     }
 
     /**
-     * Roll the {@value com.ernstye.main.Constants#NUMBER_OF_DICES} dices randomly
+     * Roll the {@value Constants#NUMBER_OF_DICES} dices randomly
      */
     private void roll()
     {
@@ -143,7 +143,7 @@ class Dices
     }
 
     /**
-     * Show the values of the {@value com.ernstye.main.Constants#NUMBER_OF_DICES} dices
+     * Show the values of the {@value Constants#NUMBER_OF_DICES} dices
      *
      * @param rollNumber the number of the actual roll
      */
@@ -203,11 +203,11 @@ class Dices
     }
 
     /**
-     * Get a list of occurrences for each possible {@link com.ernstye.main.Constants#DICE_FACES}
+     * Get a list of occurrences for each possible {@link Constants#DICE_FACES}
      *
      * @param sorted if false, then the index 0 will correspond to the number of Aces, index 1 number of Twos etc...
      *               if true, then the list will be sorted in descending order
-     * @return a list of occurrences of size {@value com.ernstye.main.Constants#DICE_FACES}
+     * @return a list of occurrences of size {@value Constants#DICE_FACES}
      */
     List<Integer> getAllOccurrences(boolean sorted)
     {
