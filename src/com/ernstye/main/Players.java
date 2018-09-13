@@ -50,7 +50,7 @@ class Players
             turnPlayers(turnNumber);
             turnNumber++;
         }
-
+        displayScores();
         // If there is a draw, display all winners
         if (isDraw())
         {
@@ -72,6 +72,17 @@ class Players
     }
 
     /**
+     * Displays the scores of every player.
+     */
+    private void displayScores()
+    {
+        for (int i = 0; i < players.length; i++)
+        {
+            System.out.println("Player " + (i + 1) + ": " + players[i].getName() + " got " + players[i].totalScore() + " points.");
+        }
+    }
+
+    /**
      * Playing one turn for each player.
      *
      * @param turnNumber the turn we're at - one game has 13 turns
@@ -83,18 +94,23 @@ class Players
         {
             Player player = players[playerNumber];
             System.out.println("\n==== TURN " + turnNumber + " ====\n");
+            System.out.println("Player n°" + (playerNumber + 1) + ": it's " + player.getName() + "'s turn!");
+            player.playOneTurn(playerNumber);
 
             ScoreGrid scoreGrid = player.getScoreGrid();
             if (scoreGrid.isFull())
             {
                 System.out.println("\n\n=== FINAL RESULTS FOR PLAYER n°" + (playerNumber + 1) + ": " + player.getName() + " ===\n");
                 System.out.println(scoreGrid.getDisplay(null));
-                System.out.println("You scored a total of " + scoreGrid.getTotalScore() + " points!");
+                System.out.println("You scored a total of " + scoreGrid.getTotalScore() + " points!\n");
             }
         }
     }
 
     /**
+     * <strong style='color:red'>UNDER DEVELOPMENT, DO NOT USE.</strong>
+     *
+     * <p>
      * Let one player play one turn.
      *
      * @param player       the player

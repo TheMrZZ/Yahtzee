@@ -50,10 +50,12 @@ class Dices
         int dicesToRoll;
         int rollNumber = 0;
 
+        // Display first roll
+        displayRoll(scoreGrid, rollNumber);
+
         do
         {
-            // Display current roll
-            displayRoll(scoreGrid, rollNumber);
+            rollNumber++;
 
             // Ask if the player wants a new roll
             dicesToRoll = askNumber(0, NUMBER_OF_DICES + 1, "How many dices do you want to roll again?");
@@ -63,9 +65,10 @@ class Dices
             {
                 // Roll the dices he wants
                 nextTurn(dicesToRoll);
-            }
 
-            rollNumber++;
+                // Display new roll
+                displayRoll(scoreGrid, rollNumber);
+            }
         }
         while (dicesToRoll > 0 && rollNumber < 2); // If the player wants to roll again the dices or if he hasn't played 3 times yet, continue the loop
     }
