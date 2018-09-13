@@ -72,7 +72,7 @@ class Players
     }
 
     /**
-     * Displays the scores of every player.
+     * Displays the score of every player.
      */
     private void displayScores()
     {
