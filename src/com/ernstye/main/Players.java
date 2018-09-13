@@ -71,12 +71,14 @@ class Players
         }
     }
 
+    /**
+     * Displays the scores of every player.
+     */
     private void displayScores()
     {
         for (int i = 0; i < players.length; i++)
         {
             System.out.println("Player " + (i + 1) + ": " + players[i].getName() + " got " + players[i].totalScore() + " points.");
-
         }
     }
 
