@@ -6,7 +6,7 @@ import java.util.Arrays;
  * String Utilities class.
  * Methods used for string - or arrays of strings - manipulation
  */
-class StringUtilities
+final class StringUtilities
 {
     /**
      * Return the length of the longest string.
