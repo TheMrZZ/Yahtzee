@@ -1,6 +1,7 @@
 package com.ernstye.main;
 
 
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -20,7 +21,7 @@ class Players
      */
     Players()
     {
-        Scanner scanner = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in, StandardCharsets.UTF_8.name());
 
         System.out.println("Please enter the number of players");
         numberOfPlayers = askPositiveNumber();
