@@ -2,6 +2,7 @@ package com.ernstye.main;
 
 import java.util.*;
 
+import static com.ernstye.main.Constants.DICES_UNICODE;
 import static com.ernstye.main.Constants.DICE_FACES;
 import static com.ernstye.main.Constants.NUMBER_OF_DICES;
 import static com.ernstye.main.UserInput.askNumber;
@@ -149,8 +150,35 @@ class Dices
      */
     private void display(int rollNumber)
     {
-        System.out.println("This is the result of roll n°" + rollNumber + ":");
         DicesDisplayer dicesDisplayer = new DicesDisplayer(this);
+        Random random = new Random();
+
+        String dices_representation = "";
+        for (Integer dice : dices)
+        {
+            dices_representation += DICES_UNICODE[dice - 1];
+        }
+        for (int dice = 0; dice < NUMBER_OF_DICES; dice++)
+        {
+            String representation = "Rolling... " + dices_representation.substring(0, dice);
+            for (int anim = 0; anim < 20; anim++)
+            {
+                System.out.print(representation);
+                System.out.print(DICES_UNICODE[random.nextInt(DICE_FACES)]);
+
+                try
+                {
+                    Thread.sleep(15);
+                }
+                catch (InterruptedException ignored)
+                {
+                }
+
+                System.out.print("\r");
+            }
+        }
+
+        System.out.println("This is the result of roll n°" + rollNumber + ":");
         dicesDisplayer.display();
     }
 
@@ -255,8 +283,7 @@ class Dices
                 {
                     max = actual;
                 }
-            }
-            else
+            } else
             {
                 actual = 1;
             }
