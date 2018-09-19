@@ -1,32 +1,11 @@
 ==== RECORDS ====
-2 players : florian, celine
-	florian: 21
-
-	celine: 34
-
-celine has won!
-
-1 players : celine
-	celine: 29
-
-celine has won!
-
-1 player(s) : celne
-	celne: 85
-
-celne has won!
-
-1 player(s) : celine	celine: 38
-
-celine has won!
-
+GAME 1
 1 player(s) : celine3
 	celine3: 37
 celine3 has won!
 
 
+GAME 2
 1 player(s) : celine4
 	celine4: 54
 celine4 has won!
-
-
