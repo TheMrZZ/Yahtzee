@@ -1,10 +1,14 @@
 package com.ernstye.main;
 
 
-import java.io.*;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static com.ernstye.main.UserInput.askPositiveNumber;
 
@@ -169,6 +173,11 @@ class Players
         return isDraw;
     }
 
+    /**
+     * Display the results in the given stream.
+     *
+     * @param out the stream where the results will be displayed
+     */
     private void displayResults(PrintStream out)
     {
         // If there is a draw, display all winners
@@ -185,12 +194,16 @@ class Players
                 out.print(players[player].getName());
             }
             out.println(" have a draw!");
-        } else
+        }
+        else
         {
             out.println(players[getWinner()].getName() + " has won!\n");
         }
     }
 
+    /**
+     * Display the results in the console.
+     */
     private void displayResults()
     {
         displayResults(System.out);
@@ -198,7 +211,7 @@ class Players
 
 
     /**
-     * register the records after each game
+     * Register the records after each game.
      */
     private void records()
     {
@@ -242,35 +255,39 @@ class Players
         records.close();
     }
 
-    /*private int getRecordNumberOfGames()
+
+    /**
+     * Return the number of the current game according to {@code records.txt}.
+     *
+     * @return the number of the current game
+     */
+    static int getCurrentGameNumber()
     {
-        File file =
-            new File("records.txt");
+        File file = new File("records.txt");
+        Scanner inputFile = null;
+        int number = 1;
 
         try
         {
-            Scanner inputFile = new Scanner(file, StandardCharsets.UTF_8.name());
-            //all the text in one string
-            while ()
-            {
-                //find last occurence of game
-            }
-                String java=" bou";
-                java.lastIndexOf()
-                System.out.println(inputFile.nextLine());
-            }
-            inputFile.close();
+            inputFile = new Scanner(file, StandardCharsets.UTF_8.name());
         }
         catch (java.io.FileNotFoundException e)
         {
             System.out.println("The records.txt file was not found");
+            System.exit(0);
         }
 
-        System.out.println();
+        String text = inputFile.useDelimiter("\\Z").next();
+        Pattern pattern = Pattern.compile("[\\r\\n]+GAME (\\d+)");
+        Matcher m = pattern.matcher(text);
 
+        while (m.find())
+        {
+            number = Integer.parseInt(m.group(1)) + 1;
+        }
+        inputFile.close();
+        return number;
     }
-*/
-
 }
 
 

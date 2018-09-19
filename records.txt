@@ -4,8 +4,12 @@ GAME 1
 	celine3: 37
 celine3 has won!
 
-
 GAME 2
 1 player(s) : celine4
 	celine4: 54
+celine4 has won!
+
+GAME 3
+1 player(s) : celineYE
+	celine4: 2
 celine4 has won!

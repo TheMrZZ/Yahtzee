@@ -6,7 +6,15 @@ package com.ernstye.main;
  */
 final class Constants
 {
-    public static final String[] DICES_UNICODE = {
+    /**
+     * If true, then the dices will be rolled in a small animation, slowing the game.
+     */
+    static final boolean NEED_DICE_ANIMATION = true;
+
+    /**
+     * Dices representation in Unicode.
+     */
+    static final String[] DICES_UNICODE = {
         "\u2680", "\u2681", "\u2682", "\u2683", "\u2684", "\u2685"
     };
 

@@ -2,8 +2,7 @@ package com.ernstye.main;
 
 import java.util.*;
 
-import static com.ernstye.main.Constants.DICE_FACES;
-import static com.ernstye.main.Constants.NUMBER_OF_DICES;
+import static com.ernstye.main.Constants.*;
 import static com.ernstye.main.UserInput.askNumber;
 import static com.ernstye.main.UserInput.askUniqueNumbers;
 
@@ -169,7 +168,10 @@ class Dices
     private void displayRoll(ScoreGrid scoreGrid, int rollNumber)
     {
         displayRollNumber(rollNumber + 1);
-        displayer.displayAnimation();
+        if (NEED_DICE_ANIMATION)
+        {
+            displayer.displayAnimation();
+        }
         System.out.println(scoreGrid.getDisplay(this));
         display(rollNumber + 1);
     }

@@ -21,6 +21,8 @@ class Yahtzee
      */
     public static void main(String[] args)
     {
+        System.out.println("GAME NUMBER" + Players.getCurrentGameNumber());
+
         while (true)
         {
             menu();
@@ -38,7 +40,7 @@ class Yahtzee
     }
 
     /**
-     * Yahtzee menu, let the user choose what he wants to do
+     * Yahtzee menu, let the user choose what he wants to do.
      */
     private static void menu()
     {
@@ -70,8 +72,6 @@ class Yahtzee
                 break;
             default:
                 break;
-
-
         }
     }
 
@@ -81,8 +81,7 @@ class Yahtzee
      */
     private static void displayRules()
     {
-        File file =
-            new File("rules.txt");
+        File file = new File("rules.txt");
 
         try
         {
@@ -101,16 +100,14 @@ class Yahtzee
         }
 
         System.out.println();
-
     }
 
     /**
-     * Display previous records of the game
+     * Display previous records of the game.
      */
     private static void displayRecords()
     {
-        File file =
-            new File("records.txt");
+        File file = new File("records.txt");
 
         try
         {
@@ -129,8 +126,6 @@ class Yahtzee
         }
 
         System.out.println();
-
-
     }
 }
 
