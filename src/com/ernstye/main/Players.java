@@ -3,6 +3,7 @@ package com.ernstye.main;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -86,6 +87,17 @@ class Players
             System.out.println("\n==== TURN " + turnNumber + " ====\n");
             System.out.println("Player n°" + (playerNumber + 1) + ": it's " + player.getName() + "'s turn!");
             player.playOneTurn(playerNumber);
+            if (players.length == 1)
+            {
+                pressEnterToContinue(player);
+            }
+            //if there are multiple players, do not ask to press something before next turn
+            else
+            {
+                pressEnterToContinue((playerNumber + 1) % players.length, players[(playerNumber + 1) % players.length]);
+            }
+
+            
 
             ScoreGrid scoreGrid = player.getScoreGrid();
             if (scoreGrid.isFull())
@@ -288,7 +300,38 @@ class Players
         inputFile.close();
         return number;
     }
+
+    public static void pressEnterToContinue(int playerNumber, Player player)
+
+    {
+        System.out.println("Player n°" + (playerNumber + 1) + ": " + player.getName() + ", it's your turn ! Tap anything when you're ready...");
+        try
+        {
+            int read = System.in.read();
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public static void pressEnterToContinue(Player player)
+
+    {
+        System.out.println(player.getName() + ", tap anything when you're ready for next turn!...");
+        try
+        {
+            int read = System.in.read();
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+
 }
+
 
 
 
