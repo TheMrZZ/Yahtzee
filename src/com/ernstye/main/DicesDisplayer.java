@@ -1,6 +1,8 @@
 package com.ernstye.main;
 
-import static com.ernstye.main.Constants.NUMBER_OF_DICES;
+import java.util.Random;
+
+import static com.ernstye.main.Constants.*;
 
 /**
  * A class used to display a dice roll.
@@ -81,7 +83,7 @@ class DicesDisplayer
 
 
     /**
-     * Display the {@code dices} in a fancy way, using the {@link DicesDisplayer#DICES_IMAGES}
+     * Display the {@code dices} in a fancy way, using the {@link DicesDisplayer#DICES_IMAGES}.
      * <p>
      * The format used is the following:
      * <pre>
@@ -142,6 +144,40 @@ class DicesDisplayer
         for (int i = 0; i < number; i++)
         {
             System.out.print(" ");
+        }
+    }
+
+    /**
+     * Display a rolling dices animation.
+     */
+    public void displayAnimation()
+    {
+        Random random = new Random();
+
+        String dices_representation = "";
+        for (Integer dice : dices.getDices())
+        {
+            dices_representation += DICES_UNICODE[dice - 1];
+        }
+
+        for (int dice = 0; dice < NUMBER_OF_DICES; dice++)
+        {
+            String representation = "Rolling... " + dices_representation.substring(0, dice);
+            for (int anim = 0; anim < 20; anim++)
+            {
+                System.out.print(representation);
+                System.out.print(DICES_UNICODE[random.nextInt(DICE_FACES)]);
+
+                try
+                {
+                    Thread.sleep(15);
+                }
+                catch (InterruptedException ignored)
+                {
+                }
+
+                System.out.print("\r");
+            }
         }
     }
 }

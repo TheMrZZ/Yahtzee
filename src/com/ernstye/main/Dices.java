@@ -2,10 +2,10 @@ package com.ernstye.main;
 
 import java.util.*;
 
-import static com.ernstye.main.Constants.DICES_UNICODE;
 import static com.ernstye.main.Constants.DICE_FACES;
 import static com.ernstye.main.Constants.NUMBER_OF_DICES;
 import static com.ernstye.main.UserInput.askNumber;
+import static com.ernstye.main.UserInput.askUniqueNumbers;
 
 /**
  * Dices model object.
@@ -20,12 +20,15 @@ class Dices
      */
     private Integer dices[];
 
+    private DicesDisplayer displayer;
+
     /**
-     * Create and roll the {@value Constants#NUMBER_OF_DICES}  dices randomly
+     * Create and roll the {@value Constants#NUMBER_OF_DICES}  dices randomly.
      */
     Dices()
     {
         dices = new Integer[NUMBER_OF_DICES];
+        displayer = new DicesDisplayer(this);
         roll();
     }
 
@@ -48,30 +51,24 @@ class Dices
     {
         roll();
 
-        int dicesToRoll;
+        boolean stop = false;
         int rollNumber = 0;
-
-        // Display first roll
-        displayRoll(scoreGrid, rollNumber);
 
         do
         {
-            rollNumber++;
-
-            // Ask if the player wants a new roll
-            dicesToRoll = askNumber(0, NUMBER_OF_DICES + 1, "How many dices do you want to roll again?");
-
-            // If the player wants to roll other dices
-            if (dicesToRoll > 0)
+            // Before the first roll, we don't have anything to do
+            if (rollNumber > 0)
             {
-                // Roll the dices he wants
-                nextTurn(dicesToRoll);
-
-                // Display new roll
-                displayRoll(scoreGrid, rollNumber);
+                // Roll new dices
+                stop = !nextTurn();
             }
+
+            // Display new roll
+            displayRoll(scoreGrid, rollNumber);
+
+            rollNumber++;
         }
-        while (dicesToRoll > 0 && rollNumber < 2); // If the player wants to roll again the dices or if he hasn't played 3 times yet, continue the loop
+        while (!stop && rollNumber < 3); // If the player wants to roll again the dices or if he hasn't played 3 times yet, continue the loop
     }
 
     /**
@@ -85,101 +82,82 @@ class Dices
     }
 
     /**
-     * Roll the {@value Constants#NUMBER_OF_DICES} dices randomly
+     * Roll the {@value Constants#NUMBER_OF_DICES} dices randomly.
      */
     private void roll()
     {
-        Random random = new Random();
-
-        for (int i = 0; i < NUMBER_OF_DICES; i++)
+        List<Integer> allDices = new ArrayList<>();
+        for (int i = 1; i <= NUMBER_OF_DICES; i++)
         {
-            dices[i] = random.nextInt(DICE_FACES) + 1;
+            allDices.add(i);
         }
+        roll(allDices);
     }
 
     /**
-     * Ask the user the dices' index to be rerolled, and verify there isn't duplicates in the dices chosen.
-     *
-     * @param dicesToRoll Number of dices to be rerolled
-     * @return a list of the dices' index to be rerolled
+     * Roll the given dices randomly.
+     * @param dicesToRoll the indexes of the dices to roll, with values going from 1 to {@value Constants#NUMBER_OF_DICES}
      */
-    private ArrayList<Integer> verifyDuplicate(int dicesToRoll)
+    private void roll(List<Integer> dicesToRoll)
     {
-        ArrayList<Integer> dicesEnteredByUser = new ArrayList<>();
+        Random random = new Random();
 
-        int i = 0;
-        while (i < dicesToRoll)
+        for (int i = 1; i <= NUMBER_OF_DICES; i++)
         {
-            int dice = askNumber(1, NUMBER_OF_DICES + 1) - 1;
-            //if the user has already entered the dice's index, ask him to choose another one
-            if (dicesEnteredByUser.contains(dice))
+            if (dicesToRoll.contains(i))
             {
-                System.out.println("You have already chosen this dice! Please enter another one :");
-            }
-            //else the dice's index is added to the list
-            else
-            {
-                dicesEnteredByUser.add(dice);
-                i++;
+                dices[i - 1] = random.nextInt(DICE_FACES) + 1;
             }
         }
-        return dicesEnteredByUser;
     }
 
     /**
      * Let the player choose the dices he want to roll again, then roll them randomly.
+     * If the player doesn't want to roll dices anymore, return false.
      *
-     * @param dicesToRoll Number of dices to be rerolled
+     * @return true if the user need another roll, false if he doesn't
      */
-    private void nextTurn(int dicesToRoll)
+    private boolean nextTurn()
     {
-        Random random = new Random();
-        System.out.println("Which dices would you like to toss again?");
-        ArrayList<Integer> dicesEnteredByUser = verifyDuplicate(dicesToRoll);
-        for (int i = 0; i < dicesToRoll; i++)
+        int dicesToRoll;
+        List<Integer> dicesEnteredByUser = null;
+
+        while (dicesEnteredByUser == null)
         {
-            //The dices chosen are being toss again
-            dices[dicesEnteredByUser.get(i)] = random.nextInt(DICE_FACES) + 1;
+            // Ask if the player wants a new roll
+            dicesToRoll = askNumber(0, NUMBER_OF_DICES + 1, "How many dices do you want to roll again?");
+
+            if (dicesToRoll == 0)
+            {
+                return false;
+            }
+
+            System.out.println("Which dices would you like to toss again? (enter 0 if you made a mistake)");
+            dicesEnteredByUser = askUniqueNumbers(dicesToRoll, 1, NUMBER_OF_DICES + 1,
+                                                  "You have already chosen this dice! Please enter another one :",
+                                                  true);
+
+            if (dicesEnteredByUser == null)
+            {
+                System.out.println("Erasing previous choices...");
+            }
         }
+
+        // The chosen dices are being toss again
+        roll(dicesEnteredByUser);
+
+        return true;
     }
 
     /**
-     * Show the values of the {@value Constants#NUMBER_OF_DICES} dices
+     * Show the values of the {@value Constants#NUMBER_OF_DICES} dices.
      *
      * @param rollNumber the number of the actual roll
      */
     private void display(int rollNumber)
     {
-        DicesDisplayer dicesDisplayer = new DicesDisplayer(this);
-        Random random = new Random();
-
-        String dices_representation = "";
-        for (Integer dice : dices)
-        {
-            dices_representation += DICES_UNICODE[dice - 1];
-        }
-        for (int dice = 0; dice < NUMBER_OF_DICES; dice++)
-        {
-            String representation = "Rolling... " + dices_representation.substring(0, dice);
-            for (int anim = 0; anim < 20; anim++)
-            {
-                System.out.print(representation);
-                System.out.print(DICES_UNICODE[random.nextInt(DICE_FACES)]);
-
-                try
-                {
-                    Thread.sleep(15);
-                }
-                catch (InterruptedException ignored)
-                {
-                }
-
-                System.out.print("\r");
-            }
-        }
-
         System.out.println("This is the result of roll n°" + rollNumber + ":");
-        dicesDisplayer.display();
+        displayer.display();
     }
 
     /**
@@ -191,6 +169,7 @@ class Dices
     private void displayRoll(ScoreGrid scoreGrid, int rollNumber)
     {
         displayRollNumber(rollNumber + 1);
+        displayer.displayAnimation();
         System.out.println(scoreGrid.getDisplay(this));
         display(rollNumber + 1);
     }
@@ -231,7 +210,7 @@ class Dices
     }
 
     /**
-     * Get a list of occurrences for each possible {@link Constants#DICE_FACES}
+     * Get a list of occurrences for each possible {@link Constants#DICE_FACES}.
      *
      * @param sorted if false, then the index 0 will correspond to the number of Aces, index 1 number of Twos etc...
      *               if true, then the list will be sorted in descending order
@@ -283,7 +262,8 @@ class Dices
                 {
                     max = actual;
                 }
-            } else
+            }
+            else
             {
                 actual = 1;
             }

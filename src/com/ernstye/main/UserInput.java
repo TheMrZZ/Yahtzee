@@ -1,6 +1,7 @@
 package com.ernstye.main;
 
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -123,5 +124,53 @@ class UserInput
                 System.out.println("This is not a number.");
             }
         }
+    }
+
+
+    /**
+     * Ask the user several numbers, and verify there is no duplicates.
+     * If {@code allowReset} is true, then the values will be taken between {@code min-1} and {@code max}, and
+     * in this case, if the user enters {@code min-1}, {@code null} will be returned.
+     *
+     * @param size           the number of numbers to ask
+     * @param min            the minimum of each value (included).
+     * @param max            the maximum of each value (excluded)
+     * @param duplicateError an error message to display if the user enters a duplicate
+     * @param allowReset     if true, then the user will be able to enter {@code min-1}, in which case {@code null}
+     *                       will be returned.
+     * @return a list of the unique numbers between {@code min} and {@code max} of given {@code size}.
+     * {@code null} if allowReset is true, and the user enters {@code min-1}.
+     */
+    static ArrayList<Integer> askUniqueNumbers(int size, int min, int max, String duplicateError, boolean allowReset)
+    {
+        ArrayList<Integer> dicesEnteredByUser = new ArrayList<>();
+
+        if (allowReset)
+        {
+            min--;
+        }
+
+        int i = 0;
+        while (i < size)
+        {
+            int dice = askNumber(min, max);
+
+            if (allowReset && dice == min)
+            {
+                return null;
+            }
+
+            // If the user has already entered the number, ask him to choose another one
+            if (dicesEnteredByUser.contains(dice))
+            {
+                System.out.println(duplicateError);
+            }
+            else
+            {
+                dicesEnteredByUser.add(dice);
+                i++;
+            }
+        }
+        return dicesEnteredByUser;
     }
 }
