@@ -21,23 +21,9 @@ class Yahtzee
      */
     public static void main(String[] args)
     {
-        startGame();
-    }
-
-    /**
-     * Starts a game and ask player for a new one, until the player asks to stop.
-     */
-    private static void startGame()
-    {
-
-        int continue_ = 1;
-        while (continue_ == 1)
+        while (true)
         {
-            startOneGame();
-
-            System.out.println("\n\n");
-            continue_ = askNumber(0, 2, "Would you like to play again? 0:No 1:Yes");
-            System.out.println("\n\n");
+            menu();
         }
     }
 
@@ -46,20 +32,48 @@ class Yahtzee
      */
     private static void startOneGame()
     {
-        int showRules;
-        System.out.println("====== YAHTZEE ======\n");
-        System.out.println("Do you want to know the rules? 0:No 1:Yes");
-
-        showRules = askNumber(0, 2);
-        if (showRules == 1)
-        {
-            displayRules();
-        }
 
         Players players = new Players();
         players.playGame();
     }
 
+    /**
+     * Yahtzee menu, let the user choose what he wants to do
+     */
+    private static void menu()
+    {
+        int userInput;
+        // Menu display
+        System.out.println("============================");
+        System.out.println("|         YAHTZEE          |");
+        System.out.println("============================");
+        System.out.println("|       1. Rules           |");
+        System.out.println("|       2. Play            |");
+        System.out.println("|       3. See records     |");
+        System.out.println("|       4. Exit            |");
+        System.out.println("============================");
+        System.out.println("Select an option :");
+        userInput = askNumber(1, 5);
+        switch (userInput)
+        {
+            case 1:
+                displayRules();
+                break;
+            case 2:
+                startOneGame();
+                break;
+            case 3:
+                displayRecords();
+                break;
+            case 4:
+                System.exit(0);
+                break;
+            default:
+                break;
+
+
+        }
+    }
 
     /**
      * Display the rules of the Yahtzee game.
@@ -69,16 +83,17 @@ class Yahtzee
     {
         File file =
             new File("rules.txt");
-        Scanner scanner;
+
         try
         {
-            scanner = new Scanner(file, StandardCharsets.UTF_8.name());
+            Scanner inputFile = new Scanner(file, StandardCharsets.UTF_8.name());
             //while the text file has more text
-            while (scanner.hasNextLine())
+            while (inputFile.hasNextLine())
             {
                 //print it
-                System.out.println(scanner.nextLine());
+                System.out.println(inputFile.nextLine());
             }
+            inputFile.close();
         }
         catch (java.io.FileNotFoundException e)
         {
@@ -86,6 +101,36 @@ class Yahtzee
         }
 
         System.out.println();
+
+    }
+
+    /**
+     * Display previous records of the game
+     */
+    private static void displayRecords()
+    {
+        File file =
+            new File("records.txt");
+
+        try
+        {
+            Scanner inputFile = new Scanner(file, StandardCharsets.UTF_8.name());
+            //while the text file has more text
+            while (inputFile.hasNextLine())
+            {
+                //print it
+                System.out.println(inputFile.nextLine());
+            }
+            inputFile.close();
+        }
+        catch (java.io.FileNotFoundException e)
+        {
+            System.out.println("The records.txt file was not found");
+        }
+
+        System.out.println();
+
+
     }
 }
 
