@@ -25,24 +25,6 @@ class Yahtzee
         {
             menu();
         }
-
-    }
-
-    /**
-     * Starts a game and ask player for a new one, until the player asks to stop.
-     */
-    private static void startGame()
-    {
-
-        int continue_ = 1;
-        while (continue_ == 1)
-        {
-            startOneGame();
-
-            System.out.println("\n\n");
-            continue_ = askNumber(0, 2, "Would you like to play again? 0:No 1:Yes");
-            System.out.println("\n\n");
-        }
     }
 
     /**
@@ -50,15 +32,6 @@ class Yahtzee
      */
     private static void startOneGame()
     {
-        int showRules;
-
-        System.out.println("Do you want to know the rules? 0:No 1:Yes");
-
-        showRules = askNumber(0, 2);
-        if (showRules == 1)
-        {
-            displayRules();
-        }
 
         Players players = new Players();
         players.playGame();
@@ -69,8 +42,8 @@ class Yahtzee
      */
     private static void menu()
     {
-        Scanner scanner = new Scanner(System.in);
         int userInput;
+        // Menu display
         System.out.println("============================");
         System.out.println("|         YAHTZEE          |");
         System.out.println("============================");

@@ -1,6 +1,7 @@
 package com.ernstye.main;
 
 
+import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -52,24 +53,8 @@ class Players
             turnNumber++;
         }
         displayScores();
-        // If there is a draw, display all winners
-        if (isDraw())
-        {
-            ArrayList<Integer> drawPlayers = drawPlayers();
-            for (int i = 0; i < drawPlayers.size(); i++)
-            {
-                Integer player = drawPlayers.get(i);
-                if (i != 0)
-                {
-                    System.out.print(" and ");
-                }
-                System.out.print(players[player].getName());
-            }
-            System.out.print(" have a draw!");
-        } else
-        {
-            System.out.print(players[getWinner()].getName() + " has won!");
-        }
+        displayResults();
+        records();
     }
 
     /**
@@ -183,6 +168,109 @@ class Players
         }
         return isDraw;
     }
+
+    private void displayResults(PrintStream out)
+    {
+        // If there is a draw, display all winners
+        if (isDraw())
+        {
+            ArrayList<Integer> drawPlayers = drawPlayers();
+            for (int i = 0; i < drawPlayers.size(); i++)
+            {
+                Integer player = drawPlayers.get(i);
+                if (i != 0)
+                {
+                    out.print(" and ");
+                }
+                out.print(players[player].getName());
+            }
+            out.println(" have a draw!");
+        } else
+        {
+            out.println(players[getWinner()].getName() + " has won!\n");
+        }
+    }
+
+    private void displayResults()
+    {
+        displayResults(System.out);
+    }
+
+
+    /**
+     * register the records after each game
+     */
+    private void records()
+    {
+        FileOutputStream records_ = null;
+        PrintStream records;
+        try
+        {
+            records_ = new FileOutputStream("records.txt", true);
+        }
+        catch (Exception ignored)
+        {
+            System.exit(0);
+        }
+
+        records = new PrintStream(records_);
+        records.print("GAME ");
+        // write the number of players in the game
+        records.print(players.length + " player(s) : ");
+
+        //write the names of the players
+        for (int playerNumber = 0; playerNumber < players.length; playerNumber++)
+        {
+            Player player = players[playerNumber];
+            if (playerNumber != 0)
+            {
+                records.print(", ");
+            }
+            records.print(player.getName());
+        }
+        records.println();
+
+        for (int playerNumber = 0; playerNumber < players.length; playerNumber++)
+        {
+            Player player = players[playerNumber];
+            ScoreGrid scoreGrid = player.getScoreGrid();
+            records.println("\t" + player.getName() + ": " + scoreGrid.getTotalScore());
+        }
+
+        displayResults(records);
+        records.println();
+        records.close();
+    }
+
+    /*private int getRecordNumberOfGames()
+    {
+        File file =
+            new File("records.txt");
+
+        try
+        {
+            Scanner inputFile = new Scanner(file, StandardCharsets.UTF_8.name());
+            //all the text in one string
+            while ()
+            {
+                //find last occurence of game
+            }
+                String java=" bou";
+                java.lastIndexOf()
+                System.out.println(inputFile.nextLine());
+            }
+            inputFile.close();
+        }
+        catch (java.io.FileNotFoundException e)
+        {
+            System.out.println("The records.txt file was not found");
+        }
+
+        System.out.println();
+
+    }
+*/
+
 }
 
 
