@@ -27,7 +27,7 @@ class Table
 
     /**
      * Creates a table used to display the score grid, with the potential scores given by the dices. A potential header
-     * can be displayed on top of the middle column, and left & right rows can be hidden.
+     * can be displayed on top of the middle column, and left and right rows can be hidden.
      *
      * @param scoreGrid_         the score grid to display
      * @param dices_             if not null, used to getDices the potential score for each empty row
