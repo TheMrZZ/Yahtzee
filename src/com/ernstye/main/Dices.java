@@ -51,7 +51,7 @@ class Dices
     {
         roll();
 
-        boolean stop;
+        boolean stop = false;
         int rollNumber = 0;
 
         do
