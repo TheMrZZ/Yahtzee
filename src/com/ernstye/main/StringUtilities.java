@@ -186,4 +186,63 @@ final class StringUtilities
 
         return result;
     }
+
+
+    /**
+     * Merge arrays of strings of the same height, like if the arrays were displayed in a horizontal way.
+     * Example:
+     * <pre>
+     *  _________\n
+     * |         |\n
+     * |  o   o  |\n
+     * |         |\n
+     * |  o   o  |\n
+     * |_________|
+     *      +
+     *  _________\n
+     * |         |\n
+     * |  o      |\n
+     * |         |\n
+     * |      o  |\n
+     * |_________|
+     *
+     *    gives
+     *  _________     _________\n
+     * |         |   |         |\n
+     * |  o   o  |   |  o      |\n
+     * |         |   |         |\n
+     * |  o   o  |   |      o  |\n
+     * |_________|   |_________|
+     * </pre>
+     *
+     * @param arrayOfStrings the array of strings to merge. All arrays should have the same width. Strings rows are
+     *                       delimited by newlines {@code \n}.
+     * @param separator      the separator between arrays
+     * @return the merged string
+     */
+    static String mergeStrings(String[] arrayOfStrings, String separator)
+    {
+        String[][] arraysOfStrings = new String[arrayOfStrings.length][];
+
+        for (int i = 0; i < arrayOfStrings.length; i++)
+        {
+            String string = arrayOfStrings[i];
+
+            arraysOfStrings[i] = string.split("\\r?\\n");
+        }
+
+        return mergeStrings(arraysOfStrings, separator);
+    }
+
+    /**
+     * Get the real length of a string (without the colors characters).
+     *
+     * @param string the string
+     * @return the real length of the string
+     */
+    static int realLength(String string)
+    {
+        string = string.replaceAll(COLOR_PATTERN.toString(), "");
+        return string.length();
+    }
 }

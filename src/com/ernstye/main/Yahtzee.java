@@ -5,6 +5,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
 import static com.ernstye.main.UserInput.askNumber;
+import static com.ernstye.main.UserInput.askPressEnter;
 
 /**
  * A working single-player implementation of Yahtzee's upper section.
@@ -21,11 +22,11 @@ class Yahtzee
      */
     public static void main(String[] args)
     {
-        System.out.println("GAME NUMBER" + Players.getCurrentGameNumber());
-
         while (true)
         {
             menu();
+            System.out.println("Press Enter to go back to the menu!...");
+            askPressEnter();
         }
     }
 

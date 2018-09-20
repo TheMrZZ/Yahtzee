@@ -67,14 +67,14 @@ class Player
      * Let the Player play one turn.
      * If the {@link Player#scoreGrid} is full, show the final results of the Player.
      *
-     * @param playerNumber the number of the player, used to display final result
+     * @param players      the players of the game
      */
-    void playOneTurn(int playerNumber)
+    void playOneTurn(Players players)
     {
-        dices.play(scoreGrid, name);
+        dices.play(scoreGrid, players);
         System.out.println();
         scoreGrid.score(dices);
-        System.out.println(scoreGrid.getDisplay(dices, name));
+        System.out.println(scoreGrid.getDisplay(dices, players));
     }
 
     /**

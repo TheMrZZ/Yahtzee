@@ -3,6 +3,8 @@ package com.ernstye.main;
 import java.util.Arrays;
 
 import static com.ernstye.main.Constants.*;
+import static com.ernstye.main.StringUtilities.colorize;
+import static com.ernstye.main.StringUtilities.mergeStrings;
 import static com.ernstye.main.UserInput.askNumber;
 
 /**
@@ -287,28 +289,7 @@ class ScoreGrid
     }
 
     /**
-     * Get the score grid and the potential points representation, in a table shape.
-     * Table has this format:
-     *
-     * <pre>
-     * ---------------------
-     * RowName  | X Points | X Potential points
-     * ---------------------
-     * </pre>
-     *
-     * @param dices if NULL, doesn't display potential points - else, display the potential points the
-     *              player could get
-     * @return the score grid representation
-     */
-    String getDisplay(Dices dices)
-    {
-        Table table = new Table(this, dices);
-        return table.toString();
-    }
-
-
-    /**
-     * Get the score grid and the potential points representation, in a table shape. The player name will be displayed.
+     * Get the score grid and the potential points representation, in a table shape. The player names will be displayed.
      * Table has this format:
      *
      * <pre>
@@ -318,15 +299,37 @@ class ScoreGrid
      * -----------------------
      * </pre>
      *
-     * @param dices      if NULL, doesn't display potential points - else, display the potential points the
-     *                   player could get
-     * @param playerName the name of the player, displayed as the header
+     * @param dices   if NULL, doesn't display potential points - else, display the potential points the
+     *                player could get
+     * @param players the players
      * @return the score grid representation
      */
-    String getDisplay(Dices dices, String playerName)
+    String getDisplay(Dices dices, Players players)
     {
-        Table table = new Table(this, dices, playerName.length() + 2, playerName, false);
-        return table.toString();
+        Player[] playerArray = players.getPlayers();
+
+        String representations[] = new String[playerArray.length];
+        for (int i = 0; i < playerArray.length; i++)
+        {
+            Player player = playerArray[i];
+            String name = player.getName();
+            boolean currentPlayer = players.getCurrentPlayerNumber() == i;
+            Dices dices_ = null;
+
+            if (currentPlayer)
+            {
+                name = colorize(name, "BLUE", null);
+                dices_ = player.getDices();
+            }
+
+            Table table = new Table(player.getScoreGrid(), dices_, player.getName().length() + 2,
+                                    name, i != 0, !currentPlayer);
+
+            representations[i] = table.toString();
+        }
+
+        String result = mergeStrings(representations, "");
+        return result;
     }
 
     /**

@@ -1,5 +1,6 @@
 package com.ernstye.main;
 
+import static com.ernstye.main.Colors.COLOR_PATTERN;
 import static com.ernstye.main.Constants.*;
 import static com.ernstye.main.StringUtilities.*;
 
@@ -22,16 +23,7 @@ class Table
     private static String POTENTIAL_COLOR = "RED";
     private static String SCORE_COLOR = "BLUE";
 
-    /**
-     * Creates a table used to display the score grid for a single player, with the potential scores given by the dices.
-     *
-     * @param scoreGrid_ the score grid to display
-     * @param dices_     if not null, used to getDices the potential score for each empty row
-     */
-    Table(ScoreGrid scoreGrid_, Dices dices_)
-    {
-        this(scoreGrid_, dices_, 3, null, false);
-    }
+    private boolean needColors;
 
     /**
      * Creates a table used to display the score grid, with the potential scores given by the dices. A potential header
@@ -42,12 +34,14 @@ class Table
      * @param middleColumnWidth_ the width of the middle column
      * @param header_            the header of the middle column
      * @param onlyPointsColumn   if true, left and right columns won't be displayed. Else they will.
+     * @param needColors_         if true, show the colors.
      */
-    Table(ScoreGrid scoreGrid_, Dices dices_, int middleColumnWidth_, String header_, boolean onlyPointsColumn)
+    Table(ScoreGrid scoreGrid_, Dices dices_, int middleColumnWidth_, String header_, boolean onlyPointsColumn, boolean needColors_)
     {
         scoreGrid = scoreGrid_;
         dices = dices_;
         header = header_;
+        needColors = needColors_;
 
         // The width of the left column, containing the names of the rows
         final int LEFT_COLUMN_WIDTH = getLongestStringLength(SCORE_SHEET_ROWS);
@@ -58,7 +52,8 @@ class Table
         // The middle column, containing the points the player already scored, and the potential header
         if (header_ != null)
         {
-            middleColumnWidth_ = Math.max(middleColumnWidth_, header_.length());
+            middleColumnWidth_ = Math.max(middleColumnWidth_, realLength(header_));
+            middleColumnWidth_ = Math.max(middleColumnWidth_, 11);
         }
         middleColumnWidth = middleColumnWidth_;
 
@@ -79,10 +74,9 @@ class Table
             rightColumnFormat = "";
         }
 
-        // Center and colorize the header
+        // Center the header
         if (header != null)
         {
-            header = colorize(header, SCORE_COLOR, null);
             header = StringUtilities.center(header, middleColumnWidth);
         }
 
@@ -137,9 +131,17 @@ class Table
         // Display the Yahtzee Bonus Points row
         result += getYahtzeeBonusRow();
 
+        String totalScore = colorize(scoreGrid.getTotalScore(), SCORE_COLOR, "BOLD");
+
         // Display the actual total score
         result += rowSeparator + "\n";
-        result += getRow("Total", colorize(scoreGrid.getTotalScore(), null, "BOLD"), "");
+        result += getRow("Total", totalScore, "");
+
+        if (needColors)
+        {
+            result = result.replaceAll(COLOR_PATTERN.toString(), "");
+        }
+
         return result;
     }
 
@@ -152,7 +154,8 @@ class Table
      * The row is displayed in this format:
      *
      * <pre>
-     * Bonus | X score | X points needed before the bonus
+     * Bonus | X points | X points needed before the bonus
+     *       |  needed  |
      * -------------------
      * </pre>
      *
@@ -163,15 +166,16 @@ class Table
         int pointsBeforeBonus = scoreGrid.getPointsBeforeUpperBonus();
 
         // If the player doesn't have the bonus, displays the points needed
-        String pointsNeeded = "";
+        String points = "";
         if (pointsBeforeBonus > 0)
         {
-            pointsNeeded = String.format(rightColumnFormat, pointsBeforeBonus, "points needed before the bonus");
+            points = pointsBeforeBonus + " points";
         }
 
         String result = "";
         // The upper bonus row has a double separation, to make the difference between the upper & lower section
-        result += getRow("Bonus", scoreGrid.getUpperBonus(), pointsNeeded);
+        result += getRowWithoutSeparator("Bonus", points, "");
+        result += getRow("", "needed", "");
         result += rowSeparator + "\n";
         return result;
     }
@@ -202,11 +206,9 @@ class Table
         int yahtzeeBonusesPoints = scoreGrid.getYahtzeeBonusPoints();
         String bonusesPoints = String.valueOf(yahtzeeBonusesPoints);
 
-        String bonusPointsExplanation = String.format(rightColumnFormat, YAHTZEE_BONUS_POINTS, "points per bonus");
-
         String result = "";
-        result += getRowWithoutSeparator("Yahtzee Bonus", bonuses, " Number of bonuses");
-        result += getRow("Bonus Points", bonusesPoints, bonusPointsExplanation);
+        result += getRowWithoutSeparator("Yahtzee Bonus", bonuses, "");
+        result += getRow("Bonus Points", bonusesPoints, "");
         return result;
     }
 
@@ -257,7 +259,11 @@ class Table
     private String getSingleRow(String rowName, int score, int potentialScore)
     {
         // If the score is NO_SCORE, don't show anything
-        String scoreString = colorize(score, SCORE_COLOR, null);
+        String scoreString = "";
+        if (score != NO_SCORE)
+        {
+            scoreString = colorize(score, SCORE_COLOR, null);
+        }
 
         // If the player already scored, we don't show the potential points
         if (potentialScore != NO_SCORE)

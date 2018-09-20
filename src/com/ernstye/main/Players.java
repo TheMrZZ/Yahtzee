@@ -21,6 +21,7 @@ class Players
 {
     private Player players[];
     private int numberOfPlayers;
+    private int currentPlayerNumber;
 
     /**
      * Create the new players.
@@ -41,6 +42,8 @@ class Players
 
             players[i] = new Player(name);
         }
+
+        currentPlayerNumber = -1;
     }
 
     /**
@@ -83,10 +86,13 @@ class Players
 
         for (int playerNumber = 0; playerNumber < players.length; playerNumber++)
         {
+            currentPlayerNumber = playerNumber;
+
             Player player = players[playerNumber];
             System.out.println("\n==== TURN " + turnNumber + " ====\n");
             System.out.println("Player n°" + (playerNumber + 1) + ": it's " + player.getName() + "'s turn!");
-            player.playOneTurn(playerNumber);
+            player.playOneTurn(this);
+
             if (players.length == 1)
             {
                 pressEnterToContinue(player);
@@ -102,25 +108,19 @@ class Players
             if (scoreGrid.isFull())
             {
                 System.out.println("\n\n=== FINAL RESULTS FOR PLAYER n°" + (playerNumber + 1) + ": " + player.getName() + " ===\n");
-                System.out.println(scoreGrid.getDisplay(null, player.getName()));
+                System.out.println(scoreGrid.getDisplay(null, this));
                 System.out.println("You scored a total of " + scoreGrid.getTotalScore() + " points!\n");
             }
         }
     }
 
     /**
-     * <strong style='color:red'>UNDER DEVELOPMENT, DO NOT USE.</strong>
-     *
-     * <p>
-     * Let one player play one turn.
-     *
-     * @param player       the player
-     * @param playerNumber the number of the player
+     * Get the number of the current player.
+     * @return the number of the current player, -1 if nobody is currently playing.
      */
-    private void onePlayerTurn(Player player, int playerNumber)
+    int getCurrentPlayerNumber()
     {
-        System.out.println("Player n°" + (playerNumber + 1) + ": it's " + player.getName() + "'s turn!");
-        player.playOneTurn(playerNumber);
+        return currentPlayerNumber;
     }
 
     /**
@@ -271,7 +271,7 @@ class Players
      *
      * @return the number of the current game
      */
-    static int getCurrentGameNumber()
+    private static int getCurrentGameNumber()
     {
         File file = new File("records.txt");
         Scanner inputFile = null;
@@ -323,6 +323,16 @@ class Players
     {
         System.out.println(player.getName() + ", press Enter when you're ready for next turn!...");
         askPressEnter();
+    }
+
+    /**
+     * Get the players.
+     *
+     * @return an array containing the players.
+     */
+    Player[] getPlayers()
+    {
+        return players;
     }
 }
 
