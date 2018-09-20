@@ -102,7 +102,7 @@ class Players
             if (scoreGrid.isFull())
             {
                 System.out.println("\n\n=== FINAL RESULTS FOR PLAYER n°" + (playerNumber + 1) + ": " + player.getName() + " ===\n");
-                System.out.println(scoreGrid.getDisplay(null));
+                System.out.println(scoreGrid.getDisplay(null, player.getName()));
                 System.out.println("You scored a total of " + scoreGrid.getTotalScore() + " points!\n");
             }
         }
