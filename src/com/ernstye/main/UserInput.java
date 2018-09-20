@@ -8,7 +8,7 @@ import java.util.Scanner;
  * Provides several methods for easier interactions with the user.
  * Mostly input functions.
  */
-class UserInput
+final class UserInput
 {
     private static Scanner scanner = new Scanner(System.in, StandardCharsets.UTF_8.name());
 
@@ -172,5 +172,13 @@ class UserInput
             }
         }
         return dicesEnteredByUser;
+    }
+
+    /**
+     * Just wait until the user pressed enter.
+     */
+    static void askPressEnter()
+    {
+        scanner.nextLine();
     }
 }

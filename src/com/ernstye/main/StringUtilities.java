@@ -137,4 +137,53 @@ final class StringUtilities
     {
         return colorize(String.valueOf(original), color, style);
     }
+
+    /**
+     * Merge arrays of strings of the same height, like if the arrays were displayed in a horizontal way.
+     * Example:
+     * <pre>
+     *  _________
+     * |         |
+     * |  o   o  |
+     * |         |
+     * |  o   o  |
+     * |_________|
+     *      +
+     *  _________
+     * |         |
+     * |  o      |
+     * |         |
+     * |      o  |
+     * |_________|
+     *
+     *    gives
+     *  _________     _________
+     * |         |   |         |
+     * |  o   o  |   |  o      |
+     * |         |   |         |
+     * |  o   o  |   |      o  |
+     * |_________|   |_________|
+     * </pre>
+     *
+     * @param arraysOfStrings the array of strings to merge. All arrays should have the same width.
+     * @param separator       the separator between arrays
+     * @return the merged string
+     */
+    static String mergeStrings(String[][] arraysOfStrings, String separator)
+    {
+        final int HEIGHT = arraysOfStrings[0].length;
+
+        String result = "";
+
+        for (int row = 0; row < arraysOfStrings[0].length; row++)
+        {
+            for (String[] array : arraysOfStrings)
+            {
+                result += array[row] + separator;
+            }
+            result += "\n";
+        }
+
+        return result;
+    }
 }

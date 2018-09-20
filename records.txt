@@ -13,3 +13,7 @@ GAME 3
 1 player(s) : celineYE
 	celine4: 2
 celine4 has won!
+
+GAME 4 player(s) : Flo
+	Flo: 21
+Flo has won!

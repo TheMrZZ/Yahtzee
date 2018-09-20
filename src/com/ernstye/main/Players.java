@@ -3,7 +3,6 @@ package com.ernstye.main;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -12,6 +11,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static com.ernstye.main.UserInput.askPositiveNumber;
+import static com.ernstye.main.UserInput.askPressEnter;
 
 /**
  * Players model object.
@@ -97,7 +97,6 @@ class Players
                 pressEnterToContinue((playerNumber + 1) % players.length, players[(playerNumber + 1) % players.length]);
             }
 
-            
 
             ScoreGrid scoreGrid = player.getScoreGrid();
             if (scoreGrid.isFull())
@@ -255,9 +254,8 @@ class Players
         }
         records.println();
 
-        for (int playerNumber = 0; playerNumber < players.length; playerNumber++)
+        for (Player player : players)
         {
-            Player player = players[playerNumber];
             ScoreGrid scoreGrid = player.getScoreGrid();
             records.println("\t" + player.getName() + ": " + scoreGrid.getTotalScore());
         }
@@ -301,35 +299,31 @@ class Players
         return number;
     }
 
-    public static void pressEnterToContinue(int playerNumber, Player player)
+    /**
+     * Wait for the player to press Enter, in order to get to the next turn.
+     * Works better than {@link #pressEnterToContinue(Player)} for multi player.
+     *
+     * @param playerNumber the number of the player
+     * @param player       the player
+     */
+    private static void pressEnterToContinue(int playerNumber, Player player)
 
     {
         System.out.println("Player n°" + (playerNumber + 1) + ": " + player.getName() + ", it's your turn ! Tap anything when you're ready...");
-        try
-        {
-            int read = System.in.read();
-        }
-        catch (IOException e)
-        {
-            e.printStackTrace();
-        }
+        askPressEnter();
     }
 
-    public static void pressEnterToContinue(Player player)
-
+    /**
+     * Wait for the player to press Enter, in order to get to the next turn.
+     * Works better than {@link #pressEnterToContinue(int, Player)} for single player.
+     *
+     * @param player the player
+     */
+    private static void pressEnterToContinue(Player player)
     {
-        System.out.println(player.getName() + ", tap anything when you're ready for next turn!...");
-        try
-        {
-            int read = System.in.read();
-        }
-        catch (IOException e)
-        {
-            e.printStackTrace();
-        }
+        System.out.println(player.getName() + ", press Enter when you're ready for next turn!...");
+        askPressEnter();
     }
-
-
 }
 
 

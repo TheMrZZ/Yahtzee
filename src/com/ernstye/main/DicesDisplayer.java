@@ -3,6 +3,8 @@ package com.ernstye.main;
 import java.util.Random;
 
 import static com.ernstye.main.Constants.*;
+import static com.ernstye.main.StringUtilities.center;
+import static com.ernstye.main.StringUtilities.mergeStrings;
 
 /**
  * A class used to display a dice roll.
@@ -106,31 +108,19 @@ class DicesDisplayer
         // The string used to separate dices
         final String DICES_SEPARATOR = "   ";
 
-        /*
-        We need to display the dices on an horizontal way.
-        Therefore, we need to iterate on the rows first: we display the top of the 1st dice, then top of the 2nd dice...
-        Then we keep going with the 2nd row, etc...
-         */
-        for (int row = 0; row < HEIGHT; row++)
+        // The images of the dices
+        String[][] diceImages = new String[dicesFaces.length][HEIGHT + 1];
+        for (int i = 0; i < dicesFaces.length; i++)
         {
-            for (int diceValue : dicesFaces)
-            {
-                // We getDices the correct image for the dice, we then display the corresponding row
-                String[] diceImage = DICES_IMAGES[diceValue - 1];
-                System.out.print(diceImage[row] + DICES_SEPARATOR);
-            }
-            System.out.println();
+            Integer diceValue = dicesFaces[i];
+
+            // Fill the first HEIGHT rows with the dice images, the last row will have the index
+            System.arraycopy(DICES_IMAGES[diceValue - 1], 0, diceImages[i], 0, HEIGHT);
+            diceImages[i][HEIGHT] = center("n°" + (i + 1), WIDTH);
         }
 
-        // Now we display the dices indexes under their images
-        for (int i = 0; i < NUMBER_OF_DICES; i++)
-        {
-            displayWhiteSpaces(WIDTH / 2 - 1);
-            System.out.print("n°" + (i + 1));
-            displayWhiteSpaces(WIDTH / 2 - 1);
-            System.out.print(DICES_SEPARATOR);
-        }
-        System.out.println();
+        // Display the dices in a horizontal way
+        System.out.println(mergeStrings(diceImages, DICES_SEPARATOR));
     }
 
     /**
@@ -149,7 +139,7 @@ class DicesDisplayer
     /**
      * Display a rolling dices animation.
      */
-    public void displayAnimation()
+    void displayAnimation()
     {
         Random random = new Random();
 
