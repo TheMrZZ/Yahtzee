@@ -5,3 +5,28 @@ GAME 1
 Florian has won!
 
 
+GAME 2
+2 player(s): Celine, Florian
+	Celine: 31
+	Florian: 53
+Florian has won!
+
+
+GAME 3
+1 player(s): celine
+	celine: 126
+celine has won!
+
+
+GAME 4
+1 player(s): Celine
+	Celine: 50
+Celine has won!
+
+
+GAME 5
+1 player(s): Celine
+	Celine: 35
+Celine has won!
+
+
