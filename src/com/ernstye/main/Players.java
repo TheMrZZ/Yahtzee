@@ -94,7 +94,11 @@ class Players
             System.out.println("Player n°" + (playerNumber + 1) + ": it's " + player.getName() + "'s turn!");
             player.playOneTurn(this);
 
-            if (players.length == 1)
+            if (playerNumber == numberOfPlayers - 1 && turnNumber == 13)
+            {
+                pressEnterToContinue();
+            }
+            else if (players.length == 1)
             {
                 pressEnterToContinue(player);
             }
@@ -335,6 +339,15 @@ class Players
     private static void pressEnterToContinue(Player player)
     {
         System.out.println(player.getName() + ", press Enter when you're ready for next turn!...");
+        askPressEnter();
+    }
+
+    /**
+     * Wait for the player to press Enter, in order to end the game.
+     */
+    private static void pressEnterToContinue()
+    {
+        System.out.println("It's over! Press Enter to see the results!...");
         askPressEnter();
     }
 
