@@ -1,12 +1,12 @@
 ==== RECORDS ====
 GAME 1
-2 player(s) : Celine, Florian
+2 player(s): Celine, Florian
 	Celine: 102
 	Florian: 59
 Celine has won!
 
 GAME 2
-3 player(s) : Camille, Aida, Louis
+3 player(s): Camille, Aida, Louis
 	Camille: 54
 	Aida: 85
 	Louis: 67
