@@ -1,15 +1,14 @@
 ==== RECORDS ====
 GAME 1
-1 player(s) : celine3
-	celine3: 37
-celine3 has won!
+2 player(s) : celine, florian
+	celine: 102
+	florian: 59
+celine has won!
 
 GAME 2
-1 player(s) : celine4
-	celine4: 54
-celine4 has won!
+3 player(s) : camille, aida, louis
+	camille: 54
+	aida: 85
+	louis: 67
+aida has won!
 
-GAME 3
-1 player(s) : celineYE
-	celine4: 2
-celine4 has won!

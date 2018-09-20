@@ -239,7 +239,7 @@ class Players
         }
 
         records = new PrintStream(records_);
-        records.print("GAME ");
+        records.println("GAME " + getCurrentGameNumber());
         // write the number of players in the game
         records.print(players.length + " player(s) : ");
 
