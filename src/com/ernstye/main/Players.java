@@ -64,6 +64,7 @@ class Players
         displayScores();
         displayResults();
         records();
+        System.out.println("records.txt has been updated!\n");
     }
 
     /**
