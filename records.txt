@@ -12,21 +12,3 @@ GAME 2
 Florian has won!
 
 
-GAME 3
-1 player(s): celine
-	celine: 126
-celine has won!
-
-
-GAME 4
-1 player(s): Celine
-	Celine: 50
-Celine has won!
-
-
-GAME 5
-1 player(s): Celine
-	Celine: 35
-Celine has won!
-
-
