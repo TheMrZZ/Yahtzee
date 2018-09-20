@@ -23,7 +23,7 @@ class Table
     private static String SCORE_COLOR = "BLUE";
 
     /**
-     * Creates a table used to display the score grid, with the potential scores given by the dices.
+     * Creates a table used to display the score grid for a single player, with the potential scores given by the dices.
      *
      * @param scoreGrid_ the score grid to display
      * @param dices_     if not null, used to getDices the potential score for each empty row
@@ -79,9 +79,10 @@ class Table
             rightColumnFormat = "";
         }
 
-        // Center the header
+        // Center and colorize the header
         if (header != null)
         {
+            header = colorize(header, SCORE_COLOR, null);
             header = StringUtilities.center(header, middleColumnWidth);
         }
 
@@ -104,15 +105,19 @@ class Table
     public String toString()
     {
         String result = "";
-        result += rowSeparator + "\n";
 
         Integer[] scoreSheet = scoreGrid.getScoreSheet();
 
         // Display the header, for example the player's name
         if (header != null)
         {
-            result += getRow("", header, "");
+            // We don't want the vertical bars for the header
+            String fullHeader = getRowWithoutSeparator("", header, "");
+            fullHeader = fullHeader.replaceAll("\\|", " ");
+            result += fullHeader;
         }
+
+        result += rowSeparator + "\n";
 
         // Display the upper section
         for (int row = 0; row < UPPER_SECTION_SIZE; row++)

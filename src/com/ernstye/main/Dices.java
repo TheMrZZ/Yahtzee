@@ -45,8 +45,9 @@ class Dices
      * Give 0 to 2 chances for the player to roll again the dices he has chosen.
      *
      * @param scoreGrid the scoreGrid of the player
+     * @param name      the name of the player
      */
-    void play(ScoreGrid scoreGrid)
+    void play(ScoreGrid scoreGrid, String name)
     {
         roll();
 
@@ -67,7 +68,7 @@ class Dices
             }
 
             // Display new roll
-            displayRoll(scoreGrid, rollNumber);
+            displayRoll(scoreGrid, rollNumber, name);
 
             rollNumber++;
         }
@@ -99,6 +100,7 @@ class Dices
 
     /**
      * Roll the given dices randomly.
+     *
      * @param dicesToRoll the indexes of the dices to roll, with values going from 1 to {@value Constants#NUMBER_OF_DICES}
      */
     private void roll(List<Integer> dicesToRoll)
@@ -168,15 +170,16 @@ class Dices
      *
      * @param scoreGrid  the score grid to display
      * @param rollNumber the current roll number
+     * @param name       the name of the player
      */
-    private void displayRoll(ScoreGrid scoreGrid, int rollNumber)
+    private void displayRoll(ScoreGrid scoreGrid, int rollNumber, String name)
     {
         displayRollNumber(rollNumber + 1);
         if (NEED_DICE_ANIMATION)
         {
             displayer.displayAnimation();
         }
-        System.out.println(scoreGrid.getDisplay(this));
+        System.out.println(scoreGrid.getDisplay(this, name));
         display(rollNumber + 1);
     }
 
