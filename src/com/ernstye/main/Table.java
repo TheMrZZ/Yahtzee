@@ -1,8 +1,7 @@
 package com.ernstye.main;
 
 import static com.ernstye.main.Constants.*;
-import static com.ernstye.main.StringUtilities.getLongestStringLength;
-import static com.ernstye.main.StringUtilities.stringFilledWith;
+import static com.ernstye.main.StringUtilities.*;
 
 /**
  * Class used for display purposes.
@@ -19,6 +18,9 @@ class Table
     private String rowSeparator;
     private ScoreGrid scoreGrid;
     private Dices dices;
+
+    private static String POTENTIAL_COLOR = "RED";
+    private static String SCORE_COLOR = "BLUE";
 
     /**
      * Creates a table used to display the score grid, with the potential scores given by the dices.
@@ -132,7 +134,7 @@ class Table
 
         // Display the actual total score
         result += rowSeparator + "\n";
-        result += getRow("Total", scoreGrid.getTotalScore(), "");
+        result += getRow("Total", colorize(scoreGrid.getTotalScore(), null, "BOLD"), "");
         return result;
     }
 
@@ -250,21 +252,15 @@ class Table
     private String getSingleRow(String rowName, int score, int potentialScore)
     {
         // If the score is NO_SCORE, don't show anything
-        String scoreString = Integer.toString(score);
-        if (score == NO_SCORE)
-        {
-            scoreString = "";
-        }
-
-        String potentialScoreString = "";
+        String scoreString = colorize(score, SCORE_COLOR, null);
 
         // If the player already scored, we don't show the potential points
         if (potentialScore != NO_SCORE)
         {
-            potentialScoreString = String.format(rightColumnFormat, potentialScore, "potential points");
+            scoreString = colorize(potentialScore, POTENTIAL_COLOR, null);
         }
 
-        return getRow(rowName, scoreString, potentialScoreString);
+        return getRow(rowName, scoreString, "");
     }
 
     /**

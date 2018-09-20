@@ -1,6 +1,10 @@
 package com.ernstye.main;
 
 import java.util.Arrays;
+import java.util.regex.Matcher;
+
+import static com.ernstye.main.Colors.COLOR_NAMES;
+import static com.ernstye.main.Colors.COLOR_PATTERN;
 
 /**
  * String Utilities class.
@@ -65,12 +69,22 @@ final class StringUtilities
      */
     static String center(String string, int width)
     {
-        if (string.length() >= width)
+        // First, we need to skip every ANSI patterns - they are used for colors
+        Matcher matcher = COLOR_PATTERN.matcher(string);
+        int charactersToSkip = 0;
+        while (matcher.find())
+        {
+            charactersToSkip += matcher.group(0).length();
+        }
+
+        int length = string.length() - charactersToSkip;
+
+        if (length >= width)
         {
             return string;
         }
 
-        int diff = width - string.length();
+        int diff = width - length;
         int leftSpaces = (diff + 1) / 2;
         int rightSpaces = diff / 2;
 
@@ -79,5 +93,48 @@ final class StringUtilities
                           stringFilledWith(' ', rightSpaces);
 
         return centered;
+    }
+
+    /**
+     * Colorize a string in the given color/style.
+     *
+     * @param original the string to colorize
+     * @param color    the color to apply. If {@code null}, no color will be given.
+     * @param style    the style to apply. If {@code null}, no style will be given.
+     * @return a string with the given color and the given style
+     */
+    static String colorize(String original, String color, String style)
+    {
+        if (color == null && style == null)
+        {
+            return original;
+        }
+
+        String colorized = original;
+        if (style != null)
+        {
+            colorized = COLOR_NAMES.get(style.toUpperCase()) + colorized;
+        }
+        if (color != null)
+        {
+            colorized = COLOR_NAMES.get(color.toUpperCase()) + colorized;
+        }
+
+        colorized = colorized + Colors.RESET;
+        return colorized;
+    }
+
+
+    /**
+     * Colorize an int in the given color/style. Convenience wrapper for {@link #colorize(String, String, String)}.
+     *
+     * @param original the number to colorize
+     * @param color    the color to apply. If {@code null}, no color will be given.
+     * @param style    the style to apply. If {@code null}, no style will be given.
+     * @return a string containing the number, with the given color and the given style
+     */
+    static String colorize(int original, String color, String style)
+    {
+        return colorize(String.valueOf(original), color, style);
     }
 }

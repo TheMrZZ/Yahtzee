@@ -10,7 +10,6 @@ import static com.ernstye.main.Constants.*;
  */
 class DicesDisplayer
 {
-
     /**
      * ASCII images for each dice face.
      * Will display correctly with any monospaced font: Consolas, Monospaced, Source Code Pro, Hack...

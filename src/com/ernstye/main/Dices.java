@@ -60,6 +60,10 @@ class Dices
             {
                 // Roll new dices
                 stop = !nextTurn();
+                if (stop)
+                {
+                    break;
+                }
             }
 
             // Display new roll
@@ -67,7 +71,7 @@ class Dices
 
             rollNumber++;
         }
-        while (!stop && rollNumber < 3); // If the player wants to roll again the dices or if he hasn't played 3 times yet, continue the loop
+        while (rollNumber < 3); // If the player wants to roll again the dices or if he hasn't played 3 times yet, continue the loop
     }
 
     /**
