@@ -8,7 +8,7 @@ import static com.ernstye.main.UserInput.askNumber;
 import static com.ernstye.main.UserInput.askPressEnter;
 
 /**
- * A working single-player implementation of Yahtzee's upper section.
+ * A working multi-player implementation of Yahtzee Game.
  *
  * @author Florian ERNST, Céline YE
  */
