@@ -322,7 +322,7 @@ class Players
     private static void pressEnterToContinue(int playerNumber, Player player)
 
     {
-        System.out.println("Player n°" + (playerNumber + 1) + ": " + player.getName() + ", it's your turn ! Tap anything when you're ready...");
+        System.out.println("Player n°" + (playerNumber + 1) + ": " + player.getName() + ", it's your turn ! Press Enter when you're ready...");
         askPressEnter();
     }
 
