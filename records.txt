@@ -11,4 +11,3 @@ GAME 2
 	aida: 85
 	louis: 67
 aida has won!
-
