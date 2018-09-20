@@ -5,3 +5,10 @@ GAME 1
 Florian has won!
 
 
+GAME 2
+2 player(s): Florian, Céline
+	Florian: 60
+	Céline: 101
+Céline has won!
+
+

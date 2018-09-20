@@ -166,16 +166,24 @@ class Table
         int pointsBeforeBonus = scoreGrid.getPointsBeforeUpperBonus();
 
         // If the player doesn't have the bonus, displays the points needed
-        String points = "";
+        String points;
+        String needed = "";
         if (pointsBeforeBonus > 0)
         {
             points = pointsBeforeBonus + " points";
+            needed = "needed";
+        }
+        else
+        {
+            points = colorize(ScoreGrid.UPPER_BONUS_POINTS, SCORE_COLOR, null);
         }
 
         String result = "";
         // The upper bonus row has a double separation, to make the difference between the upper & lower section
         result += getRowWithoutSeparator("Bonus", points, "");
-        result += getRow("", "needed", "");
+
+
+        result += getRow("", needed, "");
         result += rowSeparator + "\n";
         return result;
     }
