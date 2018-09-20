@@ -179,6 +179,7 @@ final class UserInput
      */
     static void askPressEnter()
     {
+        System.out.print("> ");
         scanner.nextLine();
     }
 }

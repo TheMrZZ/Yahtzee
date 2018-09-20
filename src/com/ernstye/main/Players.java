@@ -3,6 +3,7 @@ package com.ernstye.main;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -276,18 +277,30 @@ class Players
         File file = new File("records.txt");
         Scanner inputFile = null;
         int number = 1;
+        String text = "";
 
         try
         {
             inputFile = new Scanner(file, StandardCharsets.UTF_8.name());
+            text = inputFile.useDelimiter("\\Z").next();
         }
-        catch (java.io.FileNotFoundException e)
+        catch (java.io.FileNotFoundException | java.util.NoSuchElementException e)
         {
-            System.out.println("The records.txt file was not found");
-            System.exit(0);
+            inputFile.close();
+            try
+            {
+                FileWriter fileWriter = new FileWriter(file);
+                fileWriter.write("==== RECORDS ====\n");
+                fileWriter.close();
+                inputFile = new Scanner(file, StandardCharsets.UTF_8.name());
+                text = inputFile.useDelimiter("\\Z").next();
+            }
+            catch (Exception ignored)
+            {
+                // can't happen
+            }
         }
 
-        String text = inputFile.useDelimiter("\\Z").next();
         Pattern pattern = Pattern.compile("[\\r\\n]+GAME (\\d+)");
         Matcher m = pattern.matcher(text);
 
