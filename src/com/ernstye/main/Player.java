@@ -71,10 +71,10 @@ class Player
      */
     void playOneTurn(int playerNumber)
     {
-        dices.play(scoreGrid);
+        dices.play(scoreGrid, name);
         System.out.println();
         scoreGrid.score(dices);
-        System.out.println(scoreGrid.getDisplay(dices));
+        System.out.println(scoreGrid.getDisplay(dices, name));
     }
 
     /**

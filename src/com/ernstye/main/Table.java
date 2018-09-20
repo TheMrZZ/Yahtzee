@@ -23,7 +23,7 @@ class Table
     private static String SCORE_COLOR = "BLUE";
 
     /**
-     * Creates a table used to display the score grid, with the potential scores given by the dices.
+     * Creates a table used to display the score grid for a single player, with the potential scores given by the dices.
      *
      * @param scoreGrid_ the score grid to display
      * @param dices_     if not null, used to getDices the potential score for each empty row
@@ -47,7 +47,7 @@ class Table
     {
         scoreGrid = scoreGrid_;
         dices = dices_;
-        header = header_;
+        header = colorize(header_, SCORE_COLOR, null);
 
         // The width of the left column, containing the names of the rows
         final int LEFT_COLUMN_WIDTH = getLongestStringLength(SCORE_SHEET_ROWS);

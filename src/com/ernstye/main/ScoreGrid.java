@@ -56,7 +56,6 @@ class ScoreGrid
 
         int row = askFreeRow();
         setScore(row, dices);
-
     }
 
     /**
@@ -304,6 +303,29 @@ class ScoreGrid
     String getDisplay(Dices dices)
     {
         Table table = new Table(this, dices);
+        return table.toString();
+    }
+
+
+    /**
+     * Get the score grid and the potential points representation, in a table shape. The player name will be displayed.
+     * Table has this format:
+     *
+     * <pre>
+     *          | PlayerName |
+     * -----------------------
+     * RowName  |  X Points  | X Potential points
+     * -----------------------
+     * </pre>
+     *
+     * @param dices      if NULL, doesn't display potential points - else, display the potential points the
+     *                   player could get
+     * @param playerName the name of the player, displayed as the header
+     * @return the score grid representation
+     */
+    String getDisplay(Dices dices, String playerName)
+    {
+        Table table = new Table(this, dices, playerName.length() + 2, playerName, false);
         return table.toString();
     }
 
