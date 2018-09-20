@@ -74,6 +74,7 @@ class Player
         dices.play(scoreGrid);
         System.out.println();
         scoreGrid.score(dices);
+        System.out.println(scoreGrid.getDisplay(dices));
     }
 
     /**

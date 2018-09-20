@@ -56,6 +56,7 @@ class ScoreGrid
 
         int row = askFreeRow();
         setScore(row, dices);
+
     }
 
     /**
