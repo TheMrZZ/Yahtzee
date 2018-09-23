@@ -190,7 +190,7 @@ class Dices
      * @param topMessage  the message to display before asking for indexes
      * @return a list of dices indexes entered by the user, without duplicated.
      */
-    List<Integer> enterDices(int dicesToRoll, String topMessage)
+    private List<Integer> enterDices(int dicesToRoll, String topMessage)
     {
         List<Integer> dicesEnteredByUser;
 

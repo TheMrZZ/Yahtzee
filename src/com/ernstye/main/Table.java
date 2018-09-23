@@ -15,7 +15,6 @@ class Table
     private String header;
     private int middleColumnWidth;
     private String leftColumnFormat;
-    private String rightColumnFormat;
     private String rowSeparator;
     private ScoreGrid scoreGrid;
     private Dices dices;
@@ -57,9 +56,6 @@ class Table
         }
         middleColumnWidth = middleColumnWidth_;
 
-        // The right column contains the -optional- potential points
-        rightColumnFormat = " %3d %s";
-
         // The total width, equivalent of is (RowName + "|" + Points + "|").length
         totalWidth = middleColumnWidth_ + 1;
         if (!onlyPointsColumn)
@@ -71,7 +67,6 @@ class Table
         if (onlyPointsColumn)
         {
             leftColumnFormat = "";
-            rightColumnFormat = "";
         }
 
         // Center the header
