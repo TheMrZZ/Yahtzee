@@ -1,7 +1,8 @@
 ==== RECORDS ====
 GAME 1
-1 player(s): Florian
+2 player(s): Florian, Louis
 	Florian: 66
+	Louis: 48
 Florian has won!
 
 
@@ -9,6 +10,19 @@ GAME 2
 2 player(s): Celine, Florian
 	Celine: 31
 	Florian: 53
+Florian has won!
+
+
+GAME 3
+2 player(s): Florian, Celine
+	Florian: 41
+	Celine: 53
+Celine has won!
+
+
+GAME 4
+1 player(s): Florian
+	Florian: 32
 Florian has won!
 
 

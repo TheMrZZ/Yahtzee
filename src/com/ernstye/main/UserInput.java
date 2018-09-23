@@ -190,9 +190,10 @@ final class UserInput
      * @param min           the minimum of the number (in case of an {@code int} input), included
      * @param max           the maximum of the number (in case of an {@code int} input), excluded
      * @param possibleChars the possible chars (in case of a {@code char} input)
+     * @param msg           the message to display before the input. If {@code null}, then nothing will be displayed.
      * @return an Object, either a number or a String of length 1.
      */
-    static Object askNumberOrChar(int min, int max, String possibleChars)
+    static Object askNumberOrChar(int min, int max, String possibleChars, String msg)
     {
         possibleChars = possibleChars.toUpperCase();
         String error = "Input should be a number between " + min + " and " + (max + 1) +
@@ -200,6 +201,11 @@ final class UserInput
 
         while (true)
         {
+            if (msg != null)
+            {
+                System.out.println(msg);
+            }
+            System.out.print("> ");
             String input = scanner.nextLine().trim();
 
             // Test for a number and its boundaries.
