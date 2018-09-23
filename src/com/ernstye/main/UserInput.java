@@ -196,8 +196,11 @@ final class UserInput
     static Object askNumberOrChar(int min, int max, String possibleChars, String msg)
     {
         possibleChars = possibleChars.toUpperCase();
-        String error = "Input should be a number between " + min + " and " + (max + 1) +
-            ", or one of these characters: " + possibleChars;
+        String error = "Input should be a number between " + min + " and " + (max + 1);
+        if (!msg.equals(""))
+        {
+            error = error + ", or one of these characters: " + possibleChars;
+        }
 
         while (true)
         {
@@ -217,12 +220,18 @@ final class UserInput
                 {
                     return number;
                 }
+
+                // The input is a number, but an incorrect one - ask another input
+                continue;
             }
             catch (NumberFormatException ignored)
             {
             }
 
-            // If the input is already a single character, and is one of the possible chars
+            /*
+            Here, the input is not a number.
+            If the input is already a single character, and is one of the possible chars, return it.
+            */
             if (input.length() == 1 && possibleChars.contains(input.toUpperCase()))
             {
                 return input;
