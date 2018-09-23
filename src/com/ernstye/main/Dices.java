@@ -3,9 +3,7 @@ package com.ernstye.main;
 import java.util.*;
 
 import static com.ernstye.main.Constants.*;
-import static com.ernstye.main.UserInput.askNumber;
-import static com.ernstye.main.UserInput.askNumberOrChar;
-import static com.ernstye.main.UserInput.askUniqueNumbers;
+import static com.ernstye.main.UserInput.*;
 
 /**
  * Dices model object.
@@ -186,7 +184,8 @@ class Dices
                 System.out.println("1)Roll even dices\n2)Roll odd dices");
                 jokerType = askNumber(1, 4);
                 dicesToRoll = askNumber(0, NUMBER_OF_DICES + 1, basicMessage);
-            } else
+            }
+            else
             {
                 dicesToRoll = (int) input;
             }
@@ -199,8 +198,8 @@ class Dices
             System.out.println("Which dices would you like to toss again? (enter 0 if you made a mistake)");
 
             dicesEnteredByUser = askUniqueNumbers(dicesToRoll, 1, NUMBER_OF_DICES + 1,
-                "You have already chosen this dice! Please enter another one :",
-                true);
+                                                  "You have already chosen this dice! Please enter another one :",
+                                                  true);
 
             if (dicesEnteredByUser == null)
             {
@@ -221,10 +220,7 @@ class Dices
                 break;
             default:
                 break;
-
         }
-
-
 
         return true;
     }
@@ -346,7 +342,8 @@ class Dices
                 {
                     max = actual;
                 }
-            } else
+            }
+            else
             {
                 actual = 1;
             }

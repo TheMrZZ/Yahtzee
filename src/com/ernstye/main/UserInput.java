@@ -196,7 +196,7 @@ final class UserInput
     static Object askNumberOrChar(int min, int max, String possibleChars, String msg)
     {
         possibleChars = possibleChars.toUpperCase();
-        String error = "Input should be a number between " + min + " and " + (max + 1);
+        String error = "Input should be a number between " + min + " and " + (max - 1);
         if (!msg.equals(""))
         {
             error = error + ", or one of these characters: " + possibleChars;
