@@ -4,6 +4,7 @@ import java.util.*;
 
 import static com.ernstye.main.Constants.*;
 import static com.ernstye.main.UserInput.askNumber;
+import static com.ernstye.main.UserInput.askNumberOrChar;
 import static com.ernstye.main.UserInput.askUniqueNumbers;
 
 /**
@@ -20,6 +21,8 @@ class Dices
     private Integer dices[];
 
     private DicesDisplayer displayer;
+
+    private int numberOfJokers = 3;
 
     /**
      * Create and roll the {@value Constants#NUMBER_OF_DICES}  dices randomly.
@@ -117,6 +120,41 @@ class Dices
     }
 
     /**
+     * Roll the given dices but only even numbers ie 2,4,6.
+     *
+     * @param dicesToRoll the indexes of the dices to roll, with values going from 1 to {@value Constants#NUMBER_OF_DICES}
+     */
+    private void rollEvenDices(List<Integer> dicesToRoll)
+    {
+        roll(dicesToRoll);
+        for (int i = 1; i <= NUMBER_OF_DICES; i++)
+        {
+            if (dicesToRoll.contains(i) && dices[i - 1] % 2 == 1)
+            {
+                dices[i - 1] += 1;
+            }
+        }
+    }
+
+    /**
+     * Roll the given dices but only odd numbers, ie 1,3,5.
+     *
+     * @param dicesToRoll the indexes of the dices to roll, with values going from 1 to {@value Constants#NUMBER_OF_DICES}
+     */
+    private void rollOddDices(List<Integer> dicesToRoll)
+    {
+        roll(dicesToRoll);
+        for (int i = 1; i <= NUMBER_OF_DICES; i++)
+        {
+            if (dicesToRoll.contains(i) && dices[i - 1] % 2 == 0)
+            {
+                // only roll
+                dices[i - 1] -= 1;
+            }
+        }
+    }
+
+    /**
      * Let the player choose the dices he want to roll again, then roll them randomly.
      * If the player doesn't want to roll dices anymore, return false.
      *
@@ -124,13 +162,34 @@ class Dices
      */
     private boolean nextTurn()
     {
+        Object input;
         int dicesToRoll;
         List<Integer> dicesEnteredByUser = null;
+        int jokerType = 0;
+        String possibleChars = "J";
+        String basicMessage = "How many dices do you want to roll again?";
+        String msg = basicMessage + " Enter 'J' first if you want to use a joker (" + numberOfJokers + " left)";
+        if (numberOfJokers == 0)
+        {
+            msg = basicMessage;
+            possibleChars = "";
+        }
 
         while (dicesEnteredByUser == null)
         {
             // Ask if the player wants a new roll
-            dicesToRoll = askNumber(0, NUMBER_OF_DICES + 1, "How many dices do you want to roll again?");
+            input = askNumberOrChar(0, NUMBER_OF_DICES + 1, possibleChars, msg);
+            if ("J".equals(input))
+            {
+                numberOfJokers--;
+                System.out.println("Which joker would you like to use?");
+                System.out.println("1)Roll even dices\n2)Roll odd dices");
+                jokerType = askNumber(1, 4);
+                dicesToRoll = askNumber(0, NUMBER_OF_DICES + 1, basicMessage);
+            } else
+            {
+                dicesToRoll = (int) input;
+            }
 
             if (dicesToRoll == 0)
             {
@@ -138,18 +197,34 @@ class Dices
             }
 
             System.out.println("Which dices would you like to toss again? (enter 0 if you made a mistake)");
+
             dicesEnteredByUser = askUniqueNumbers(dicesToRoll, 1, NUMBER_OF_DICES + 1,
-                                                  "You have already chosen this dice! Please enter another one :",
-                                                  true);
+                "You have already chosen this dice! Please enter another one :",
+                true);
 
             if (dicesEnteredByUser == null)
             {
                 System.out.println("Erasing previous choices...");
             }
         }
-
         // The chosen dices are being toss again
-        roll(dicesEnteredByUser);
+        switch (jokerType)
+        {
+            case 0:
+                roll(dicesEnteredByUser);
+                break;
+            case 1:
+                rollEvenDices(dicesEnteredByUser);
+                break;
+            case 2:
+                rollOddDices(dicesEnteredByUser);
+                break;
+            default:
+                break;
+
+        }
+
+
 
         return true;
     }
@@ -271,8 +346,7 @@ class Dices
                 {
                     max = actual;
                 }
-            }
-            else
+            } else
             {
                 actual = 1;
             }
