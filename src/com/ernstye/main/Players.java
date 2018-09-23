@@ -110,11 +110,15 @@ class Players
         {
             pressEnterToContinue();
         }
+        // If the player is alone
+        else if (players.length == 1)
+        {
+            pressEnterToContinue(player);
+        }
         //if there are some players left or the turn is not the last one, ask the next player to press enter
         else
         {
-            int nextPlayerNumber = (currentPlayerNumber + 1) % players.length;
-            pressEnterToContinue(nextPlayerNumber, players[nextPlayerNumber]);
+            pressEnterToContinue((currentPlayerNumber + 1) % players.length, players[(currentPlayerNumber + 1) % players.length]);
         }
 
         // If his game is over, display his results
