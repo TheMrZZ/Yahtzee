@@ -85,7 +85,6 @@ final class UserInput
             }
         } while (!validInput);
 
-
         return number;
     }
 
@@ -181,5 +180,49 @@ final class UserInput
     {
         System.out.print("> ");
         scanner.nextLine();
+    }
+
+    /**
+     * Ask the user an {@code int} or a single character.
+     * If the input is an {@code int}, then the boundaries will be checked.
+     * If the input is a {@code char}, then the char presence in {@code possibleChars} will be checked.
+     *
+     * @param min           the minimum of the number (in case of an {@code int} input), included
+     * @param max           the maximum of the number (in case of an {@code int} input), excluded
+     * @param possibleChars the possible chars (in case of a {@code char} input)
+     * @return an Object, either a number or a String of length 1.
+     */
+    static Object askNumberOrChar(int min, int max, String possibleChars)
+    {
+        possibleChars = possibleChars.toUpperCase();
+        String error = "Input should be a number between " + min + " and " + (max + 1) +
+            ", or one of these characters: " + possibleChars;
+
+        while (true)
+        {
+            String input = scanner.nextLine().trim();
+
+            // Test for a number and its boundaries.
+            try
+            {
+                int number = Integer.valueOf(input);
+
+                if (min <= number && number < max)
+                {
+                    return number;
+                }
+            }
+            catch (NumberFormatException ignored)
+            {
+            }
+
+            // If the input is already a single character, and is one of the possible chars
+            if (input.length() == 1 && possibleChars.contains(input.toUpperCase()))
+            {
+                return input;
+            }
+
+            System.out.println(error);
+        }
     }
 }
