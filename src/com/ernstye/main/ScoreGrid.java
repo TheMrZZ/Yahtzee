@@ -5,7 +5,7 @@ import java.util.Arrays;
 import static com.ernstye.main.Constants.*;
 import static com.ernstye.main.StringUtilities.colorize;
 import static com.ernstye.main.StringUtilities.mergeStrings;
-import static com.ernstye.main.UserInput.askNumber;
+import static com.ernstye.main.UserInput.askNumberOrChar;
 
 /**
  * Score Grid model object.
@@ -44,20 +44,39 @@ class ScoreGrid
     }
 
     /**
-     * Allows the player to choose a row to score.
+     * Allows the player to choose a row to score, or to use the Bonus Roll.
      *
-     * @param dices the dices rolled by the player
+     * @param dices   the dices rolled by the player
+     * @param players the players
      */
-    void score(Dices dices)
+    void score(Dices dices, Players players)
     {
+        int numberOfJokers = dices.getNumberOfJokers();
+        boolean jokerAvailable = players != null && numberOfJokers > 0;
+
         // If applicable, give the automatic Yahtzee bonus.
         scorePossibleYahtzeeBonus(dices);
 
         System.out.println("Score points in which row?");
         displayFreeRows();
 
-        int row = askFreeRow();
-        setScore(row, dices);
+        if (jokerAvailable)
+        {
+            System.out.println("J) Roll one more time");
+        }
+
+        Object rowOrJoker = askFreeRow(jokerAvailable);
+
+        // If the player chose a joker, roll the dices again, then score again.
+        if ("J".equals(rowOrJoker))
+        {
+            dices.doNextRoll(this, Dices.JOKER_BONUS_ROLL, players);
+            score(dices, players);
+        }
+        else
+        {
+            setScore((int) rowOrJoker, dices);
+        }
     }
 
     /**
@@ -83,15 +102,29 @@ class ScoreGrid
      * Ask a "free" row to the user.
      * Formally, ask for a row having the {@link Constants#NO_SCORE} value.
      *
-     * @return a free row index entered by the user.
+     * @param jokerAvailable true if the player can use the Bonus Roll joker
+     * @return a free row index entered by the user, or "J" if the user wants a bonus roll.
      */
-    private int askFreeRow()
+    private Object askFreeRow(boolean jokerAvailable)
     {
+        String possibleChars = "";
+        if (jokerAvailable)
+        {
+            possibleChars = "J";
+        }
+
+        Object rowOrJoker;
         int row;
         do
         {
-            row = askNumber(1, scoreSheet.length + 1) - 1;
+            rowOrJoker = askNumberOrChar(1, scoreSheet.length + 1, possibleChars, null);
 
+            if ("J".equals(rowOrJoker))
+            {
+                return "J";
+            }
+
+            row = (int) rowOrJoker - 1;
             // If the player tries to score in a already taken row
             if (getRowScore(row) != NO_SCORE)
             {

@@ -13,6 +13,11 @@ import static com.ernstye.main.UserInput.*;
 class Dices
 {
     /**
+     * A roll number of this value means that the player used a bonus roll.
+     */
+    static final int JOKER_BONUS_ROLL = -1;
+
+    /**
      * Array of values of the dices.
      * (e.g. [1, 2, 1, 2, 3] means the player rolled two Ones, two Twos and one Three).
      */
@@ -20,7 +25,7 @@ class Dices
 
     private DicesDisplayer displayer;
 
-    private int numberOfJokers = 3;
+    private int numberOfJokers;
 
     /**
      * Create and roll the {@value Constants#NUMBER_OF_DICES}  dices randomly.
@@ -30,6 +35,7 @@ class Dices
         dices = new Integer[NUMBER_OF_DICES];
         displayer = new DicesDisplayer(this);
         roll();
+        numberOfJokers = 3;
     }
 
     /**
@@ -52,28 +58,46 @@ class Dices
     {
         roll();
 
-        boolean stop;
+        boolean keepGoing;
         int rollNumber = 0;
 
         do
         {
-            // Before the first roll, we don't have anything to do
-            if (rollNumber > 0)
-            {
-                // Roll new dices
-                stop = !nextTurn();
-                if (stop)
-                {
-                    break;
-                }
-            }
-
-            // Display new roll
-            displayRoll(scoreGrid, rollNumber, players);
-
+            keepGoing = doNextRoll(scoreGrid, rollNumber, players);
             rollNumber++;
         }
-        while (rollNumber < 3); // If the player wants to roll again the dices or if he hasn't played 3 times yet, continue the loop
+        while (keepGoing && rollNumber < 3); // If the player wants to roll again the dices or if he hasn't played 3 times yet, continue the loop
+    }
+
+    /**
+     * Start the next roll.
+     *
+     * @param scoreGrid  the score grid of the current player
+     * @param rollNumber the current roll number
+     * @param players    the players
+     * @return true if the player wants to keep playing, false if he doesn't
+     */
+    boolean doNextRoll(ScoreGrid scoreGrid, int rollNumber, Players players)
+    {
+        if (rollNumber == JOKER_BONUS_ROLL)
+        {
+            numberOfJokers--;
+        }
+
+        // Before the first roll, we don't have anything to do
+        if (rollNumber > 0 || rollNumber == JOKER_BONUS_ROLL)
+        {
+            // Roll new dices
+            boolean keepGoing = nextTurn();
+            if (!keepGoing)
+            {
+                return false;
+            }
+        }
+
+        // Display new roll
+        displayRoll(scoreGrid, rollNumber, players);
+        return true;
     }
 
     /**
@@ -83,7 +107,14 @@ class Dices
      */
     private void displayRollNumber(int rollNumber)
     {
-        System.out.println("\n=== ROLL " + (rollNumber) + " ===");
+        if (rollNumber == JOKER_BONUS_ROLL)
+        {
+            System.out.println("\n=== !! BONUS ROLL !! ===");
+        }
+        else
+        {
+            System.out.println("\n=== ROLL " + (rollNumber) + " ===");
+        }
     }
 
     /**
@@ -153,6 +184,31 @@ class Dices
     }
 
     /**
+     * Ask the user to enter dices indexes.
+     *
+     * @param dicesToRoll the number of dices to roll
+     * @param topMessage  the message to display before asking for indexes
+     * @return a list of dices indexes entered by the user, without duplicated.
+     */
+    List<Integer> enterDices(int dicesToRoll, String topMessage)
+    {
+        List<Integer> dicesEnteredByUser;
+
+        System.out.println(topMessage);
+
+        dicesEnteredByUser = askUniqueNumbers(dicesToRoll, 1, NUMBER_OF_DICES + 1,
+                                              "You have already chosen this dice! Please enter another one :",
+                                              true);
+
+        if (dicesEnteredByUser == null)
+        {
+            System.out.println("Erasing previous choices...");
+        }
+
+        return dicesEnteredByUser;
+    }
+
+    /**
      * Let the player choose the dices he want to roll again, then roll them randomly.
      * If the player doesn't want to roll dices anymore, return false.
      *
@@ -167,6 +223,7 @@ class Dices
         String possibleChars = "J";
         String basicMessage = "How many dices do you want to roll again?";
         String msg = basicMessage + " Enter 'J' first if you want to use a joker (" + numberOfJokers + " left)";
+
         if (numberOfJokers == 0)
         {
             msg = basicMessage;
@@ -195,17 +252,9 @@ class Dices
                 return false;
             }
 
-            System.out.println("Which dices would you like to toss again? (enter 0 if you made a mistake)");
-
-            dicesEnteredByUser = askUniqueNumbers(dicesToRoll, 1, NUMBER_OF_DICES + 1,
-                                                  "You have already chosen this dice! Please enter another one :",
-                                                  true);
-
-            if (dicesEnteredByUser == null)
-            {
-                System.out.println("Erasing previous choices...");
-            }
+            dicesEnteredByUser = enterDices(dicesToRoll, "Which dices would you like to toss again? (enter 0 if you made a mistake)");
         }
+
         // The chosen dices are being toss again
         switch (jokerType)
         {
@@ -232,7 +281,14 @@ class Dices
      */
     private void display(int rollNumber)
     {
-        System.out.println("This is the result of roll n°" + rollNumber + ":");
+        if (rollNumber == JOKER_BONUS_ROLL)
+        {
+            System.out.println("This is the result of bonus roll:");
+        }
+        else
+        {
+            System.out.println("This is the result of roll n°" + rollNumber + ":");
+        }
         displayer.display();
     }
 
@@ -245,13 +301,19 @@ class Dices
      */
     private void displayRoll(ScoreGrid scoreGrid, int rollNumber, Players players)
     {
-        displayRollNumber(rollNumber + 1);
+        int realRoll = rollNumber + 1;
+        if (rollNumber == JOKER_BONUS_ROLL)
+        {
+            realRoll = JOKER_BONUS_ROLL;
+        }
+
+        displayRollNumber(realRoll);
         if (NEED_DICE_ANIMATION)
         {
             displayer.displayAnimation();
         }
         System.out.println(scoreGrid.getDisplay(this, players));
-        display(rollNumber + 1);
+        display(realRoll);
     }
 
     /**
@@ -364,5 +426,15 @@ class Dices
     void setDices(Integer[] dices)
     {
         this.dices = dices;
+    }
+
+    /**
+     * Return the {@link #numberOfJokers}.
+     *
+     * @return the number of jokers.
+     */
+    int getNumberOfJokers()
+    {
+        return numberOfJokers;
     }
 }

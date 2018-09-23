@@ -197,7 +197,7 @@ final class UserInput
     {
         possibleChars = possibleChars.toUpperCase();
         String error = "Input should be a number between " + min + " and " + (max - 1);
-        if (!msg.equals(""))
+        if (!possibleChars.equals(""))
         {
             error = error + ", or one of these characters: " + possibleChars;
         }

@@ -73,7 +73,7 @@ class Player
     {
         dices.play(scoreGrid, players);
         System.out.println();
-        scoreGrid.score(dices);
+        scoreGrid.score(dices, players);
         System.out.println(scoreGrid.getDisplay(null, players));
     }
 
