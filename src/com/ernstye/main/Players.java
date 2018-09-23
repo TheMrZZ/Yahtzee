@@ -89,39 +89,47 @@ class Players
         for (int playerNumber = 0; playerNumber < players.length; playerNumber++)
         {
             currentPlayerNumber = playerNumber;
+            currentPlayerTurn(turnNumber);
+        }
+    }
 
-            Player player = players[playerNumber];
-            System.out.println("\n==== TURN " + turnNumber + " ====\n");
-            System.out.println("Player n°" + (playerNumber + 1) + ": it's " + player.getName() + "'s turn!");
-            player.playOneTurn(this);
+    /**
+     * Make the {@link #currentPlayerNumber} player play one turn.
+     *
+     * @param turnNumber the current turn.
+     */
+    private void currentPlayerTurn(int turnNumber)
+    {
+        Player player = players[currentPlayerNumber];
+        System.out.println("\n==== TURN " + turnNumber + " ====\n");
+        System.out.println("Player n°" + (currentPlayerNumber + 1) + ": it's " + player.getName() + "'s turn!");
+        player.playOneTurn(this);
 
-            if (playerNumber == numberOfPlayers - 1 && turnNumber == 13)
-            {
-                pressEnterToContinue();
-            }
-            else if (players.length == 1)
-            {
-                pressEnterToContinue(player);
-            }
-            //if there are multiple players, do not ask to press something before next turn
-            else
-            {
-                pressEnterToContinue((playerNumber + 1) % players.length, players[(playerNumber + 1) % players.length]);
-            }
+        // If this was the last turn of the last player, don't ask the next player to press enter
+        if (currentPlayerNumber == numberOfPlayers - 1 && turnNumber == 13)
+        {
+            pressEnterToContinue();
+        }
+        //if there are some players left or the turn is not the last one, ask the next player to press enter
+        else
+        {
+            int nextPlayerNumber = (currentPlayerNumber + 1) % players.length;
+            pressEnterToContinue(nextPlayerNumber, players[nextPlayerNumber]);
+        }
 
-
-            ScoreGrid scoreGrid = player.getScoreGrid();
-            if (scoreGrid.isFull())
-            {
-                System.out.println("\n\n=== FINAL RESULTS FOR PLAYER n°" + (playerNumber + 1) + ": " + player.getName() + " ===\n");
-                System.out.println(scoreGrid.getDisplay(null, this));
-                System.out.println("You scored a total of " + scoreGrid.getTotalScore() + " points!\n");
-            }
+        // If his game is over, display his results
+        ScoreGrid scoreGrid = player.getScoreGrid();
+        if (scoreGrid.isFull())
+        {
+            System.out.println("\n\n=== FINAL RESULTS FOR PLAYER n°" + (currentPlayerNumber + 1) + ": " + player.getName() + " ===\n");
+            System.out.println(scoreGrid.getDisplay(null, this));
+            System.out.println("You scored a total of " + scoreGrid.getTotalScore() + " points!\n");
         }
     }
 
     /**
      * Get the number of the current player.
+     *
      * @return the number of the current player, -1 if nobody is currently playing.
      */
     int getCurrentPlayerNumber()
