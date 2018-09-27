@@ -222,7 +222,7 @@ class Dices
         int jokerType = 0;
         String possibleChars = "J";
         String basicMessage = "How many dices do you want to roll again?";
-        String msg = basicMessage + " Enter 'J' first if you want to use a joker (" + numberOfJokers + " left)";
+        String msg = basicMessage + " Enter 'J' if you want to use a joker (" + numberOfJokers + " left)";
 
         if (numberOfJokers == 0)
         {

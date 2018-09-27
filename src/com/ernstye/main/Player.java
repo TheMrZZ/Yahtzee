@@ -67,7 +67,7 @@ class Player
      * Let the Player play one turn.
      * If the {@link Player#scoreGrid} is full, show the final results of the Player.
      *
-     * @param players      the players of the game
+     * @param players the players of the game
      */
     void playOneTurn(Players players)
     {

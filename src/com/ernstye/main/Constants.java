@@ -47,17 +47,17 @@ final class Constants
         "Aces", "Twos", "Threes", "Fours", "Fives", "Sixes",
         "Three of a kind", "Four of a kind", "Full house",
         "Small Straight", "Large straight", "Chance", "YAHTZEE",
-        };
+    };
 
     // The number of the row (in the lower section)
     static final int
         THREE_OF_A_KIND_ROW = 0,
-        FOUR_OF_A_KIND_ROW  = 1,
-        FULL_HOUSE_ROW      = 2,
-        SMALL_STRAIGHT_ROW  = 3,
-        LARGE_STRAIGHT_ROW  = 4,
-        CHANCE_ROW          = 5,
-        YAHTZEE_ROW         = 6;
+        FOUR_OF_A_KIND_ROW = 1,
+        FULL_HOUSE_ROW = 2,
+        SMALL_STRAIGHT_ROW = 3,
+        LARGE_STRAIGHT_ROW = 4,
+        CHANCE_ROW = 5,
+        YAHTZEE_ROW = 6;
 
 
     /**

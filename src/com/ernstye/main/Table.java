@@ -33,7 +33,7 @@ class Table
      * @param middleColumnWidth_ the width of the middle column
      * @param header_            the header of the middle column
      * @param onlyPointsColumn   if true, left and right columns won't be displayed. Else they will.
-     * @param needColors_         if true, show the colors.
+     * @param needColors_        if true, show the colors.
      */
     Table(ScoreGrid scoreGrid_, Dices dices_, int middleColumnWidth_, String header_, boolean onlyPointsColumn, boolean needColors_)
     {

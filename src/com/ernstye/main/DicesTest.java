@@ -86,7 +86,7 @@ class DicesTest
                 int expected = expectedOccurrences[i];
                 int actual = dices.getOccurrencesOf(i + 1);
                 String error = "Dices " + Arrays.toString(dices.getDices()) + " have " + expected + " occurrences of "
-                               + (i + 1) + ", but " + actual + " occurrences were found";
+                    + (i + 1) + ", but " + actual + " occurrences were found";
 
                 assertEquals(expected, actual, error);
             }
@@ -122,7 +122,7 @@ class DicesTest
             int expected = (int) diceSet[1];
             int actual = dices.getLongestStraightSize();
             String error = "Dices " + Arrays.toString(dices.getDices()) + " should have a longest straight length of " +
-                           expected + ", but a length of " + actual + " was found.";
+                expected + ", but a length of " + actual + " was found.";
 
             assertEquals(expected, actual, error);
         }

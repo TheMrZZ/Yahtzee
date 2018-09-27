@@ -267,7 +267,7 @@ class ScoreGridTest
         scoreGrid.getScoreSheet()[2] = NO_SCORE;
 
         assertFalse(scoreGrid.isFull(), "Score grid should not be detected as " +
-                                        "full when there is one NO_SCORE inside");
+            "full when there is one NO_SCORE inside");
     }
 
     /**
@@ -337,7 +337,7 @@ class ScoreGridTest
 
         assertEquals(63, scoreGrid.getPointsBeforeUpperBonus(),
                      "When the score grid is empty, the player should have to score " +
-                     ScoreGrid.UPPER_SECTION_MINIMUM + " to get the bonus");
+                         ScoreGrid.UPPER_SECTION_MINIMUM + " to get the bonus");
 
         score62UpperPoints();
         assertEquals(1, scoreGrid.getPointsBeforeUpperBonus(),
@@ -416,7 +416,7 @@ class ScoreGridTest
         scoreGrid.scorePossibleYahtzeeBonus(dices);
 
         assertEquals(1, scoreGrid.getYahtzeeBonuses(), "Getting a Yahtzee after having successfully scored" +
-                                                       "in the Yahtzee section should give one bonus");
+            "in the Yahtzee section should give one bonus");
 
         // Now, check if the bonus is not given when it should not be
         scoreGrid = new ScoreGrid();
@@ -430,6 +430,6 @@ class ScoreGridTest
         scoreGrid.scorePossibleYahtzeeBonus(dices);
 
         assertEquals(0, scoreGrid.getYahtzeeBonuses(), "Getting a Yahtzee after having already scored a 0" +
-                                                       "in the Yahtzee section should NOT give a bonus");
+            "in the Yahtzee section should NOT give a bonus");
     }
 }

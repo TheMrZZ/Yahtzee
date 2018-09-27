@@ -89,8 +89,8 @@ final class StringUtilities
         int rightSpaces = diff / 2;
 
         String centered = stringFilledWith(' ', leftSpaces) +
-                          string +
-                          stringFilledWith(' ', rightSpaces);
+            string +
+            stringFilledWith(' ', rightSpaces);
 
         return centered;
     }
